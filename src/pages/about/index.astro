@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import { AppConfig } from '@/utils/AppConfig';
+const { title } = AppConfig;
+const { description } = AppConfig;
+import Section from '../../components/Section.astro';
+---
+
+<Base head={{ title, description }}>
+  <Section>
+    <slot />
+    <br />
+    <p class="pb-2 pt-6 text-4xl font-bold">About Me</p>
+    <div class="flex justify-center py-4">
+      <img src="/public/about.jpeg" alt="Personal Image" class="shadow-lg" style="max-width: 100%; height: auto;" />
+    </div>
+    <div style="height:3rem ;width: 3rem"></div>
+  <section class="text-sm">
+    <p class="py-2">
+      Hello! I'm Anshuman, a passionate software developer and music enthusiast. I am currently studying Computer Science at Manipal Institute of Technology.
+      I love exploring new technologies and working on interesting projects. When I'm not coding, you can find me jamming to Radiohead or diving into a good book.
+    </p>
+    <p class="py-2">
+      My journey in tech has led me to work on various projects including web development, machine learning, and AI-generated music. I’m particularly interested in creating
+      innovative solutions that blend technology with creativity. Feel free to explore my portfolio and projects, and don’t hesitate to reach out if you have any questions or just want to chat!
+    </p>
+    <p class="py-2">
+      <strong>Contact me:</strong> <a href="mailto:anshuwont@gmail.com">anshuwont@gmail.com</a>
+    </p>
+  </section>
+</Section>
+</Base>
