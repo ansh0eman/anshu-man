@@ -1,14 +1,14 @@
 ---
 layout: ../../layouts/post.astro
 title: "Art Generation with Neural Style Transfer Model."
-pubDate: 2023-12-24
+pubDate: 2024-07-09
 description: "Exploring Neural Style Transfer with Impressionism!"
 author: "anshu man"
 excerpt: as a fan of art history, i decided to experiment with some impressionist art. impressionism, a revolutionary 19th-century art movement, is known for its small, thin, yet visible brush strokes, open compositions, and emphasis on the ever-changing qualities of light.
 image:
   src:
   alt:
-tags: ["tag1", "tag2", "tag3"]
+tags: ["Art", "Deep Learning", "AI"]
 ---
 
 ## Exploring Neural Style Transfer with Impressionism!
