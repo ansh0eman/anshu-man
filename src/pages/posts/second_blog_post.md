@@ -1,163 +1,39 @@
 ---
 layout: ../../layouts/post.astro
-title: "This is the second post of my new Astro blog."
+title: "Art Generation with Neural Style Transfer Model."
 pubDate: 2023-12-24
-description: "This is the second post of my new Astro blog."
-author: "nicdun"
-excerpt: Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+description: "Exploring Neural Style Transfer with Impressionism!"
+author: "anshu man"
+excerpt: as a fan of art history, i decided to experiment with some impressionist art. impressionism, a revolutionary 19th-century art movement, is known for its small, thin, yet visible brush strokes, open compositions, and emphasis on the ever-changing qualities of light.
 image:
   src:
   alt:
 tags: ["tag1", "tag2", "tag3"]
 ---
 
-This is a paragraph. Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero esse non molestias eos excepturi, inventore atque cupiditate. Sed voluptatem quas omnis culpa, et odit.
+## Exploring Neural Style Transfer with Impressionism!
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero esse non molestias eos excepturi, inventore atque cupiditate. Sed voluptatem quas omnis culpa, et odit.
+Hello World!. 😉 
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero esse non molestias eos excepturi, inventore atque cupiditate. Sed voluptatem quas omnis culpa, et odit.
+as a fan of art history, i decided to experiment with some impressionist art. ***impressionism***, a revolutionary 19th-century art movement, is known for its small, thin, yet visible brush strokes, open compositions, and emphasis on the ever-changing qualities of light.
 
-## Headings
+i've recently been diving into the fascinating world of <h1 style="margin-top: 1.2em" >**neural style transfer** (nst)</h1>one of the coolest optimization techniques in deep learning. nst essentially merges two images: **the content image** and the **style image**, repainting the content image in the style (?) of the referenced image. us to merge two images—a "content" image and a "style" image —to create a "generated" image that beautifully blends the content of first image with the style of other.
 
-# H1 For example
+<img src="/nst.png" alt="Personal Image" class="shadow-lg w-full object-repeat" style="max-width: 100%; height: auto; border-radius:0 " />
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero esse non molestias eos excepturi, inventore atque cupiditate. Sed voluptatem quas omnis culpa, et odit.
 
-## H2 For example
+ I used ***VGG-19***, a 19-layer version of the VGG network. This model has already been trained on the very large ImageNet database, and has learned to recognize a variety of low level features (at the shallower layers) and high level features (at the deeper layers).
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero esse non molestias eos excepturi, inventore atque cupiditate. Sed voluptatem quas omnis culpa, et odit.
+The Impressionism movement began with a group of paris-based artists in the 1870s and 1880s and faced significant opposition from the conventional art community at the time. fun fact: the name 
+# "impressionism"
+ comes from claude monet's painting, impression, soleil levant (impression, sunrise), which inspired a critic to coin the term in a satirical review.
 
-### H3 For example
+for my experiment, i used multiple pictures from my pc (whatever there was) as the content image and multiple paintins as the style image. the results were pretty insane. the generated image kept the landscape's structure while adopting the style image's vibrant brushstrokes and colors. it was like merging the past and present on one canvas.
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero esse non molestias eos excepturi, inventore atque cupiditate. Sed voluptatem quas omnis culpa, et odit.
+<img src="/4.png" alt="Personal Image" class="shadow-lg w-full object-repeat" style="max-width: 100%; height: auto; border-radius:0 " />
+<img src="/3.png" alt="Personal Image" class="shadow-lg w-full object-repeat" style="max-width: 100%; height: auto; border-radius:0 " />
+<img src="/2.png" alt="Personal Image" class="shadow-lg w-full object-repeat" style="max-width: 100%; height: auto; border-radius:0 " />
+<img src="/6.png" alt="Personal Image" class="shadow-lg w-full object-repeat" style="max-width: 100%; height: auto; border-radius:0 " />
+<img src="/1.png" alt="Personal Image" class="shadow-lg w-full object-repeat" style="max-width: 100%; height: auto; border-radius:0 " />
 
-#### H4 For example
-
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero esse non molestias eos excepturi, inventore atque cupiditate. Sed voluptatem quas omnis culpa, et odit.
-
-##### H5 For example
-
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero esse non molestias eos excepturi, inventore atque cupiditate. Sed voluptatem quas omnis culpa, et odit.
-
-###### H6 For example
-
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero esse non molestias eos excepturi, inventore atque cupiditate. Sed voluptatem quas omnis culpa, et odit.
-
-## Emphasis
-
-Emphasis, aka italics, with _asterisks_ or _underscores_.
-
-Strong emphasis, aka bold, with **asterisks** or **underscores**.
-
-Strikethrough uses two tildes. ~~Scratch this.~~
-
-## Blockquotes
-
-> Blockquotes are very handy in email to emulate reply text.
-> This line is part of the same quote.
-
-Quote break.
-
-> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can _put_ **Markdown** into a blockquote.
-
-## Horizontal separator
-
-This is a horizontal separator:
-
----
-
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero esse non molestias eos excepturi, inventore atque cupiditate. Sed voluptatem quas omnis culpa, et odit.
-
----
-
-## List types
-
-### Ordered list
-
-1. List item 1
-2. List item 2
-   1. Nested list item A
-   2. Nested list item B
-3. List item 3
-
-### Unordered list
-
-- List item
-- List item
-  - Nested list item
-  - Nested list item
-    - Double nested list item
-    - Double nested list item
-- List item
-
-### Mixed list
-
-1. First ordered list item
-2. Another item
-   - Unordered sub-list.
-3. Actual numbers don't matter, just that it's a number
-   1. Ordered sub-list
-4. And another item.
-
-## Links
-
-[Inline-style link](https://www.google.com)
-
-[Inline-style link with title](https://www.google.com "Google's Homepage")
-
-[Reference-style link][arbitrary case-insensitive reference text]
-
-[You can use numbers for reference-style link definitions][1]
-
-Or leave it empty and use the [link text itself].
-
-Some text to show that the reference links can follow later.
-
-[arbitrary case-insensitive reference text]: https://www.mozilla.org
-[1]: http://slashdot.org
-[link text itself]: http://www.reddit.com
-
-## Images
-
-Images included in _\_posts_ folder are lazy loaded.
-
-Inline-style:
-![alt text](/src/images/random.jpeg "Logo Title Text 1")
-
-## Table
-
-| Tables        |      Are      | Cool |
-| ------------- | :-----------: | ---: |
-| col 3 is      | right-aligned | 1600 |
-| col 2 is      |   centered    |   12 |
-| zebra stripes |   are neat    |    1 |
-
-| Markdown | Less      | Pretty     |
-| -------- | --------- | ---------- |
-| _Still_  | `renders` | **nicely** |
-| 1        | 2         | 3          |
-
-## Syntax highlight
-
-```ts title="astro.config.mjs" showLineNumbers {1-2,5-6}
-import { defineConfig } from "astro/config";
-import vercelStatic from "@astrojs/vercel/static";
-
-export default defineConfig({
-  output: "static",
-  adapter: vercelStatic({
-    webAnalytics: {
-      enabled: true,
-    },
-  }),
-});
-```
-
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero esse non molestias eos excepturi, inventore atque cupiditate. Sed voluptatem quas omnis culpa, et odit.
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero esse non molestias eos excepturi, inventore atque cupiditate. Sed voluptatem quas omnis culpa, et odit.
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vero esse non molestias eos excepturi, inventore atque cupiditate. Sed voluptatem quas omnis culpa, et odit.
-
-```python showLineNumbers
-s = "Python syntax highlighting"
-print s
-```
+there's always room for improvement with some hyperparameter magic and longer training—if only i had a quantum computer.
