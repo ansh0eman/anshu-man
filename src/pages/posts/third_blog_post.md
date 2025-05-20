@@ -8,7 +8,7 @@ excerpt: I (over)think, (maybe) therefore I am (not).
 image:
   src:
   alt:
-tags: ["", "", ""]
+tags: ["cogito", "ergo", "sum"]
 ---
 <h1 style="margin-top: 1.2em" >Mind over matter is magic</h1>
 <h1 style="margin-top: 1.2em" >Cogito, ergo sum</h1>
