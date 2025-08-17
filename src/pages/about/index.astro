@@ -9,26 +9,63 @@ const { description } = AppConfig;
 ---
 
 <Base head={{ title, description }}>
-  <Section>
-    <slot />
-    <br />
-    <p class="pb-2 pt-6 text-4xl font-bold">About Me</p>
-    <div class="flex justify-center py-4">
-      <img src="/about.jpeg" alt="Personal Image" class="shadow-lg" style="max-width: 100%; height: auto;" />
-    </div>
-    <div style="height:3rem ;width: 3rem"></div>
-    <section class="text-sm">
-      <p class="py-2">
-        Hello! I'm Anshuman, a passionate software developer and music enthusiast. I am currently studying Computer Science at Manipal Institute of Technology.
-        I love exploring new technologies and working on interesting projects. When I'm not coding, you can find me jamming to Radiohead or diving into a good book.
-      </p>
-      <p class="py-2">
-        My journey in tech has led me to work on various projects including web development, machine learning, and AI-generated music. I’m particularly interested in creating
-        innovative solutions that blend technology with creativity. Feel free to explore my portfolio and projects, and don’t hesitate to reach out if you have any questions or just want to chat!
-      </p>
-      <p class="py-2">
-        <strong>Contact me:</strong> <a href="mailto:anshuwont@gmail.com">anshuwont@gmail.com</a>
-      </p>
-    </section>
+	<Section>
+		<slot />
+		<br />
+		<p class="pb-2 pt-6 text-4xl font-bold">About Me</p>
+		<div class="flex justify-center py-4">
+			<img
+				src="/about.jpeg"
+				alt="Personal Image"
+				class="shadow-lg"
+				style="max-width: 100%; height: auto;"
+			/>
+		</div>
+		<div style="height:3rem ;width: 3rem"></div>
+		<section class="text-sm leading-relaxed">
+			<p class="py-2">
+				Hello! I’m <strong class="font-black text-orange-600">Anshuman</strong> - a Computer Science undergrad at
+				Manipal Institute of Technology, a passionate <strong
+					>software developer</strong
+				>, and a music enthusiast.
+			</p>
 
+			<p class="py-2">
+				I love exploring new technologies and working on projects that sit at the intersection
+				of <strong class="font-black text-orange-600">creativity</strong> and <strong class="font-black text-orange-600">code</strong>. Over the years, my curiosity has led me into some
+				pretty interesting spaces — from building an <strong class="font-black text-orange-600">AI-powered compliance engine (SetuAI)</strong
+				> that bagged a special award at
+				<strong>SAP Hackfest 2025</strong>, to experimenting with <strong class="font-black text-orange-600">neural style transfer</strong> for
+				art generation, to analyzing the <strong class="font-black text-orange-600">fractal nature of song lyrics</strong> (because why
+				not make math poetic?).
+			</p>
+
+			<p class="py-2">
+				Professionally, I’ve dipped my toes into the real world through internships
+				as a
+				Data Analyst at Alethe Labs, where I built models to spot corrosion and
+				catch fraudulent transactions, and as a Tech Intern at Yes Bank, where I
+				helped streamline enterprise testing (aka, broke things and then fixed them). These
+				experiences taught me how tech can solve very real problems — and how <strong>coffee</strong> can solve even bigger ones.
+			</p>
+
+			<p class="py-2">
+				When I’m not coding, you’ll likely find me bed-rotting with a book,
+				failing at filmmaking in style, or humming along to Radiohead tracks that
+				make me wonder if Thom Yorke coded in Python in a past life.
+			</p>
+
+			<p class="py-2">
+				I’m always open to building cool things, collaborating on ideas, or just having a chat about machine learning, web development, or underrated Radiohead songs. If that sounds like your jam, feel free
+				to reach out!
+			</p>
+
+			<p class="py-2">
+				<strong>Contact me:</strong>
+				<a href="mailto:anshuwont@gmail.com" class="text-blue-500 hover:underline"
+					>anshuwont@gmail.com</a
+				>
+			</p>
+		</section>
+	</Section>
 </Base>
