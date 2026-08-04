@@ -11,8 +11,8 @@ interface Props {
 
 const { posts } = Astro.props;
 const [featuredPost, ...recentPosts] = posts;
-const featuredContent =
-	featuredPost?.frontmatter.featuredContent ?? featuredPost?.frontmatter.excerpt;
+// const featuredContent =
+// 	featuredPost?.frontmatter.featuredContent ?? featuredPost?.frontmatter.excerpt;
 ---
 
 <Section>
@@ -55,7 +55,7 @@ const featuredContent =
 									<Tags tags={featuredPost.frontmatter.tags} />
 								</div>
 								<p class="mt-5 max-w-md whitespace-pre-line text-base leading-7 text-stone-700 sm:text-lg sm:leading-8">
-									{featuredContent}
+									{featuredPost.frontmatter.excerpt}
 								</p>
 							</div>
 							<a
