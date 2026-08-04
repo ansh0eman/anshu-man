@@ -99,7 +99,7 @@ import Section from './Section.astro';
 			if (response.ok && payload.status === 'playing') {
 				showTrack(payload);
 			} else if (response.ok && payload.status === 'idle') {
-				showMessage('Nothing playing right now.');
+				showMessage('No signal right now.');
 			} else {
 				showMessage('Spotify status is unavailable.');
 			}
