@@ -4,9 +4,22 @@ import Section from './Section.astro';
 
 <Section>
 	<div
-		class="content prose mt-8 max-w-none text-base leading-8 text-black dark:prose-invert prose-code:rounded-lg prose-code:bg-stone-800 prose-code:p-1 prose-code:text-orange-600 prose-img:rounded-lg prose-img:shadow-xl dark:text-white prose-img:dark:shadow-stone-800"
+		class="content prose mt-8 max-w-none text-base leading-8 text-black dark:prose-invert prose-code:rounded-lg prose-code:bg-stone-800 prose-code:p-1 prose-code:text-orange-600 prose-img:rounded-lg prose-img:border prose-img:border-stone-500 prose-img:bg-stone-200 prose-img:p-1 prose-img:shadow-xl dark:text-white prose-img:dark:border-stone-600 prose-img:dark:bg-stone-800 prose-img:dark:shadow-stone-800"
 	>
+		<div
+			class="not-prose mb-7 flex items-center justify-between border-b border-dashed border-stone-400 pb-2 text-[9px] uppercase tracking-[0.16em] text-stone-500 dark:border-stone-700 dark:text-stone-400"
+			aria-hidden="true"
+		>
+			<span>reading file / 本文</span>
+			<span>scroll ↓</span>
+		</div>
 		<slot />
+		<div
+			class="not-prose mt-10 flex items-center gap-3 border-t border-stone-400 pt-3 text-[9px] uppercase tracking-[0.16em] text-stone-500 dark:border-stone-700 dark:text-stone-400"
+			aria-hidden="true"
+		>
+			<span>end</span><span class="h-px flex-1 bg-stone-300 dark:bg-stone-700"></span><span>了</span>
+		</div>
 	</div>
 </Section>
 

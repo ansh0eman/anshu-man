@@ -16,12 +16,26 @@ allPosts.sort(sortPostsByDate);
 <Base head={{ title, description }}>
 	<Section><Heading title="Posts" /></Section>
 	<Section>
+		<div class="mb-5 flex flex-wrap items-center justify-between gap-2 border-y border-stone-500 py-2 text-[10px] uppercase tracking-[0.16em] text-stone-600 dark:border-stone-600 dark:text-stone-400">
+			<span>notes index / 記録</span>
+			<span>{String(allPosts.length).padStart(2, '0')} entries · newest first</span>
+		</div>
 		{
-			allPosts.map((post: any) => (
-				<div class="mb-4 basis-1 last:mb-0">
+			allPosts.map((post: any, index: number) => (
+				<div class="relative mb-4 basis-1 border-l border-stone-500 pl-4 last:mb-0 dark:border-stone-600">
+					<span
+						class="absolute -left-[1px] top-4 -translate-x-1/2 bg-stone-100 px-1 text-[9px] text-stone-500 dark:bg-stone-900 dark:text-stone-400"
+						aria-hidden="true"
+					>
+						{String(index + 1).padStart(2, '0')}
+					</span>
 					<Card post={post} />
 				</div>
 			))
 		}
+		<div class="mt-6 flex items-center justify-between border-t border-dashed border-stone-400 pt-3 text-[10px] uppercase tracking-[0.14em] text-stone-500 dark:border-stone-700 dark:text-stone-400">
+			<span>end of index</span>
+			<a href="/rss.xml" class="underline decoration-stone-400 underline-offset-4 hover:text-orange-700">rss feed →</a>
+		</div>
 	</Section>
 </Base>
