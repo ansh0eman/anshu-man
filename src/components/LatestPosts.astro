@@ -1,27 +1,114 @@
 ---
 import { MarkdownInstance } from 'astro';
+import { formatDate } from '@/utils/data.util';
 import Section from './Section.astro';
-import Card from './Card.astro';
+import Tags from './Tags.astro';
 
 interface Props {
 	posts: MarkdownInstance<any>[];
 }
 
 const { posts } = Astro.props;
+const [featuredPost, ...recentPosts] = posts;
 ---
 
 <Section>
-	<div class="flex justify-between pb-4">
-		<p class="text-xl font-bold">Latest Posts</p>
-		<a href="/posts" class="underline hover:text-orange-600">all posts →</a>
-	</div>
-	<div class="flex flex-col pb-4 md:flex-row">
-		{
-			posts.map((post: any) => (
-				<div class="mb-4 basis-1 last:mr-0 md:mr-4 md:basis-1/3 hover:scale:-105 transition-transform duration-300">
-					<Card post={post} />
+	<section aria-labelledby="notes-heading" class="pb-6 pt-2">
+		<div class="mb-4 flex items-end justify-between border-b border-stone-500 pb-2">
+			<div class="flex items-baseline gap-3">
+				<h2 id="notes-heading" class="text-xl font-bold">Notes</h2>
+				<span class="hidden text-[10px] uppercase tracking-[0.18em] text-stone-500 sm:inline">
+					記録 / log
+				</span>
+			</div>
+			<a href="/posts" class="text-xs text-stone-600 underline decoration-stone-400 underline-offset-4 hover:text-orange-700">
+				all notes / archive →
+			</a>
+		</div>
+
+		<div class="grid gap-4 lg:grid-cols-[minmax(0,1.65fr)_minmax(16rem,0.75fr)]">
+			{
+				featuredPost && (
+					<article class="group flex min-h-[20rem] flex-col border border-stone-500 bg-stone-300/70 p-5 shadow-[3px_3px_0_0_rgba(120,113,108,0.35)] sm:p-6">
+						<div class="mb-8 flex items-center justify-between gap-4 border-b border-dashed border-stone-500 pb-2 text-[10px] uppercase tracking-[0.15em] text-stone-600">
+							<span>[ featured note ]</span>
+							<span class="text-right">{formatDate(featuredPost.frontmatter.pubDate)} · {featuredPost.frontmatter.minutesRead}</span>
+						</div>
+
+						<div class="flex flex-1 flex-col justify-between">
+							<div>
+								<a href={featuredPost.url} class="block">
+									<h3 class="max-w-2xl text-2xl font-bold leading-tight transition-colors group-hover:text-orange-700 sm:text-3xl">
+										{featuredPost.frontmatter.title}
+									</h3>
+								</a>
+								<div class="mt-5">
+									<Tags tags={featuredPost.frontmatter.tags} />
+								</div>
+								<p class="mt-5 line-clamp-3 max-w-md text-base leading-7 text-stone-700 sm:min-h-16 sm:text-lg sm:leading-8">
+									{featuredPost.frontmatter.excerpt}
+								</p>
+							</div>
+							<a href={featuredPost.url} class="mt-8 w-fit border-b border-stone-700 text-sm hover:border-orange-700 hover:text-orange-700">
+								read note →
+							</a>
+						</div>
+					</article>
+				)
+			}
+
+			<aside aria-labelledby="on-repeat-heading" class="flex flex-col border border-stone-500 bg-stone-800 p-4 text-stone-100 shadow-[3px_3px_0_0_rgba(120,113,108,0.35)] sm:p-5">
+				<div class="flex items-start justify-between border-b border-stone-600 pb-3">
+					<div>
+						<p class="text-[9px] uppercase tracking-[0.18em] text-lime-300">most played this month</p>
+						<h3 id="on-repeat-heading" class="mt-1 text-lg font-bold">On Repeat</h3>
+					</div>
+					<span class="mt-1 h-2 w-2 animate-pulse rounded-full bg-lime-300" aria-hidden="true"></span>
 				</div>
-			))
-		}
-	</div>
+
+				<div class="mt-5 grid grid-cols-[6.5rem_minmax(0,1fr)] gap-4 lg:grid-cols-1">
+					<div
+						class="relative aspect-square w-full overflow-hidden border border-stone-500 bg-[repeating-linear-gradient(135deg,#57534e_0,#57534e_8px,#44403c_8px,#44403c_16px)]"
+						role="img"
+						aria-label="Album artwork placeholder"
+					>
+						<div class="absolute inset-3 flex items-center justify-center border border-dashed border-stone-400 text-center text-[10px] uppercase tracking-[0.18em] text-stone-300">
+							album art<br />placeholder
+						</div>
+					</div>
+
+					<div class="flex min-w-0 flex-col justify-end lg:mt-1">
+						<p class="truncate text-base font-bold" data-on-repeat-track>Track title</p>
+						<p class="mt-1 truncate text-xs text-stone-400" data-on-repeat-artist>Artist name</p>
+						<div class="mt-4 flex items-center gap-3">
+							<span class="flex h-7 w-7 items-center justify-center rounded-full bg-lime-300 text-xs text-stone-900" aria-hidden="true">▶</span>
+							<div class="h-px flex-1 bg-stone-600"><div class="h-px w-1/3 bg-stone-300"></div></div>
+						</div>
+					</div>
+				</div>
+
+				<p class="mt-auto border-t border-dashed border-stone-600 pt-3 text-[9px] uppercase tracking-[0.15em] text-stone-500">
+					presentational placeholder · connect later
+				</p>
+			</aside>
+		</div>
+
+		<div class="mt-4 grid gap-4 sm:grid-cols-2">
+			{
+				recentPosts.slice(0, 2).map((post: any, index: number) => (
+					<article class="group flex flex-col border border-stone-400 bg-stone-200/60 p-4 transition-colors hover:bg-stone-300/80">
+						<div class="mb-5 flex items-center justify-between gap-3 text-[10px] uppercase tracking-[0.12em] text-stone-600">
+							<span>0{index + 1} / recent</span>
+							<span class="text-right">{formatDate(post.frontmatter.pubDate)}</span>
+						</div>
+						<a href={post.url} class="flex flex-1 flex-col">
+							<h3 class="text-lg font-bold leading-snug transition-colors group-hover:text-orange-700">{post.frontmatter.title}</h3>
+							<p class="mt-3 line-clamp-3 text-sm leading-6 text-stone-700">{post.frontmatter.excerpt}</p>
+							<p class="mt-5 text-xs underline decoration-stone-400 underline-offset-4">open note →</p>
+						</a>
+					</article>
+				))
+			}
+		</div>
+	</section>
 </Section>
