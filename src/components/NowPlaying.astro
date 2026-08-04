@@ -1,0 +1,115 @@
+---
+import Section from './Section.astro';
+---
+
+<Section>
+	<section
+		aria-labelledby="now-playing-heading"
+		class="rounded-lg border border-stone-300 bg-white/60 p-4 shadow-sm dark:border-stone-700 dark:bg-stone-800/60"
+		data-now-playing
+	>
+		<div class="mb-3 flex items-center gap-2">
+			<span class="h-2.5 w-2.5 rounded-full bg-stone-400" aria-hidden="true" data-indicator></span>
+			<h2 id="now-playing-heading" class="text-sm font-bold uppercase tracking-wide">
+				Now playing
+			</h2>
+		</div>
+
+		<p class="text-sm text-stone-600 dark:text-stone-300" data-status aria-live="polite">
+			Checking Spotify…
+		</p>
+
+		<a
+			class="hidden items-center gap-4 rounded-md outline-none ring-green-500 focus-visible:ring-2"
+			data-track
+			target="_blank"
+			rel="noopener noreferrer"
+		>
+			<img
+				class="hidden h-16 w-16 rounded object-cover"
+				data-artwork
+				alt=""
+				width="64"
+				height="64"
+			/>
+			<span class="min-w-0">
+				<strong class="block truncate text-base" data-title></strong>
+				<span class="block truncate text-sm text-stone-600 dark:text-stone-300" data-artists></span>
+				<span class="block truncate text-xs text-stone-500 dark:text-stone-400" data-album></span>
+			</span>
+		</a>
+	</section>
+</Section>
+
+<script>
+	import type { NowPlayingResponse } from '../types/spotify';
+
+	const root = document.querySelector<HTMLElement>('[data-now-playing]');
+	const status = root?.querySelector<HTMLElement>('[data-status]');
+	const indicator = root?.querySelector<HTMLElement>('[data-indicator]');
+	const trackLink = root?.querySelector<HTMLAnchorElement>('[data-track]');
+	const artwork = root?.querySelector<HTMLImageElement>('[data-artwork]');
+	const title = root?.querySelector<HTMLElement>('[data-title]');
+	const artists = root?.querySelector<HTMLElement>('[data-artists]');
+	const album = root?.querySelector<HTMLElement>('[data-album]');
+
+	function showMessage(message: string): void {
+		if (!status || !trackLink) return;
+		indicator?.classList.remove('bg-green-500');
+		indicator?.classList.add('bg-stone-400');
+		status.textContent = message;
+		status.classList.remove('hidden');
+		trackLink.classList.add('hidden');
+		trackLink.classList.remove('flex');
+	}
+
+	function showTrack(response: Extract<NowPlayingResponse, { status: 'playing' }>): void {
+		if (!status || !trackLink || !artwork || !title || !artists || !album) return;
+
+		const track = response.track;
+		indicator?.classList.remove('bg-stone-400');
+		indicator?.classList.add('bg-green-500');
+		trackLink.href = track.spotifyUrl;
+		title.textContent = track.title;
+		artists.textContent = track.artists.join(', ');
+		album.textContent = track.album;
+
+		if (track.albumImageUrl) {
+			artwork.src = track.albumImageUrl;
+			artwork.alt = `${track.album} cover`;
+			artwork.classList.remove('hidden');
+		} else {
+			artwork.removeAttribute('src');
+			artwork.alt = '';
+			artwork.classList.add('hidden');
+		}
+
+		status.classList.add('hidden');
+		trackLink.classList.remove('hidden');
+		trackLink.classList.add('flex');
+	}
+
+	async function updateNowPlaying(): Promise<void> {
+		try {
+			const response = await fetch('/api/spotify/now-playing', {
+				headers: { Accept: 'application/json' }
+			});
+			const payload = (await response.json()) as NowPlayingResponse;
+
+			if (response.ok && payload.status === 'playing') {
+				showTrack(payload);
+			} else if (response.ok && payload.status === 'idle') {
+				showMessage('Nothing playing right now.');
+			} else {
+				showMessage('Spotify status is unavailable.');
+			}
+		} catch {
+			showMessage('Spotify status is unavailable.');
+		}
+	}
+
+	void updateNowPlaying();
+	window.setInterval(() => {
+		if (document.visibilityState === 'visible') void updateNowPlaying();
+	}, 30_000);
+</script>

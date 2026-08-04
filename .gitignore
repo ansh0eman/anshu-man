@@ -1,0 +1,11 @@
+# Local environment files may contain Spotify credentials.
+.env
+.env.*
+!.env.example
+
+# Generated locally by dependency installation, Astro, and Vercel builds.
+node_modules/
+.astro/
+dist/
+.vercel/
+.netlify/

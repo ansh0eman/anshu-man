@@ -6,6 +6,7 @@
 		"dev": "astro dev",
 		"start": "astro dev",
 		"build": "astro check && astro build",
+		"spotify:authorize": "node scripts/spotify-authorize.mjs",
 		"preview": "astro preview",
 		"astro": "astro"
 	},
