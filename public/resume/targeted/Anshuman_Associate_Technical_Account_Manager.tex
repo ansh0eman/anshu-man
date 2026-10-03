@@ -1,0 +1,137 @@
+% Targeted resume for Associate Technical Account Manager roles
+% Visual structure follows the existing Anshuman resume template.
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.72in}
+\addtolength{\textheight}{1.44in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-7pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-4pt}]
+
+\newcommand{\resumeItem}[1]{
+  \item\small{{#1 \vspace{-2pt}}}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small #3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-8pt}
+}
+
+\newcommand{\resumePItem}[2]{
+  \item[$\vcenter{\hbox{\tiny$\bullet$}}$]\small{\textbf{#1}: #2 \vspace{-2pt}}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumePItem{#1}{#2}\vspace{-3pt}}
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in,label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.22in]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-6pt}}
+
+\begin{document}
+
+\begin{tabularx}{\textwidth}{@{}X@{}}
+  {\Huge \scshape Anshuman}\\[0.2em]
+  +91-6205590392 \;|\;
+  \href{mailto:anshuwont@gmail.com}{anshuwont@gmail.com} \;|\;
+  \href{https://ansh0eman.netlify.app/}{ansh0eman.xyz} \;|\;
+  \href{https://github.com/ansh0eman}{github.com/ansh0eman} \;|\;
+  \href{https://www.linkedin.com/in/anshuman-anshuman-82028b263/}{linkedin.com/in/anshuman}\\[0.15em]
+\end{tabularx}
+
+\section{Experience}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {AI Analyst}{Jan 2026 -- Present}
+    {Impact Analytics}{Bengaluru, Karnataka}
+    \resumeItemListStart
+      \resumeItem{Develop and validate pricing and demand-forecasting pipelines for a global luxury retailer across 13 geographic clusters, using Python, BigQuery SQL, and DBeaver to transform transactional data into reliable modeling inputs and outputs.}
+      \resumeItem{Research and implement forecasting approaches spanning store clustering, baseline prediction, seasonality, and price elasticity, while determining appropriate modeling levels across product hierarchies.}
+      \resumeItem{Lead recurring QA and QC in Tableau and Excel, trace exceptions across upstream and downstream tables, build hierarchy-level alerts, and communicate findings to data science leads, project leadership, and client-facing teams.}
+    \resumeItemListEnd
+
+  \resumeSubheading
+    {Software Engineering Intern}{May 2025 -- Jul 2025}
+    {YES BANK}{Mumbai, Maharashtra}
+    \resumeItemListStart
+      \resumeItem{Led a three-person intern team through end-to-end QA of three enterprise platforms, documenting 50+ defects and validating approval workflows across multiple decision paths and organizational levels.}
+      \resumeItem{Translated workflow failures into reproducible defect reports, coordinated resolutions with developers and cross-functional stakeholders, and retested fixes through closure.}
+      \resumeItem{Designed and enhanced SharePoint and Power Automate workflows, internal sites, and Power BI dashboards for operational processes, stakeholder reporting, and client presentations.}
+    \resumeItemListEnd
+
+  \resumeSubheading
+    {Machine Learning Engineer Intern}{Dec 2024 -- Jan 2025}
+    {Alethe Labs}{Gurugram, Haryana}
+    \resumeItemListStart
+      \resumeItem{Developed and evaluated a ResUNet computer-vision model with multi-head attention to segment infrastructure imagery into severe corrosion, bad, fair, and background classes.}
+      \resumeItem{Implemented unsupervised anomaly-detection approaches for fraudulent bank transactions, preparing datasets and analyzing suspicious behavioral patterns without relying on labeled outcomes.}
+    \resumeItemListEnd
+
+  \resumeSubheading
+    {Undergraduate NLP Research Intern}{Jun 2024 -- Jul 2024}
+    {Manipal Institute of Technology}{Manipal, Karnataka}
+    \resumeItemListStart
+      \resumeItem{Analyzed lyrical structures using BERT, Word2Vec, Doc2Vec, and NLTK, and translated embedding patterns into interpretable visualizations with Matplotlib and Plotly.}
+    \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\section{Relevant Projects}
+\resumeSubHeadingListStart
+  \resumeSubItem{SetuAI -- Vendor Compliance Platform}
+    {Built a full-stack SaaS platform using React, Node.js, PostgreSQL, Gemini OCR, government API validation, role-based dashboards, and risk scoring to streamline vendor onboarding and compliance review; earned a SAP Hackfest 2025 special award after placing in the top five among 4,000 teams.}
+  \resumeSubItem{NearHere -- Privacy-Aware Mobile Platform}
+    {Developed a React Native and Supabase application with phone authentication, row-level security, authorized RPCs, and controlled disclosure of exact meeting locations; implemented resilient chat refresh behavior and 39 unit tests for domain and parser rules.}
+  \resumeSubItem{Art Generation with Neural Style Transfer}
+    {Built a deep-learning image-generation workflow using a pre-trained VGG-19 convolutional network to transfer low- and high-level visual features into Impressionism-inspired artwork.}
+  \resumeSubItem{Analysis of the Fractal Nature of Lyrical Verses}
+    {Analyzed and visualized lyrical patterns using BERT, Word2Vec, Doc2Vec, NLTK, Matplotlib, and Plotly; explored transformer-based lyric generation with Hugging Face models.}
+\resumeSubHeadingListEnd
+
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in,label={}]
+  \small{\item{
+    \textbf{Languages}{: Python, SQL, JavaScript, Java, C, HTML, CSS} \\
+    \textbf{Data and platforms}{: BigQuery, PostgreSQL, Supabase, DBeaver, Tableau, Power BI, Git} \\
+    \textbf{Application and automation}{: React, Node.js, REST APIs, SharePoint, Power Automate} \\
+    \textbf{Engineering practices}{: Data validation, QA, issue triage, workflow automation, access control, technical documentation}
+  }}
+\end{itemize}
+
+\section{Education}
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {Manipal Institute of Technology}{2022 -- 2026}
+    {Bachelor of Technology in Computer Science; CGPA: 8.65}{Manipal, Karnataka}
+\resumeSubHeadingListEnd
+
+\end{document}

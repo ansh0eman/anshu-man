@@ -1,0 +1,44 @@
+Anshuman
+Software Engineer - Systems and Machine Learning
++91-6205590392 | anshuwont@gmail.com | ansh0eman.xyz | github.com/ansh0eman | linkedin.com/in/anshuman
+Bengaluru, India | Open to relocation to Galway | Requires employment sponsorship
+Experience
+AI Analyst Jan 2026 – Present
+Impact Analytics Bengaluru, Karnataka
+• Develop and validate Python and BigQuery SQL pricing and demand-forecasting pipelines across 13 geographic clusters,
+transforming transactional data into reliable modeling inputs.
+• Implement store-clustering, baseline, seasonality, and elasticity approaches; trace data and model exceptions across
+upstream and downstream tables using DBeaver, Tableau, and Excel.
+Software Engineering Intern May 2025 – Jul 2025
+YES BANK Mumbai, Maharashtra
+• Led a three-person intern team through end-to-end QA of three enterprise platforms, documenting 50+ defects and
+validating approval workflows across multiple decision paths.
+• Built SharePoint and Power Automate workflows, internal sites, and Power BI dashboards for operational reporting and
+stakeholder review.
+Machine Learning Engineer Intern Dec 2024 – Jan 2025
+Alethe Labs Gurugram, Haryana
+• Developed and evaluated a ResUNet computer-vision model with multi-head attention to segment infrastructure imagery
+into four corrosion-condition classes.
+Undergraduate NLP Research Intern Jun 2024 – Jul 2024
+Manipal Institute of Technology Manipal, Karnataka
+• Analyzed lyrical structure using BERT, Word2Vec, and Doc2Vec embeddings and visualized recurring patterns for research
+exploration.
+Selected Projects
+• LEDA - Realtime watchOS Voice Assistant: Built a Swift/SwiftUI and AVFoundation prototype that streams
+microphone audio over WebSockets to a Node.js bridge and plays streamed responses on Apple Watch. Converted Watch
+Float32 audio to 24 kHz PCM16 and implemented listen/speak state transitions that pause capture during playback.
+• Realtime Anomaly Engine: Built a Python event-processing service with FastAPI, Redis Streams, PostgreSQL, and
+Docker; used asynchronous stream ingestion for anomaly scoring, persisted flagged events, and exposed results through REST
+endpoints.
+• SetuAI - Vendor Compliance Platform: Built a React, Node.js, and PostgreSQL platform with Gemini OCR, government
+API checks, role-based dashboards, and risk scoring. Placed in the top five among 4,000 SAP Hackfest 2025 teams and
+received a special award.
+Technical Skills
+Languages: C, Java (OOP), Python, Swift, JavaScript/TypeScript, SQL
+Systems and backend: Linux, Git, REST APIs, WebSockets, FastAPI, Node.js, Redis Streams, Docker
+Data and ML: PostgreSQL, BigQuery, PyTorch, TensorFlow, Hugging Face Transformers, Tableau
+Coursework: Data Structures and Algorithms, OOP, Operating Systems, Computer Architecture, Embedded Systems,
+DBMS
+Education
+Manipal Institute of Technology 2022 – 2026
+Bachelor of Technology in Computer Science and Engineering; CGPA: 8.65/10 Manipal, Karnataka
