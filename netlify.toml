@@ -11,3 +11,9 @@ from = "/api/spotify/now-playing"
 to = "/.netlify/functions/spotify-now-playing"
 status = 200
 force = true
+
+[[redirects]]
+from = "https://setuai.ansh0eman.in/"
+to = "/projects/setuai/"
+status = 200
+force = true

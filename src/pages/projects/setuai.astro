@@ -1,0 +1,188 @@
+---
+import Base from '../../layouts/Base.astro';
+import Section from '../../components/Section.astro';
+
+const title = 'SetuAI | Anshuman';
+const description = 'A project story about SetuAI, a compliance workflow for India’s textile supply chain.';
+const canonical = 'https://setuai.ansh0eman.in/';
+const siteRoot = 'https://ansh0eman.in';
+
+const captures = [
+	{
+		src: '/assets/projects/setuai/vendor-dashboard.png',
+		alt: 'SetuAI vendor dashboard showing uploaded compliance documents and their review statuses',
+		caption: 'A vendor sees what is uploaded, what is verified, and what still needs attention.'
+	},
+	{
+		src: '/assets/projects/setuai/vendor-compliance-detail.png',
+		alt: 'SetuAI vendor compliance detail with document verification states',
+		caption: 'Document-level review keeps the compliance state legible to buyers and vendors.'
+	},
+	{
+		src: '/assets/projects/setuai/buyer-marketplace.png',
+		alt: 'SetuAI buyer marketplace listing textile suppliers and compliance status',
+		caption: 'Buyer teams can compare suppliers and inspect compliance standing from one view.'
+	}
+];
+---
+
+<Base head={{ title, description, canonical }} siteRoot={siteRoot}>
+	<Section>
+		<main class="setu-story">
+			<section class="setu-hero" aria-labelledby="setu-title">
+				<div class="setu-hero-copy">
+					<p class="setu-kicker">A project by Anshuman / SAP Hackfest 2025 Special Award</p>
+					<h1 id="setu-title">Compliance, made easier to see.</h1>
+					<p class="setu-lede">
+						SetuAI helps textile vendors become audit-ready and gives enterprise buyers a clearer view of supplier compliance.
+					</p>
+					<div class="setu-actions">
+						<a class="setu-button setu-button-primary" href="https://github.com/ansh0eman/SetuAI" target="_blank" rel="noreferrer">View the source <span aria-hidden="true">↗</span></a>
+						<a class="setu-text-link" href="#how-it-works">Explore the workflow <span aria-hidden="true">↓</span></a>
+					</div>
+				</div>
+				<figure class="setu-hero-figure">
+					<img src="/assets/projects/setuai/buyer-marketplace.png" alt="SetuAI buyer marketplace showing textile vendors and compliance states" fetchpriority="high" />
+					<figcaption>Buyer marketplace / real product capture</figcaption>
+				</figure>
+				<div class="setu-hero-index" aria-hidden="true">SETUAI / 01</div>
+			</section>
+
+			<section class="setu-intro" aria-labelledby="setu-context-title">
+				<h2 id="setu-context-title">The work behind the paperwork.</h2>
+				<div>
+					<p>
+						Textile supply chains depend on many vendors maintaining current certificates. SetuAI brings document intake, OCR extraction, external checks, and role-based review into one workflow.
+					</p>
+					<p>
+						The goal was not another document dump. It was a shared view of what had been submitted, what had been verified, and what needed follow-up.
+					</p>
+				</div>
+			</section>
+
+			<section id="how-it-works" class="setu-workflow" aria-labelledby="setu-workflow-title">
+				<div class="setu-section-heading">
+					<h2 id="setu-workflow-title">One compliance workflow, end to end.</h2>
+					<p>From a vendor’s upload to a buyer’s review, each step leaves a clearer trail.</p>
+				</div>
+				<ol class="setu-steps">
+					<li><span>01</span><h3>Collect</h3><p>Vendors submit the certificates required for their profile.</p></li>
+					<li><span>02</span><h3>Extract</h3><p>OCR turns document details into structured fields for review.</p></li>
+					<li><span>03</span><h3>Verify</h3><p>Government checks and risk signals help assess the submitted information.</p></li>
+					<li><span>04</span><h3>Review</h3><p>Role-based views help vendors and buyers act on the same status.</p></li>
+				</ol>
+			</section>
+
+			<section class="setu-gallery" aria-labelledby="setu-gallery-title">
+				<div class="setu-section-heading">
+					<h2 id="setu-gallery-title">The product, in use.</h2>
+					<p>These are captures of the working application, not mockups.</p>
+				</div>
+				<div class="setu-capture-grid">
+					{captures.map((capture, index) => (
+						<figure class:list={['setu-capture', index === 0 && 'setu-capture-wide']}>
+							<img src={capture.src} alt={capture.alt} loading="lazy" />
+							<figcaption>{capture.caption}</figcaption>
+						</figure>
+					))}
+				</div>
+			</section>
+
+			<section class="setu-build" aria-labelledby="setu-build-title">
+				<div class="setu-build-copy">
+					<h2 id="setu-build-title">Built around the real workflow.</h2>
+					<p>
+						The platform combines a React interface with a Node.js service layer and PostgreSQL storage. Gemini OCR supports document extraction; government API checks, role-based dashboards, and risk scoring support review.
+					</p>
+				</div>
+				<dl class="setu-stack">
+					<div><dt>Interface</dt><dd>React</dd></div>
+					<div><dt>Services</dt><dd>Node.js</dd></div>
+					<div><dt>Data</dt><dd>PostgreSQL</dd></div>
+					<div><dt>Document extraction</dt><dd>Gemini OCR</dd></div>
+				</dl>
+			</section>
+
+			<section class="setu-outcome" aria-labelledby="setu-outcome-title">
+				<div>
+					<p class="setu-kicker">Outcome</p>
+					<h2 id="setu-outcome-title">Less waiting to become audit-ready.</h2>
+				</div>
+				<p class="setu-metric"><strong>70%</strong><span>faster vendor onboarding</span></p>
+				<p class="setu-award">SetuAI received a Special Award at SAP Hackfest 2025, among the top five teams.</p>
+			</section>
+
+			<footer class="setu-footer">
+				<p>This is a project overview, not a hosted SetuAI application.</p>
+				<a href="https://github.com/ansh0eman/SetuAI" target="_blank" rel="noreferrer">GitHub repository ↗</a>
+				<a href="https://ansh0eman.in/">Back to Anshuman’s portfolio ↗</a>
+			</footer>
+		</main>
+	</Section>
+</Base>
+
+<style>
+	.setu-story { --setu-accent: #c04b39; --setu-ink: #1f1d1b; --setu-paper: #f4f1eb; color: var(--setu-ink); padding: 1rem 0 4rem; }
+	:global(.dark) .setu-story { --setu-ink: #eeeae4; --setu-paper: #211f1d; color: var(--setu-ink); }
+	.setu-hero { position: relative; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2rem, 6vw, 6rem); align-items: center; min-height: 34rem; padding: clamp(2rem, 7vw, 6rem) clamp(1.25rem, 5vw, 4rem); overflow: hidden; background: linear-gradient(90deg, rgb(20 19 18 / 0.92), rgb(20 19 18 / 0.48)), url('/assets/projects/setuai/archive-texture.png') center / cover; color: #f6f2ec; }
+	.setu-hero-copy { position: relative; z-index: 1; max-width: 40rem; }
+	.setu-kicker { color: #e2a194; font-size: 0.7rem; letter-spacing: 0.14em; line-height: 1.6; text-transform: uppercase; }
+	.setu-hero h1 { margin: 1.25rem 0; max-width: 10ch; font-size: clamp(2.5rem, 5vw, 4.8rem); line-height: 0.98; letter-spacing: -0.055em; }
+	.setu-lede { max-width: 38rem; color: #e2ddd6; font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.65; }
+	.setu-actions { display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; margin-top: 2rem; }
+	.setu-button { display: inline-flex; align-items: center; gap: 0.7rem; padding: 0.8rem 1rem; border: 1px solid #e2a194; color: #fff8f1; font-size: 0.85rem; text-decoration: none; transition: transform 160ms ease, background-color 160ms ease; }
+	.setu-button:hover { transform: translateY(-2px); background: rgb(192 75 57 / 0.25); }
+	.setu-text-link { color: #f0c2b8; font-size: 0.8rem; text-underline-offset: 0.25em; }
+	.setu-hero-figure { position: relative; z-index: 1; margin: 0; padding: 0.45rem; background: #ece7df; box-shadow: 12px 14px 0 rgb(0 0 0 / 0.24); transform: rotate(1deg); }
+	.setu-hero-figure img { display: block; width: 100%; height: auto; }
+	.setu-hero-figure figcaption { padding: 0.5rem 0.35rem 0.1rem; color: #514b45; font-size: 0.64rem; letter-spacing: 0.08em; text-transform: uppercase; }
+	.setu-hero-index { position: absolute; right: 1rem; bottom: 0.6rem; color: rgb(255 255 255 / 0.48); font-size: 0.65rem; letter-spacing: 0.15em; }
+	.setu-intro, .setu-build, .setu-outcome { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: clamp(2rem, 8vw, 8rem); padding: clamp(3rem, 7vw, 6rem) clamp(1.25rem, 5vw, 4rem); border-bottom: 1px solid rgb(120 113 108 / 0.42); }
+	.setu-story h2 { margin: 0; font-size: clamp(1.7rem, 3vw, 2.8rem); line-height: 1.1; letter-spacing: -0.04em; }
+	.setu-intro p, .setu-build-copy p { max-width: 43rem; margin: 0 0 1rem; color: color-mix(in srgb, currentColor 78%, transparent); line-height: 1.8; }
+	.setu-workflow, .setu-gallery { padding: clamp(3rem, 7vw, 6rem) clamp(1.25rem, 5vw, 4rem); border-bottom: 1px solid rgb(120 113 108 / 0.42); }
+	.setu-section-heading { max-width: 47rem; margin-bottom: 2rem; }
+	.setu-section-heading p { margin-top: 0.75rem; color: color-mix(in srgb, currentColor 72%, transparent); line-height: 1.7; }
+	.setu-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.3rem; margin: 2.5rem 0 0; padding: 0; list-style: none; }
+	.setu-steps li { padding-top: 1rem; border-top: 2px solid var(--setu-accent); }
+	.setu-steps span { color: var(--setu-accent); font-size: 0.75rem; }
+	.setu-steps h3 { margin: 1.1rem 0 0.45rem; font-size: 1.1rem; }
+	.setu-steps p { margin: 0; color: color-mix(in srgb, currentColor 72%, transparent); font-size: 0.85rem; line-height: 1.65; }
+	.setu-capture-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem 1.5rem; align-items: start; }
+	.setu-capture { margin: 0; }
+	.setu-capture-wide { grid-column: 1 / -1; }
+	.setu-capture img { display: block; width: 100%; height: auto; border: 1px solid rgb(120 113 108 / 0.35); background: #e7e5e4; }
+	.setu-capture figcaption { max-width: 55ch; margin-top: 0.75rem; color: color-mix(in srgb, currentColor 75%, transparent); font-size: 0.8rem; line-height: 1.6; }
+	.setu-stack { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.8rem 1rem; margin: 0; }
+	.setu-stack div { padding: 1rem 0; border-top: 1px solid rgb(120 113 108 / 0.5); }
+	.setu-stack dt { color: color-mix(in srgb, currentColor 66%, transparent); font-size: 0.72rem; }
+	.setu-stack dd { margin: 0.45rem 0 0; font-size: 1.1rem; font-weight: 700; }
+	.setu-outcome { grid-template-columns: 1fr auto; align-items: center; border-bottom: 0; background: color-mix(in srgb, var(--setu-accent) 9%, transparent); }
+	.setu-outcome .setu-kicker { margin: 0 0 0.75rem; color: var(--setu-accent); }
+	.setu-metric { display: flex; gap: 0.8rem; align-items: baseline; }
+	.setu-metric strong { color: var(--setu-accent); font-size: clamp(2.8rem, 6vw, 5rem); line-height: 1; }
+	.setu-metric span { max-width: 9ch; font-size: 0.9rem; line-height: 1.3; }
+	.setu-award { grid-column: 1 / -1; max-width: 60ch; margin: 0; font-size: 0.86rem; line-height: 1.7; }
+	.setu-footer { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 2rem; padding: 1.5rem clamp(1.25rem, 5vw, 4rem) 0; font-size: 0.76rem; }
+	.setu-footer p { flex: 1 1 100%; color: color-mix(in srgb, currentColor 66%, transparent); }
+	.setu-footer a { color: var(--setu-accent); text-underline-offset: 0.25em; }
+	@media (max-width: 760px) {
+		.setu-story { padding-top: 0.5rem; }
+		.setu-hero { grid-template-columns: 1fr; gap: 2rem; min-height: auto; padding: 2.5rem 1.25rem 3.5rem; }
+		.setu-hero h1 { max-width: 12ch; }
+		.setu-hero-figure { max-width: 42rem; transform: none; }
+		.setu-intro, .setu-build, .setu-outcome { grid-template-columns: 1fr; gap: 1.5rem; }
+		.setu-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+		.setu-outcome { grid-template-columns: 1fr; }
+		.setu-award { grid-column: auto; }
+	}
+	@media (max-width: 520px) {
+		.setu-actions { align-items: flex-start; flex-direction: column; }
+		.setu-steps, .setu-capture-grid, .setu-stack { grid-template-columns: 1fr; }
+		.setu-capture-wide { grid-column: auto; }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.setu-button { transition: none; }
+		.setu-button:hover { transform: none; }
+	}
+</style>
