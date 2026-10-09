@@ -1,198 +1,180 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { AppConfig } from '@/utils/AppConfig';
-const { title } = AppConfig;
-const { description } = AppConfig;
 import Section from '../../components/Section.astro';
+import ProjectJukebox from '../../components/ProjectJukebox';
+
+const title = 'Projects | Anshuman';
+const description = 'Selected products, experiments, and systems by Anshuman.';
 ---
 
 <Base head={{ title, description }}>
 	<Section>
-		<slot />
-		<br />
+		<main class="projects-page">
+			<header class="page-heading">
+				<div><p class="page-kicker">Selected work / 作業記録</p><h1>Projects</h1></div>
+			</header>
 
-		<div class="flex flex-wrap items-center justify-between gap-2 border-y border-stone-500 py-2 text-[10px] uppercase tracking-[0.16em] text-stone-600 dark:border-stone-600 dark:text-stone-400">
-			<span>selected work / 作業記録</span>
-			<span>project archive · 01-04</span>
-		</div>
-		<p class="pb-2 pt-6 text-4xl font-bold">PROJECTS</p>
-		<div class="flex flex-col justify-center py-4">
-			<img
-				src="/project_img.png"
-				alt="Image"
-				class="border border-stone-500 bg-stone-200 p-1 shadow-[4px_4px_0_0_rgba(120,113,108,0.35)] dark:border-stone-600 dark:bg-stone-800"
-				style="max-width: 100%; height: auto;"
-			/>
-			<p class="mt-3 flex items-center justify-between border-b border-dashed border-stone-400 pb-2 text-[9px] uppercase tracking-[0.15em] text-stone-500 dark:border-stone-700 dark:text-stone-400">
-				<span>visual archive · kid a / radiohead</span><span>image ref. 001</span>
-			</p>
-		</div>
-		<section class="project-index text-sm">
-			<p class="project-title py-1 text-3xl font-bold" data-project-code="project file / 01">
-				<span class="text-6xl">1.</span>
-				<a
-					href="https://github.com/ansh0eman/SetuAI"
-					target="_blank"
-					class="text-inherit underline hover:text-blue-500"
-				>
-					SetuAI : AI-Powered Compliance Engine
-				</a>
-			</p>
-			<p class="project-copy py-2">
-				• <strong>SetuAI</strong> is an AI-powered compliance engine designed for <strong
-					>India’s textile supply chain</strong
-				>. It helps textile vendors become <em>“audit-ready”</em> by automating the verification of mandatory
-				compliance certificates using <strong>OCR</strong> (Optical Character Recognition) and AI, alongside
-				live checks with government APIs. <br /><br />
-				• This makes compliance easier, faster, and more reliable for vendors (especially small ones)
-				and promotes
-				<strong>ethical sourcing</strong> for big enterprise buyers. <br /><br />
-				• Built a full-stack SaaS platform integrating <strong>PostgreSQL</strong>, <strong
-					>Node.js</strong
-				>, <strong>React</strong>, and <strong>Google Gemini OCR</strong>
-				to power compliance verification. <br /><br />
-				• Incorporated live government API checks, role-based dashboards, and risk scoring — reducing
-				vendor onboarding time by <strong>70%</strong>. <br /><br />
-				• Awarded a <strong>special recognition at SAP Hackfest’25</strong> for innovation and real-world
-				impact.
-			</p>
-			<p class="project-copy py-2">
-				<a href="https://setuai.ansh0eman.in/" class="text-blue-500 underline hover:text-blue-700">Explore the SetuAI project story ↗</a>
-			</p>
+			<figure class="radiohead-strip">
+				<img src="/project_img.png" alt="Abstract panoramic artwork from Radiohead’s Kid A era" width="3904" height="1024" fetchpriority="high" />
+				<figcaption><span>Radiohead / Kid A visual archive</span><span>Side A - selected projects</span></figcaption>
+			</figure>
 
-			<p class="project-title py-1 text-3xl font-bold" data-project-code="project file / 02">
-				<span class="text-6xl">2.</span>
-				<a
-					href="/posts/second_blog_post"
-					target="_blank"
-					class="text-inherit underline hover:text-blue-500"
-				>
-					Art Generation with Neural Style Transfer Model
-				</a>
-			</p>
-			<p class="project-copy py-2">
-				• Developed a Deep Learning Model using NST to generate aesthetically pleasing and
-				contextually significant images in the style of various Impressionism movement artists. <br
-				/><br />
-				• Used convolutional neural networks (CNNs), a 19-layer VGG network pre-trained on the ImageNet
-				database, to recognize and apply low-level and high-level features in the style transfer process.
-				<br /><br />
-				• Enhanced skills in researching and implementing advanced deep learning algorithms while exploring
-				the art history of Impressionism.
-			</p>
+			<ProjectJukebox client:load />
 
-			<p class="project-title py-1 text-3xl font-bold" data-project-code="project file / 03">
-				<span class="text-6xl">3.</span>
-				<a
-					href="https://github.com/ansh0eman/Fractal-Nature-of-Lyrical-Verses"
-					target="_blank"
-					class="text-inherit underline hover:text-blue-500"
-				>
-					Analysis of Fractal-Nature of Lyrical Verses
-				</a>
-			</p>
-			<p class="project-copy py-2">
-				• Created a model to analyze and visualize the fractal nature of lyrical verses and generate
-				lyrics using advanced NLP techniques and transformer models. <br /><br />
-				• Applied word embeddings (Word2Vec, Doc2Vec, BERT) and fine-tuned transformer models (GPT-3,
-				Hugging Face Transformers) for lyrics generation focused on specific artists. <br /><br />
-				• Visualized complex lyrical patterns using Python libraries such as NLTK, Matplotlib, and Plotly.
-			</p>
+			<section class="experiments" aria-labelledby="experiments-title">
+				<div class="experiments-heading"><p class="page-kicker">B-sides / small experiments</p><h2 id="experiments-title">Also in the archive</h2></div>
+				<div class="experiment-list">
+					<a class="experiment experiment-with-image" href="/posts/second_blog_post/">
+						<img src="/assets/projects/neural-style-transfer/style-transfer-samples.png" alt="Examples of artistic image generation using neural style transfer" loading="lazy" />
+						<span class="experiment-copy"><small>01 / Computer vision</small><strong>Neural Style Transfer</strong><span>VGG-based style transfer experiments inspired by Impressionist painting.</span></span>
+						<span class="experiment-link" aria-hidden="true">↗</span>
+					</a>
+					<a class="experiment" href="https://github.com/ansh0eman/ImageFX" target="_blank" rel="noreferrer">
+						<span class="experiment-number">02</span><span class="experiment-copy"><small>02 / Java desktop</small><strong>ImageFX</strong><span>A JavaFX image-processing application with filters, histogram analysis, and compression.</span></span><span class="experiment-link" aria-hidden="true">↗</span>
+					</a>
+					<a class="experiment" href="https://github.com/ansh0eman/Fractal-Nature-of-Lyrical-Verses" target="_blank" rel="noreferrer">
+						<span class="experiment-number">03</span><span class="experiment-copy"><small>03 / Text analysis</small><strong>Fractal Nature of Lyrical Verses</strong><span>An exploration of structure and recurring patterns in lyrical text.</span></span><span class="experiment-link" aria-hidden="true">↗</span>
+					</a>
+				</div>
+			</section>
 
-			<p class="project-title py-1 text-3xl font-bold" data-project-code="project file / 04">
-				<span class="text-6xl">4.</span>
-				<a
-					href="https://github.com/ansh0eman/ImageFX"
-					target="_blank"
-					class="text-inherit underline hover:text-blue-500"
-				>
-					ImageFX : Image Processing Application
-				</a>
-			</p>
-			<p class="project-copy py-2">
-				• Developed an image processing application with various filters, histogram-based analysis,
-				and image compression features. <br /><br />
-				• Utilized Object-Oriented Programming principles (inheritance, modularity) with JavaFX and CSS
-				styling to design an intuitive GUI for image editing and analysis.
-			</p>
-
-			<p class="contact-line py-2">
-				<strong>Contact me:</strong>
-				<a href="mailto:anshuwont@gmail.com" class="text-blue-500 hover:underline"
-					>anshuwont@gmail.com</a
-				>
-			</p>
-		</section>
+			<aside class="radiohead-note" aria-label="Radiohead image credit">
+				<img src="/assets/radiohead/thom-yorke-nimes-2012.jpg" alt="Thom Yorke performing with Radiohead in Nîmes in 2012" loading="lazy" />
+				<div><p class="page-kicker">After the last track</p><p>Built between records, prototypes, and too many open tabs.</p>
+					<details><summary>Photo credit</summary><p>Thom Yorke performing in Nîmes, 2012. Photo by anyonlinyr, via Wikimedia Commons, <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noreferrer">CC BY 2.0</a>.</p></details>
+				</div>
+			</aside>
+		</main>
 	</Section>
 </Base>
 
 <style is:global>
-	.project-index .project-title {
-		position: relative;
-		margin-top: 3.25rem;
-		border-top: 1px solid rgb(120 113 108);
-		border-bottom: 1px solid rgb(168 162 158);
-		background: rgb(231 229 228 / 0.55);
-		padding: 1rem 1rem 0.75rem;
+	.projects-page { --project-accent: #a94335; --project-rule: rgb(120 113 108 / 0.42); --project-muted: rgb(68 64 60 / 0.76); padding: 0.25rem 0 3.5rem; }
+	.dark .projects-page { --project-accent: #df7564; --project-rule: rgb(168 162 158 / 0.32); --project-muted: rgb(214 211 209 / 0.74); }
+	.page-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; padding: 0.35rem 0 0.8rem; }
+	.page-kicker, .eyebrow { margin: 0; color: var(--project-accent); font-size: 0.68rem; letter-spacing: 0.14em; line-height: 1.5; text-transform: uppercase; }
+	.page-heading h1 { margin: 0.2rem 0 0; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.06em; line-height: 1; }
+	.radiohead-strip { margin: 0 0 0.8rem; border-block: 1px solid var(--project-rule); }
+	.radiohead-strip img { display: block; width: 100%; height: clamp(4.5rem, 8vw, 6.25rem); object-fit: cover; object-position: center 48%; }
+	.radiohead-strip figcaption { display: flex; justify-content: space-between; gap: 1rem; padding: 0.45rem 0; color: var(--project-muted); font-size: 0.59rem; letter-spacing: 0.1em; text-transform: uppercase; }
+	.jukebox { --ink: #211f1d; --muted: var(--project-muted); --rule: var(--project-rule); --accent: var(--project-accent); color: var(--ink); }
+	.dark .jukebox { --ink: #eeeae4; color: var(--ink); }
+	.jukebox-stage { display: grid; grid-template-columns: minmax(0, 1.42fr) minmax(16rem, 0.82fr); gap: clamp(1.4rem, 3vw, 3rem); align-items: stretch; }
+	.project-feature { min-width: 0; }
+	.project-media { margin: 0; padding: 0.35rem; border: 1px solid var(--rule); background: rgb(120 113 108 / 0.08); }
+	.project-cover { width: 100%; aspect-ratio: 1.62; overflow: hidden; background: #252321; }
+	.project-cover img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; background: #252321; }
+	.project-media figcaption { display: flex; justify-content: space-between; gap: 1rem; padding: 0.48rem 0.2rem 0.1rem; color: var(--muted); font-size: 0.58rem; letter-spacing: 0.09em; text-transform: uppercase; }
+	.feature-copy { padding: 1rem 0.1rem 0; }
+	.feature-copy h2 { margin: 0.2rem 0 0; font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.055em; line-height: 1.05; }
+	.feature-line { max-width: 42ch; margin: 0.5rem 0 0; color: var(--muted); font-size: 0.95rem; line-height: 1.6; }
+	.project-stack { display: flex; flex-wrap: wrap; gap: 0.45rem 1rem; margin: 0.9rem 0 0; color: var(--muted); font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; }
+	.project-links { display: flex; flex-wrap: wrap; gap: 0.75rem 1.3rem; margin-top: 1.05rem; }
+	.project-links a { color: var(--accent); font-size: 0.76rem; font-weight: 700; text-underline-offset: 0.25em; }
+	.project-links a:hover { text-decoration-thickness: 2px; }
+	.record-rack { display: flex; flex-direction: column; min-width: 0; padding: 0.2rem 0 0.4rem; }
+	.rack-heading { display: flex; justify-content: space-between; padding-bottom: 0.5rem; border-bottom: 1px solid var(--rule); color: var(--muted); font-size: 0.61rem; letter-spacing: 0.12em; text-transform: uppercase; }
+	.record-list { display: flex; flex-direction: column; flex: 1; padding: 0.3rem 0; }
+	.record-choice { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.55rem; align-items: center; min-height: 3.45rem; padding: 0.16rem 0.45rem 0.16rem 0.1rem; border-bottom: 1px solid var(--rule); transition: transform 380ms cubic-bezier(.2,.8,.2,1), background-color 220ms ease, padding 220ms ease; }
+	.record-choice:last-child { border-bottom: 0; }
+	.record-choice:hover { padding-left: 0.48rem; background: rgb(169 67 53 / 0.055); }
+	.record-select { display: grid; grid-template-columns: 3.2rem minmax(0, 1fr); gap: 0.55rem; align-items: center; width: 100%; padding: 0; border: 0; background: transparent; color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+	.record-select:focus-visible, .record-arrow:focus-visible { z-index: 1; outline: 2px solid var(--accent); outline-offset: 2px; }
+	.record-choice.is-active { z-index: 1; transform: translateX(-0.4rem); background: rgb(169 67 53 / 0.07); }
+	.record-disc { position: relative; display: grid; width: 2.8rem; aspect-ratio: 1; place-items: center; overflow: hidden; border: 1px solid rgb(28 25 23 / 0.6); border-radius: 50%; background: #302d2a; box-shadow: 2px 3px 5px rgb(0 0 0 / 0.2); transition: transform 420ms cubic-bezier(.2,.8,.2,1); }
+	.record-disc::before { position: absolute; z-index: 1; inset: 0.23rem; border: 1px solid rgb(250 250 249 / 0.36); border-radius: 50%; content: ''; pointer-events: none; }
+	.record-disc img { width: 100%; height: 100%; object-fit: cover; opacity: 0.76; filter: grayscale(0.42) contrast(1.06); }
+	.record-center { position: absolute; z-index: 2; display: grid; width: 1.32rem; aspect-ratio: 1; place-items: center; border: 2px solid #f4f1eb; border-radius: 50%; background: var(--accent); color: white; font-size: 0.48rem; }
+	.is-active .record-disc { transform: rotate(-12deg) scale(1.06); }
+	.record-label { display: grid; gap: 0.24rem; }
+	.record-label strong { font-size: 0.87rem; line-height: 1.2; }
+	.record-label small { color: var(--muted); font-size: 0.58rem; letter-spacing: 0.07em; text-transform: uppercase; }
+	.record-arrow { display: grid; width: 1.5rem; height: 2rem; place-items: center; color: var(--accent); font-size: 0.86rem; opacity: 0; text-decoration: none; }
+	.is-active .record-arrow, .record-choice:hover .record-arrow, .record-choice:focus-within .record-arrow { opacity: 1; }
+	.rack-note { margin: auto 0 0; padding-top: 0.5rem; border-top: 1px dashed var(--rule); color: var(--muted); font-size: 0.62rem; line-height: 1.5; }
+	.project-detail { display: grid; grid-template-columns: minmax(12rem, 0.7fr) minmax(0, 1.6fr); gap: clamp(1.5rem, 5vw, 5rem); margin-top: 3rem; padding: 1.25rem 0 1.45rem; border-block: 1px solid var(--rule); }
+	.detail-heading h3 { max-width: 13ch; margin: 0.28rem 0 0; font-size: clamp(1.5rem, 2.7vw, 2.2rem); letter-spacing: -0.045em; line-height: 1.1; }
+	.detail-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+	.detail-facts article { padding-top: 0.55rem; border-top: 2px solid var(--accent); }
+	.detail-facts h4 { margin: 0; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; }
+	.detail-facts p { margin: 0.42rem 0 0; color: var(--muted); font-size: 0.72rem; line-height: 1.65; }
+	.project-gallery { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(14rem, 0.7fr); gap: clamp(1.25rem, 3vw, 2.5rem); align-items: center; margin-top: 2rem; padding-top: 0.25rem; }
+	.gallery-copy { display: flex; flex-direction: column; min-width: 0; padding: 0.35rem 0; }
+	.gallery-copy { grid-column: 2; grid-row: 1; }
+	.gallery-kicker { margin: 0; color: var(--accent); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; }
+	.gallery-copy h3 { margin: 0.45rem 0 0; font-size: clamp(1.25rem, 2.4vw, 1.8rem); letter-spacing: -0.04em; line-height: 1.15; }
+	.gallery-copy > p:not(.gallery-kicker) { margin: 0.65rem 0 0; color: var(--muted); font-size: 0.78rem; line-height: 1.6; }
+	.gallery-controls { display: flex; justify-content: space-between; gap: 0.75rem; margin-top: 1rem; }
+	.gallery-arrow { padding: 0.4rem 0; border: 0; background: transparent; color: var(--accent); font: inherit; font-size: 0.73rem; cursor: pointer; }
+	.gallery-arrow:focus-visible, .gallery-thumb:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+	.gallery-thumbnails { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.85rem; }
+	.gallery-thumb { display: grid; width: 3.4rem; height: 2.55rem; padding: 0.12rem; place-items: center; overflow: hidden; border: 1px solid var(--rule); border-bottom: 2px solid transparent; background: transparent; cursor: pointer; }
+	.gallery-thumb.is-current { border-bottom-color: var(--accent); }
+	.gallery-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+	.gallery-stage { display: flex; grid-column: 1; grid-row: 1; width: 100%; aspect-ratio: 1.62; justify-content: center; align-items: center; padding: 0.55rem; border: 1px solid var(--rule); background: #e9e5dd; }
+	.dark .gallery-stage { background: #252321; }
+	.gallery-image-link { display: flex; width: 100%; height: 100%; justify-content: center; align-items: center; min-width: 0; min-height: 0; }
+	.gallery-image-link img { display: block; width: 100%; height: 100%; max-width: 100%; max-height: 100%; object-fit: contain; object-position: center; }
+	.gallery-stage.is-portrait { width: min(100%, 24rem, 37vh); justify-self: center; aspect-ratio: 1206 / 2622; }
+	.gallery-stage.is-square { width: min(100%, 34rem); justify-self: center; aspect-ratio: 1; }
+	.experiments { margin-top: 3.75rem; padding-top: 1.1rem; border-top: 1px solid var(--project-rule); }
+	.experiments-heading { display: flex; justify-content: space-between; align-items: end; gap: 1rem; margin-bottom: 1.2rem; }
+	.experiments-heading h2 { margin: 0.25rem 0 0; font-size: clamp(1.5rem, 3vw, 2.15rem); letter-spacing: -0.045em; }
+	.experiment-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid var(--project-rule); }
+	.experiment { display: grid; grid-template-columns: 2.6rem 1fr auto; gap: 0.8rem; align-items: center; min-height: 8.5rem; padding: 1rem 1rem 1rem 0; color: inherit; text-decoration: none; border-right: 1px solid var(--project-rule); transition: background-color 180ms ease; }
+	.experiment:last-child { border-right: 0; }
+	.experiment:hover { background: rgb(169 67 53 / 0.055); }
+	.experiment-with-image { grid-template-columns: 5.4rem 1fr auto; padding-left: 0; }
+	.experiment-with-image img { display: block; width: 5.4rem; height: 5.8rem; object-fit: contain; background: rgb(120 113 108 / 0.1); }
+	.experiment-number { color: var(--project-accent); font-size: 0.75rem; text-align: center; }
+	.experiment-copy { display: grid; gap: 0.28rem; }
+	.experiment-copy small { color: var(--project-accent); font-size: 0.58rem; letter-spacing: 0.08em; text-transform: uppercase; }
+	.experiment-copy strong { font-size: 0.98rem; line-height: 1.25; }
+	.experiment-copy > span { color: var(--project-muted); font-size: 0.72rem; line-height: 1.55; }
+	.experiment-link { align-self: start; color: var(--project-accent); font-size: 1rem; }
+	.radiohead-note { display: grid; grid-template-columns: 9rem 1fr; gap: 1.2rem; align-items: center; max-width: 43rem; margin: 3.25rem auto 0; }
+	.radiohead-note > img { display: block; width: 9rem; height: 7rem; object-fit: cover; object-position: center 35%; filter: saturate(0.72); }
+	.radiohead-note > div > p:nth-child(2) { margin: 0.45rem 0 0.6rem; font-size: 0.91rem; }
+	.radiohead-note details { color: var(--project-muted); font-size: 0.68rem; line-height: 1.6; }
+	.radiohead-note summary { width: fit-content; cursor: pointer; text-decoration: underline; text-underline-offset: 0.2em; }
+	.radiohead-note details p { max-width: 56ch; margin: 0.4rem 0 0; }
+	.radiohead-note details a { color: var(--project-accent); }
+	@media (max-width: 760px) {
+		.page-heading { align-items: start; flex-direction: column; gap: 0.55rem; }
+		.jukebox-stage { grid-template-columns: 1fr; gap: 1.1rem; }
+		.project-feature { display: contents; }
+		.feature-copy { order: 1; padding-top: 0.85rem; }
+		.record-rack { order: 2; padding-top: 0.5rem; }
+		.project-media { order: 3; }
+		.record-list { flex-direction: row; gap: 0.3rem; overflow-x: auto; padding: 0.65rem 0.15rem 0.75rem; scroll-snap-type: x mandatory; scrollbar-width: thin; }
+		.record-choice { flex: 0 0 5.7rem; display: flex; flex-direction: column; justify-content: start; gap: 0.45rem; min-height: 0; padding: 0.35rem 0.4rem 0.55rem; border: 1px solid transparent; scroll-snap-align: center; text-align: center; }
+		.record-select { display: flex; flex-direction: column; gap: 0.45rem; min-height: 4.6rem; padding: 0; text-align: center; }
+		.record-choice:hover, .record-choice.is-active { padding-left: 0.4rem; }
+		.record-choice.is-active { transform: translateY(-0.25rem); border-color: var(--accent); }
+		.record-disc { width: 3.6rem; }
+		.record-label { min-height: 2rem; align-content: start; }
+		.record-label strong { font-size: 0.68rem; }
+		.record-label small { display: none; }
+		.record-arrow { position: absolute; top: 0.05rem; right: 0.05rem; width: 1.3rem; height: 1.3rem; opacity: 1; }
+		.rack-note { display: none; }
+		.project-detail { grid-template-columns: 1fr; gap: 1rem; margin-top: 2rem; }
+		.detail-facts { grid-template-columns: 1fr; gap: 0.75rem; }
+		.detail-facts article { display: grid; grid-template-columns: 6.5rem 1fr; gap: 0.5rem; }
+		.detail-facts p { margin-top: 0; }
+		.project-gallery { grid-template-columns: minmax(0, 1fr); gap: 0.9rem; }
+		.gallery-copy, .gallery-stage { grid-column: 1; }
+		.gallery-stage { grid-row: 1; }
+		.gallery-copy { grid-row: 2; }
+		.gallery-stage.is-portrait { width: min(100%, 24rem, 37vh); }
+		.gallery-stage.is-square { width: min(100%, 90vw); }
+		.experiment-list { grid-template-columns: 1fr; }
+		.experiment, .experiment-with-image { grid-template-columns: 4.6rem 1fr auto; min-height: 7.1rem; padding: 0.75rem 0; border-right: 0; border-bottom: 1px solid var(--project-rule); }
+		.experiment:last-child { border-bottom: 0; }
+		.experiment-with-image img { width: 4.1rem; height: 4.4rem; }
+		.experiment-number { width: 4.1rem; }
+		.radiohead-note { grid-template-columns: 5.7rem 1fr; gap: 0.8rem; }
+		.radiohead-note > img { width: 5.7rem; height: 5.7rem; }
+		.radiohead-strip figcaption { font-size: 0.48rem; }
 	}
-
-	.project-index .project-title::before {
-		content: attr(data-project-code);
-		position: absolute;
-		top: -1.35rem;
-		left: 0;
-		font-size: 0.56rem;
-		font-weight: 400;
-		letter-spacing: 0.16em;
-		text-transform: uppercase;
-		color: rgb(87 83 78);
-	}
-
-	.project-index .project-title span {
-		display: inline-block;
-		margin-right: 0.25rem;
-		color: rgb(194 65 12);
-	}
-
-	.project-index .project-copy {
-		border-left: 1px solid rgb(168 162 158);
-		padding: 1.25rem 1rem 1.75rem;
-		line-height: 1.7;
-	}
-
-	.project-index .contact-line {
-		margin-top: 2.5rem;
-		border-top: 1px dashed rgb(168 162 158);
-		padding-top: 1rem;
-	}
-
-	.dark .project-index .project-title {
-		border-color: rgb(87 83 78);
-		background: rgb(41 37 36 / 0.55);
-	}
-
-	.dark .project-index .project-title::before {
-		color: rgb(168 162 158);
-	}
-
-	.dark .project-index .project-copy,
-	.dark .project-index .contact-line {
-		border-color: rgb(87 83 78);
-	}
-
-	@media (max-width: 640px) {
-		.project-index .project-title {
-			font-size: 1.35rem;
-			line-height: 1.35;
-			padding-inline: 0.75rem;
-		}
-
-		.project-index .project-title span {
-			font-size: 2.5rem;
-		}
-
-		.project-index .project-copy {
-			padding-inline: 0.75rem 0.25rem;
-		}
-	}
+	@media (prefers-reduced-motion: reduce) { .record-choice, .record-disc, .experiment { transition: none; } }
 </style>
