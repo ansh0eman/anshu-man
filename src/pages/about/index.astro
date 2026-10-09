@@ -1,71 +1,65 @@
 ---
-import Base from '../../layouts/Base.astro';
-import Section from '../../components/Section.astro';
-// import SpotifyData from '../../components/SpotifyData.astro';
-
-import { AppConfig } from '@/utils/AppConfig';
-const { title } = AppConfig;
-const { description } = AppConfig;
+import Base from '@/layouts/Base.astro';
+import Section from '@/components/Section.astro';
 ---
 
-<Base head={{ title, description }}>
+<Base head={{ title: 'About | Anshuman', description: 'The person behind the projects: software, work, books, philosophy, music, and a few ongoing questions.', canonical: 'https://ansh0eman.in/about/' }}>
 	<Section>
-		<slot />
-		<br />
-		<p class="pb-2 pt-6 text-4xl font-bold">About Me</p>
-		<div class="flex justify-center py-4">
-			<img
-				src="/about.jpeg"
-				alt="Personal Image"
-				class="shadow-lg"
-				style="max-width: 100%; height: auto;"
-			/>
-		</div>
-		<div style="height:3rem ;width: 3rem"></div>
-		<section class="text-sm leading-relaxed">
-			<p class="py-2">
-				Hello! I’m <strong class="font-black text-orange-600">Anshuman</strong> - a Computer Science undergrad at
-				Manipal Institute of Technology, a passionate <strong
-					>software developer</strong
-				>, and a music enthusiast.
-			</p>
+		<main class="about-page">
+			<header class="about-heading">
+				<p class="eyebrow">The person behind the projects</p>
+				<h1>about me, <em>more or less.</em></h1>
+				<p class="opening">I studied computer science at Manipal and now work with AI and data systems. I like building things, but I also like finding out what happens after the nice demo: who can use the thing, what breaks when the data is wrong, and whether the idea still makes sense outside my laptop.</p>
+			</header>
 
-			<p class="py-2">
-				I love exploring new technologies and working on projects that sit at the intersection
-				of <strong class="font-black text-orange-600">creativity</strong> and <strong class="font-black text-orange-600">code</strong>. Over the years, my curiosity has led me into some
-				pretty interesting spaces — from building an <strong class="font-black text-orange-600">AI-powered compliance engine (SetuAI)</strong
-				> that bagged a special award at
-				<strong>SAP Hackfest 2025</strong>, to experimenting with <strong class="font-black text-orange-600">neural style transfer</strong> for
-				art generation, to analyzing the <strong class="font-black text-orange-600">fractal nature of song lyrics</strong> (because why
-				not make math poetic?).
-			</p>
+			<section class="about-section">
+				<p class="section-number">01 / the throughline</p>
+				<div>
+					<h2>curiosity is doing most of the driving.</h2>
+					<p>That curiosity has taken me from image and music experiments to compliance workflows, internal tools, and an Apple Watch app with a suspiciously familiar green dial. I don't think those interests are as unrelated as they first look. I like figuring out how a complicated thing works, then making it understandable enough to use or play with.</p>
+					<a href="/projects/">see what i've made ↗</a>
+				</div>
+			</section>
 
-			<p class="py-2">
-				Professionally, I’ve dipped my toes into the real world through internships
-				as a
-				Data Analyst at Alethe Labs, where I built models to spot corrosion and
-				catch fraudulent transactions, and as a Tech Intern at Yes Bank, where I
-				helped streamline enterprise testing (aka, broke things and then fixed them). These
-				experiences taught me how tech can solve very real problems — and how <strong>coffee</strong> can solve even bigger ones.
-			</p>
+			<section class="about-section">
+				<p class="section-number">02 / away from the editor</p>
+				<div>
+					<h2>when i'm not building</h2>
+					<p>I read books and philosophy, listen to records that stay with me for years, and keep telling myself I'll finish a film. The questions I return to are usually about identity, meaning, and how much possibility fits inside a blank beginning. I don't have tidy answers. That's probably why I like them.</p>
+					<p>Radiohead has been here for a while. Car Seat Headrest belongs in the conversation too.</p>
+					<a href="/posts/">read the notes ↗</a>
+				</div>
+			</section>
 
-			<p class="py-2">
-				When I’m not coding, you’ll likely find me bed-rotting with a book,
-				failing at filmmaking in style, or humming along to Radiohead tracks that
-				make me wonder if Thom Yorke coded in Python in a past life.
-			</p>
-
-			<p class="py-2">
-				I’m always open to building cool things, collaborating on ideas, or just having a chat about machine learning, web development, or underrated Radiohead songs. If that sounds like your jam, feel free
-				to reach out!
-			</p>
-
-			<p class="py-2">
-				<strong>Contact me:</strong>
-				<a href="mailto:anshuwont@gmail.com" class="text-blue-500 hover:underline"
-					>anshuwont@gmail.com</a
-				>
-			</p>
-		</section>
+			<section class="about-section about-contact">
+				<p class="section-number">03 / your turn</p>
+				<div>
+					<h2>come say hi.</h2>
+					<p>If you've got a problem worth thinking through, a project worth building, or a book I should read, I'd like to hear about it.</p>
+					<div class="about-links">
+						<a href="mailto:anshuwont@gmail.com">email ↗</a>
+						<a href="https://github.com/ansh0eman" target="_blank" rel="noopener noreferrer">github ↗</a>
+						<a href="https://www.linkedin.com/in/anshuman-anshuman/" target="_blank" rel="noopener noreferrer">linkedin ↗</a>
+					</div>
+				</div>
+			</section>
+		</main>
 	</Section>
 </Base>
+
+<style>
+	.about-page { --accent: #a94335; --muted: #57534e; --rule: rgb(120 113 108 / .42); padding: clamp(2rem, 6vw, 4.5rem) 0 4rem; }
+	:global(.dark) .about-page { --accent: #df7564; --muted: #c2bbb3; --rule: rgb(168 162 158 / .32); }
+	.eyebrow, .section-number { color: var(--accent); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; }
+	.about-heading { max-width: 58rem; padding-bottom: clamp(3rem, 8vw, 6rem); }
+	h1 { margin: .8rem 0 1.5rem; font-size: clamp(2.8rem, 8vw, 6.5rem); letter-spacing: -.075em; line-height: 1.03; }
+	h1 em { color: var(--accent); font-style: normal; }
+	.opening { max-width: 65ch; font-size: clamp(1rem, 1.9vw, 1.23rem); line-height: 1.8; }
+	.about-section { display: grid; grid-template-columns: minmax(10rem, .32fr) minmax(0, 1fr); gap: 1.5rem; padding: 2.2rem 0 2.8rem; border-top: 1px solid var(--rule); }
+	.about-section > div { max-width: 65ch; }
+	h2 { margin: 0 0 1rem; font-size: clamp(1.55rem, 3vw, 2.4rem); line-height: 1.2; letter-spacing: -.055em; }
+	.about-section p:not(.section-number) { margin: 0 0 1rem; color: var(--muted); font-size: .89rem; line-height: 1.85; }
+	.about-section a { display: inline-block; margin-top: .4rem; color: var(--accent); font-size: .8rem; font-weight: 700; text-decoration: underline; text-underline-offset: .3em; }
+	.about-links { display: flex; flex-wrap: wrap; gap: .8rem 1.5rem; }
+	@media (max-width: 650px) { .about-section { grid-template-columns: 1fr; gap: .8rem; } }
+</style>

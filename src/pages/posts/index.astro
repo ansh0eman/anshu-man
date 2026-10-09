@@ -1,20 +1,21 @@
 ---
-import { AppConfig } from '@/utils/AppConfig';
 import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
 import Card from '@/components/Card.astro';
-import Heading from '@/components/Heading.astro';
 import { sortPostsByDate } from '@/utils/data.util';
-
-const { title } = AppConfig;
-const { description } = AppConfig;
 
 const allPosts = await Astro.glob('./*.md');
 allPosts.sort(sortPostsByDate);
 ---
 
-<Base head={{ title, description }}>
-	<Section><Heading title="Posts" /></Section>
+<Base head={{ title: 'Notes | Anshuman', description: 'Personal stories, build logs, and ideas by Anshuman.', canonical: 'https://ansh0eman.in/posts/' }}>
+	<Section>
+		<header class="notes-heading">
+			<p>Words from the side quests</p>
+			<h1>notes<span>.</span></h1>
+			<div>Some are build logs. Some are stories. One is about the bureaucratic consequences of having one name. They're all mine.</div>
+		</header>
+	</Section>
 	<Section>
 		<div class="mb-5 flex flex-wrap items-center justify-between gap-2 border-y border-stone-500 py-2 text-[10px] uppercase tracking-[0.16em] text-stone-600 dark:border-stone-600 dark:text-stone-400">
 			<span>notes index / 記録</span>
@@ -39,3 +40,13 @@ allPosts.sort(sortPostsByDate);
 		</div>
 	</Section>
 </Base>
+
+<style>
+	.notes-heading { max-width: 55rem; padding: clamp(2rem, 6vw, 4rem) 0 2rem; }
+	.notes-heading > p { color: #a94335; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; }
+	:global(.dark) .notes-heading > p, :global(.dark) .notes-heading h1 span { color: #df7564; }
+	.notes-heading h1 { margin: .3rem 0 1rem; font-size: clamp(3rem, 8vw, 6rem); letter-spacing: -.075em; line-height: 1; }
+	.notes-heading h1 span { color: #a94335; }
+	.notes-heading div { max-width: 62ch; color: #57534e; font-size: .9rem; line-height: 1.75; }
+	:global(.dark) .notes-heading div { color: #c2bbb3; }
+</style>

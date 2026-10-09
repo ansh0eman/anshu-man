@@ -24,10 +24,10 @@ type Project = {
 const projects: Project[] = [
 	{
 		id: 'nearhere', name: 'NearHere', shortDescription: 'A map-first way to find your people nearby.',
-		technologies: ['SwiftUI', 'Supabase', 'Maps'],
+		technologies: ['Expo', 'React Native', 'Supabase', 'Maps'],
 		facts: [
 			{ label: 'Product', text: 'Discover nearby activities and make small-group plans.' },
-			{ label: 'Privacy', text: 'Browse area-based listings without exposing live exact locations.' },
+			{ label: 'Privacy', text: 'Area-based discovery keeps location disclosure an explicit product decision.' },
 			{ label: 'Flow', text: 'Open an activity, review its details, and RSVP in one path.' }
 		],
 		links: [{ label: 'GitHub', href: 'https://github.com/ansh0eman/NearHere' }],
@@ -90,6 +90,20 @@ const projects: Project[] = [
 			{ src: '/assets/projects/setuai/vendor-compliance-detail.png', alt: 'SetuAI vendor compliance detail view with document verification states', caption: 'Document verification detail', width: 1440, height: 900 },
 			{ src: '/assets/projects/setuai/compliance-reports.png', alt: 'SetuAI compliance reports screen', caption: 'Compliance reports', width: 1440, height: 900 },
 			{ src: '/assets/projects/setuai/marketplace.png', alt: 'SetuAI vendor marketplace screen', caption: 'Vendor marketplace', width: 1440, height: 900 }
+		]
+	},
+	{
+		id: 'leda-os', name: 'LEDA OS', shortDescription: 'An Omnitrix-inspired voice prototype for Apple Watch.',
+		technologies: ['watchOS', 'SwiftUI', 'Digital Crown', 'Local voice bridge'],
+		facts: [
+			{ label: 'Interaction', text: 'Tap the dial and turn the Digital Crown to select an alien-inspired mode.' },
+			{ label: 'Feedback', text: 'Sound and haptics give the selection flow its watch-like feel.' },
+			{ label: 'Status', text: 'A local real-time voice bridge connects the prototype; physical-device reliability is still to be validated.' }
+		],
+		links: [{ label: 'GitHub', href: 'https://github.com/ansh0eman/ledaWatchOS' }],
+		cover: '/assets/projects/leda/watchos-omnitrix.png', coverAlt: 'LEDA OS Omnitrix-inspired watchOS prototype interface',
+		media: [
+			{ src: '/assets/projects/leda/watchos-omnitrix.png', alt: 'Green Omnitrix-inspired interface from the LEDA OS watchOS prototype', caption: 'Prototype watch interface', width: 400, height: 400 }
 		]
 	},
 	{
