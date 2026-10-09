@@ -10,5 +10,6 @@ export interface SpotifyTrack {
 
 export type NowPlayingResponse =
 	| { status: 'playing'; track: SpotifyTrack }
+	| { status: 'repeat'; track: SpotifyTrack }
 	| { status: 'idle' }
 	| { status: 'unavailable' };

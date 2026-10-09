@@ -6,6 +6,8 @@ declare const process: {
 
 const TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token';
 const NOW_PLAYING_ENDPOINT = 'https://api.spotify.com/v1/me/player/currently-playing';
+const TOP_TRACKS_ENDPOINT =
+	'https://api.spotify.com/v1/me/top/tracks?limit=1&time_range=short_term';
 const TOKEN_EXPIRY_BUFFER_MS = 30_000;
 
 interface TokenResponse {
@@ -13,20 +15,26 @@ interface TokenResponse {
 	expires_in: number;
 }
 
+interface SpotifyTrackItem {
+	type?: string;
+	name?: string;
+	duration_ms?: number;
+	artists?: Array<{ name?: string }>;
+	album?: {
+		name?: string;
+		images?: Array<{ url?: string }>;
+	};
+	external_urls?: { spotify?: string };
+}
+
 interface SpotifyCurrentlyPlaying {
 	is_playing?: boolean;
 	progress_ms?: number | null;
-	item?: {
-		type?: string;
-		name?: string;
-		duration_ms?: number;
-		artists?: Array<{ name?: string }>;
-		album?: {
-			name?: string;
-			images?: Array<{ url?: string }>;
-		};
-		external_urls?: { spotify?: string };
-	} | null;
+	item?: SpotifyTrackItem | null;
+}
+
+interface SpotifyTopTracks {
+	items?: SpotifyTrackItem[];
 }
 
 let cachedToken: { value: string; expiresAt: number } | null = null;
@@ -110,9 +118,11 @@ function safeImageUrl(value: unknown): string | null {
 	}
 }
 
-function normalizeTrack(payload: SpotifyCurrentlyPlaying): SpotifyTrack | null {
-	const item = payload.item;
-	if (!payload.is_playing || !item || item.type !== 'track') return null;
+function normalizeTrack(
+	item: SpotifyTrackItem | null | undefined,
+	progressMs = 0
+): SpotifyTrack | null {
+	if (!item || item.type !== 'track') return null;
 
 	const title = item.name?.trim();
 	const album = item.album?.name?.trim();
@@ -131,7 +141,7 @@ function normalizeTrack(payload: SpotifyCurrentlyPlaying): SpotifyTrack | null {
 		album,
 		albumImageUrl: safeImageUrl(item.album?.images?.[0]?.url),
 		spotifyUrl,
-		progressMs: typeof payload.progress_ms === 'number' ? payload.progress_ms : 0,
+		progressMs,
 		durationMs: item.duration_ms
 	};
 }
@@ -163,17 +173,42 @@ async function handleNowPlaying(): Promise<Response> {
 			}
 		});
 
-		if (response.status === 204) {
-			return json({ status: 'idle' }, 200, 'public, s-maxage=30, stale-while-revalidate=60');
+		if (response.status !== 204) {
+			if (!response.ok) throw new Error(`Spotify playback request failed with ${response.status}`);
+
+			const payload = (await response.json()) as SpotifyCurrentlyPlaying;
+			const track = payload.is_playing
+				? normalizeTrack(
+						payload.item,
+						typeof payload.progress_ms === 'number' ? payload.progress_ms : 0
+					)
+				: null;
+
+			if (track) {
+				return json(
+					{ status: 'playing', track },
+					200,
+					'public, s-maxage=15, stale-while-revalidate=30'
+				);
+			}
 		}
 
-		if (!response.ok) throw new Error(`Spotify playback request failed with ${response.status}`);
+		const topTracksResponse = await fetch(TOP_TRACKS_ENDPOINT, {
+			headers: {
+				Accept: 'application/json',
+				Authorization: `Bearer ${accessToken}`
+			}
+		});
 
-		const payload = (await response.json()) as SpotifyCurrentlyPlaying;
-		const track = normalizeTrack(payload);
+		if (!topTracksResponse.ok) {
+			throw new Error(`Spotify top-tracks request failed with ${topTracksResponse.status}`);
+		}
+
+		const topTracksPayload = (await topTracksResponse.json()) as SpotifyTopTracks;
+		const track = normalizeTrack(topTracksPayload.items?.[0]);
 
 		return track
-			? json({ status: 'playing', track }, 200, 'public, s-maxage=15, stale-while-revalidate=30')
+			? json({ status: 'repeat', track }, 200, 'public, s-maxage=900, stale-while-revalidate=3600')
 			: json({ status: 'idle' }, 200, 'public, s-maxage=30, stale-while-revalidate=60');
 	} catch (error) {
 		console.error(error instanceof Error ? error.message : 'Unknown Spotify integration error');

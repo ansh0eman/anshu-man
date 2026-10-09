@@ -1,74 +1,99 @@
----
-import Section from './Section.astro';
----
-
-<Section>
-	<section
-		aria-labelledby="now-playing-heading"
-		class="rounded-lg border border-stone-300 bg-white/60 p-4 shadow-sm dark:border-stone-700 dark:bg-stone-800/60"
-		data-now-playing
-	>
-		<div class="mb-3 flex items-center gap-2">
-			<span class="h-2.5 w-2.5 rounded-full bg-stone-400" aria-hidden="true" data-indicator></span>
-			<h2 id="now-playing-heading" class="text-sm font-bold uppercase tracking-wide">
-				Now playing
-			</h2>
+<aside
+	aria-labelledby="music-heading"
+	class="flex flex-col border border-stone-500 bg-stone-800 p-4 text-stone-100 shadow-[3px_3px_0_0_rgba(120,113,108,0.35)] sm:p-5"
+	data-now-playing
+>
+	<div class="flex items-start justify-between border-b border-stone-600 pb-3">
+		<div>
+			<p class="text-[9px] uppercase tracking-[0.18em] text-lime-300" data-eyebrow>
+				checking Spotify
+			</p>
+			<h3 id="music-heading" class="mt-1 text-lg font-bold" data-heading>On Repeat</h3>
 		</div>
+		<span class="mt-1 h-2 w-2 rounded-full bg-stone-400" aria-hidden="true" data-indicator></span>
+	</div>
 
-		<p class="text-sm text-stone-600 dark:text-stone-300" data-status aria-live="polite">
-			Checking Spotify…
-		</p>
+	<p class="mt-5 text-sm text-stone-300" data-status aria-live="polite">Checking Spotify…</p>
 
-		<a
-			class="hidden items-center gap-4 rounded-md outline-none ring-green-500 focus-visible:ring-2"
-			data-track
-			target="_blank"
-			rel="noopener noreferrer"
-		>
-			<img
-				class="hidden h-16 w-16 rounded object-cover"
-				data-artwork
-				alt=""
-				width="64"
-				height="64"
-			/>
-			<span class="min-w-0">
-				<strong class="block truncate text-base" data-title></strong>
-				<span class="block truncate text-sm text-stone-600 dark:text-stone-300" data-artists></span>
-				<span class="block truncate text-xs text-stone-500 dark:text-stone-400" data-album></span>
-			</span>
-		</a>
-	</section>
-</Section>
+	<a
+		class="mt-5 grid hidden grid-cols-[6.5rem_minmax(0,1fr)] gap-4 rounded-md outline-none ring-lime-300 focus-visible:ring-2 lg:grid-cols-1"
+		data-track
+		target="_blank"
+		rel="noopener noreferrer"
+	>
+		<img
+			class="hidden aspect-square w-full border border-stone-500 object-cover"
+			data-artwork
+			alt=""
+			width="320"
+			height="320"
+		/>
+		<span class="flex min-w-0 flex-col justify-end lg:mt-1">
+			<strong class="truncate text-base" data-title></strong>
+			<span class="mt-1 truncate text-xs text-stone-400" data-artists></span>
+			<span class="mt-1 truncate text-[10px] uppercase tracking-[0.12em] text-stone-500" data-album
+			></span>
+		</span>
+	</a>
+
+	<p
+		class="mt-auto border-t border-dashed border-stone-600 pt-3 text-[9px] uppercase tracking-[0.15em] text-stone-500"
+		data-footer
+	>
+		one shared music card
+	</p>
+</aside>
 
 <script>
 	import type { NowPlayingResponse } from '../types/spotify';
 
 	const root = document.querySelector<HTMLElement>('[data-now-playing]');
 	const status = root?.querySelector<HTMLElement>('[data-status]');
+	const eyebrow = root?.querySelector<HTMLElement>('[data-eyebrow]');
+	const heading = root?.querySelector<HTMLElement>('[data-heading]');
 	const indicator = root?.querySelector<HTMLElement>('[data-indicator]');
 	const trackLink = root?.querySelector<HTMLAnchorElement>('[data-track]');
 	const artwork = root?.querySelector<HTMLImageElement>('[data-artwork]');
 	const title = root?.querySelector<HTMLElement>('[data-title]');
 	const artists = root?.querySelector<HTMLElement>('[data-artists]');
 	const album = root?.querySelector<HTMLElement>('[data-album]');
+	const footer = root?.querySelector<HTMLElement>('[data-footer]');
 
 	function showMessage(message: string): void {
-		if (!status || !trackLink) return;
-		indicator?.classList.remove('bg-green-500');
+		if (!status || !trackLink || !eyebrow || !heading || !footer) return;
+		eyebrow.textContent = 'Spotify status';
+		heading.textContent = 'On Repeat';
+		footer.textContent = 'No listening data available';
+		indicator?.classList.remove('bg-green-500', 'bg-lime-300');
 		indicator?.classList.add('bg-stone-400');
 		status.textContent = message;
 		status.classList.remove('hidden');
 		trackLink.classList.add('hidden');
-		trackLink.classList.remove('flex');
 	}
 
-	function showTrack(response: Extract<NowPlayingResponse, { status: 'playing' }>): void {
-		if (!status || !trackLink || !artwork || !title || !artists || !album) return;
+	function showTrack(
+		response: Extract<NowPlayingResponse, { status: 'playing' | 'repeat' }>
+	): void {
+		if (
+			!status ||
+			!trackLink ||
+			!artwork ||
+			!title ||
+			!artists ||
+			!album ||
+			!eyebrow ||
+			!heading ||
+			!footer
+		)
+			return;
 
 		const track = response.track;
-		indicator?.classList.remove('bg-stone-400');
-		indicator?.classList.add('bg-green-500');
+		const isPlaying = response.status === 'playing';
+		eyebrow.textContent = isPlaying ? 'live on Spotify' : 'most played this month';
+		heading.textContent = isPlaying ? 'Now Playing' : 'On Repeat';
+		footer.textContent = isPlaying ? 'Listening now' : 'Spotify short-term top track';
+		indicator?.classList.remove('bg-stone-400', 'bg-green-500', 'bg-lime-300');
+		indicator?.classList.add(isPlaying ? 'bg-green-500' : 'bg-lime-300');
 		trackLink.href = track.spotifyUrl;
 		title.textContent = track.title;
 		artists.textContent = track.artists.join(', ');
@@ -86,7 +111,6 @@ import Section from './Section.astro';
 
 		status.classList.add('hidden');
 		trackLink.classList.remove('hidden');
-		trackLink.classList.add('flex');
 	}
 
 	async function updateNowPlaying(): Promise<void> {
@@ -98,8 +122,10 @@ import Section from './Section.astro';
 
 			if (response.ok && payload.status === 'playing') {
 				showTrack(payload);
+			} else if (response.ok && payload.status === 'repeat') {
+				showTrack(payload);
 			} else if (response.ok && payload.status === 'idle') {
-				showMessage('No signal right now.');
+				showMessage('No recent Spotify listening data.');
 			} else {
 				showMessage('Spotify status is unavailable.');
 			}

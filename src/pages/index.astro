@@ -2,7 +2,6 @@
 import { AppConfig } from '@/utils/AppConfig';
 import Base from '@/layouts/Base.astro';
 import Hero from '@/components/Hero.astro';
-import NowPlaying from '@/components/NowPlaying.astro';
 import LatestPosts from '@/components/LatestPosts.astro';
 import { sortPostsByDate } from '@/utils/data.util';
 
@@ -16,6 +15,5 @@ const latestPosts = allPosts.slice(0, 3);
 
 <Base head={{ title, description }}>
 	<Hero />
-	<NowPlaying />
 	<LatestPosts posts={latestPosts} />
 </Base>

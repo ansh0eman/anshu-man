@@ -12,14 +12,15 @@ The local integration is intentionally inactive until the portfolio owner suppli
 The public response has three states:
 
 - `playing`: a real currently playing track and its display metadata.
-- `idle`: Spotify returned no actively playing track.
+- `repeat`: no track is active, so Spotify's short-term top track is shown instead.
+- `idle`: Spotify returned neither an active track nor a recent top track.
 - `unavailable`: credentials are absent or Spotify could not be reached. This response is not cached.
 
 ## One-time owner authorization
 
 This helper runs only on the owner’s computer. It is not part of the public site and never asks visitors to authenticate. In the Spotify Dashboard, configure:
 
-- Website: `https://anshuman.netlify.app`
+- Website: `https://ansh0eman.netlify.app`
 - Redirect URI: `http://127.0.0.1:4321/spotify/callback`
 
 Create `.env.spotify.local` in the project root and add the existing app credentials there:
@@ -29,7 +30,7 @@ SPOTIFY_CLIENT_ID=
 SPOTIFY_CLIENT_SECRET=
 ```
 
-Do not paste either value into source code, a command argument, chat, or a committed file. The helper enforces mode `0600`, listens only on `127.0.0.1`, requests only `user-read-currently-playing`, validates a random single-use state, and stops after one callback or five minutes.
+Do not paste either value into source code, a command argument, chat, or a committed file. The helper enforces mode `0600`, listens only on `127.0.0.1`, requests `user-read-currently-playing` and `user-top-read`, validates a random single-use state, and stops after one callback or five minutes.
 
 Run:
 
@@ -47,7 +48,7 @@ Copy all three values from that ignored local file into Netlify’s encrypted en
 
 Never prefix these names with `PUBLIC_`. After Netlify has the values, delete `.env.spotify.local` if local testing is unnecessary, then redeploy. The production portfolio has no OAuth callback; visitors only call `/api/spotify/now-playing`.
 
-If the refresh token expires or is revoked, remove only its line from `.env.spotify.local` (or recreate the file with the client values), rerun the helper, update Netlify, and redeploy. Until then, the component safely reports that Spotify is unavailable.
+The current refresh token must be replaced once to grant `user-top-read` for the On Repeat fallback. Remove only its token line from `.env.spotify.local` (or recreate the file with the client values), rerun the helper, update Netlify, and redeploy. Repeat that process if the refresh token later expires or is revoked.
 
 ## Deployment verification
 

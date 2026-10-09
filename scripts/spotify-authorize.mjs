@@ -7,7 +7,7 @@ const HOST = '127.0.0.1';
 const PORT = 4321;
 const CALLBACK_PATH = '/spotify/callback';
 const REDIRECT_URI = `http://${HOST}:${PORT}${CALLBACK_PATH}`;
-const REQUIRED_SCOPE = 'user-read-currently-playing';
+const REQUIRED_SCOPES = ['user-read-currently-playing', 'user-top-read'];
 const AUTHORIZATION_TIMEOUT_MS = 5 * 60 * 1_000;
 const LOCAL_ENV_PATH = fileURLToPath(new URL('../.env.spotify.local', import.meta.url));
 
@@ -139,8 +139,9 @@ async function exchangeAuthorizationCode({ clientId, clientSecret, code }) {
 		throw new Error('Spotify did not return a usable refresh token.');
 	}
 
-	if (!grantedScopes.has(REQUIRED_SCOPE)) {
-		throw new Error(`Spotify did not grant the required ${REQUIRED_SCOPE} scope.`);
+	const missingScopes = REQUIRED_SCOPES.filter((scope) => !grantedScopes.has(scope));
+	if (missingScopes.length > 0) {
+		throw new Error(`Spotify did not grant required scope(s): ${missingScopes.join(', ')}.`);
 	}
 
 	return refreshToken;
@@ -170,7 +171,7 @@ async function authorizeOwner(configuration) {
 		client_id: configuration.clientId,
 		redirect_uri: REDIRECT_URI,
 		response_type: 'code',
-		scope: REQUIRED_SCOPE,
+		scope: REQUIRED_SCOPES.join(' '),
 		state
 	}).toString();
 

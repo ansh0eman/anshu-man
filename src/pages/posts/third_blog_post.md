@@ -1,14 +1,27 @@
 ---
 layout: ../../layouts/post.astro
-title: "Cogito, ergo sum"
+title: 'Cogito, ergo sum'
 pubDate: 2025-05-20
-description: "Cogito, ergo sum"
-author: "Anshuman"
+description: 'Cogito, ergo sum'
+author: 'Anshuman'
 excerpt: I (over)think, (maybe) therefore I am (not).
+featuredContent: |
+  Mind over matter is magic
+  Cogito, ergo sum
+  I think, therefore I am
+  I am, a speck of stardust
+  Carbon dirt with neurons
+  and I will again go
+  into it and lose my
+  Conscience. I am, therefore
+  I feel.
+  I am, therefore I feel.
+  I feel.
+  I (over)think, (maybe) therefore I am (not).
 image:
   src:
   alt:
-tags: ["cogito", "ergo", "sum"]
+tags: ['cogito', 'ergo', 'sum']
 ---
 
 <style>
