@@ -29,9 +29,10 @@ const featuredProjects = [
 				<figure class="home-artwork">
 					<img src="/home1.jpeg" alt="Thom Yorke standing alone in an overgrown landscape beside a concrete walkway" width="728" height="547" fetchpriority="high" />
 				</figure>
-				<p class="home-lede">Hi, I’m Anshuman. “Anshu Man” began as a third-grader’s answer to a question about my missing surname, then stuck around long after Facebook. I work on AI and data systems; somehow, that has involved building models, leading hackathon-winning teams, and getting government APIs to mostly cooperate. Outside work, I consume too much media and occasionally try to make films. My success rate there is not something I advertise.</p>
-				<p class="home-lede">My mum asked for one Good Morning text each day. I automated it, kept tinkering, and ended up with LEDA, my second brain. Now I’m building a voice bridge to it on Apple Watch, dressed as the Omnitrix. The text takes five seconds. This project has taken somewhat longer.</p>
-				<p class="home-elsewhere"><span>Away from code:</span> books, philosophy, too much music, and a queue of films I swear I’ll watch.</p>
+				<p class="home-lede">Anshu Man began with a third-grade question about my missing surname and a superhero answer from my mum. <a href="/posts/first_blog_post/">The investigation was extremely serious.</a></p>
+				<p class="home-lede">These days I work on AI and data systems. Off the clock: making things, watching films, and occasionally trying to make my own. Results vary.</p>
+				<p class="home-lede">Currently: LEDA, my second brain. Mum asked for a daily Good Morning text; I somehow ended up building a voice bridge to it on my Apple Watch, dressed as the Omnitrix. The request was one sentence. The implementation has lore.</p>
+				<p class="home-elsewhere"><span>Also:</span> books, philosophy, music that gets stuck in my head.</p>
 				<nav class="home-jumps" aria-label="Explore this page">
 					<a href="#work">where i've worked <span aria-hidden="true">↘</span></a>
 					<a href="#projects">things i've made <span aria-hidden="true">↘</span></a>
@@ -57,7 +58,7 @@ const featuredProjects = [
 
 			<section id="projects" class="home-section projects-section" aria-labelledby="projects-heading">
 				<div class="section-heading"><div><h2 id="projects-heading">things i've made</h2></div><span class="section-aside">02 / 03</span></div>
-				<p class="section-intro">A few ideas I followed far enough to give them their own page.</p>
+				<p class="section-intro">A few projects that escaped the “I'll just try this quickly” stage.</p>
 				<div class="featured-projects">
 					{featuredProjects.map((project, index) => (
 						<article class:list={['featured-project', { 'featured-project-lead': index === 0, 'featured-project-watch': project.name === 'LEDA OS' }]}>
@@ -77,7 +78,7 @@ const featuredProjects = [
 
 			<section class="home-section notes-section" aria-labelledby="notes-heading">
 				<div class="section-heading"><div><h2 id="notes-heading">notes from the side quests</h2></div><span class="section-aside">03 / 03</span></div>
-				<p class="section-intro">The posts wander from my name to consciousness to the time one text message grew an agent architecture. I try to keep up.</p>
+				<p class="section-intro">There’s a name-origin investigation, a poem about consciousness, and the technical story of a Good Morning text that got wildly out of hand. A mixed bag, like the rest of my brain.</p>
 				<div class="notes-layout">
 					{latestPost && <article class="latest-note">
 						<p class="project-kind">Latest note / {formatDate(latestPost.frontmatter.pubDate)}</p>
@@ -92,7 +93,7 @@ const featuredProjects = [
 
 			<section class="home-contact" aria-labelledby="contact-heading">
 				<h2 id="contact-heading">come say hi</h2>
-				<p>Got a project, a book I should read, or a theory you need a witness for? Email me.</p>
+				<p>Have a project, a book recommendation, or a question you can’t stop thinking about? Send it over.</p>
 				<a href="mailto:anshuwont@gmail.com">email me <span aria-hidden="true">↗</span></a>
 			</section>
 		</main>
