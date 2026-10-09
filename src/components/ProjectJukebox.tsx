@@ -103,7 +103,9 @@ const projects: Project[] = [
 		links: [{ label: 'GitHub', href: 'https://github.com/ansh0eman/ledaWatchOS' }],
 		cover: '/assets/projects/leda/watchos-omnitrix.png', coverAlt: 'LEDA OS Omnitrix-inspired watchOS prototype interface',
 		media: [
-			{ src: '/assets/projects/leda/watchos-omnitrix.png', alt: 'Green Omnitrix-inspired interface from the LEDA OS watchOS prototype', caption: 'Prototype watch interface', width: 400, height: 400 }
+			{ src: '/assets/projects/leda/watchos-omnitrix.png', alt: 'Idle LEDA OS watch face with its green Omnitrix-inspired dial', caption: 'The idle watch face', width: 416, height: 496 },
+			{ src: '/assets/projects/leda/selector-heatblast.png', alt: 'LEDA OS alien selector showing Heatblast with the Digital Crown selection prompt', caption: 'Choose a form · Heatblast', width: 416, height: 496 },
+			{ src: '/assets/projects/leda/selector-grey-matter.png', alt: 'LEDA OS alien selector showing Grey Matter with the Digital Crown selection prompt', caption: 'Choose a form · Grey Matter', width: 416, height: 496 }
 		]
 	},
 	{

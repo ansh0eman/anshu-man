@@ -14,15 +14,15 @@ import Section from '@/components/Section.astro';
 				<img src="/about.jpeg" alt="Two seated portraits of Thom Yorke against a white background" width="728" height="756" fetchpriority="high" />
 			</figure>
 			<div class="opening">
-				<p>hi, i'm Anshu Man. The space in my name has a whole third-grade superhero story behind it (<a href="/posts/first_blog_post/">yes, really</a>).</p>
-				<p>I studied computer science at Manipal and now work with AI and data systems. I like building things, but I also like finding out what happens after the nice demo: who can use the thing, what breaks when the data is wrong, and whether the idea still makes sense outside my laptop.</p>
+				<p>hi, i'm Anshu Man. A school form once insisted I needed a surname. My mother had a better explanation, and it involved superheroes. <a href="/posts/first_blog_post/">Here's the whole story.</a></p>
+				<p>I studied computer science at Manipal and now work with AI and data systems. I like building the demo. I also like the awkward next part: who can use it, what happens when the data is wrong, and whether it still makes sense away from my laptop.</p>
 			</div>
 
 			<section class="about-section">
 				<p class="section-number">01 / the throughline</p>
 				<div>
-					<h2>curiosity is doing most of the driving.</h2>
-					<p>That curiosity has taken me from image and music experiments to compliance workflows, internal tools, and an Apple Watch app with a suspiciously familiar green dial. It also turned my mother's request for a Good Morning text into <a href="/posts/openclaw-second-brain/">a second brain</a>. I have a habit of following a small question further than planned.</p>
+					<h2>small questions get out of hand.</h2>
+					<p>One week it's image and music experiments. Another it's a compliance workflow or an internal tool. My mother asked for a Good Morning text and I somehow built <a href="/posts/openclaw-second-brain/">a second brain</a>. I put an Omnitrix-inspired dial on an Apple Watch because a normal microphone button didn't satisfy the product manager in my head. I tend to follow an idea until I can build it, understand it, or both.</p>
 					<a href="/projects/">see what i've made ↗</a>
 				</div>
 			</section>
@@ -31,8 +31,8 @@ import Section from '@/components/Section.astro';
 				<p class="section-number">02 / away from the editor</p>
 				<div>
 					<h2>when i'm not building</h2>
-					<p>I read books and philosophy, listen to records that stay with me for years, and keep telling myself I'll finish a film. The questions I return to are usually about identity, meaning, and how much possibility fits inside a blank beginning. I don't have tidy answers. That's probably why I like them.</p>
-					<p>Radiohead has been here for a while. Car Seat Headrest belongs in the conversation too.</p>
+					<p>I read books and philosophy, listen to Radiohead and Car Seat Headrest, and keep telling myself I'll finish a film. I return to questions about identity and meaning more often than I arrive at answers.</p>
+					<p>I wrote <a href="/posts/third_blog_post/">a poem about overthinking</a>. It did not fix the overthinking.</p>
 					<a href="/posts/">read the notes ↗</a>
 				</div>
 			</section>
@@ -41,7 +41,7 @@ import Section from '@/components/Section.astro';
 				<p class="section-number">03 / your turn</p>
 				<div>
 					<h2>come say hi.</h2>
-					<p>If you've got a problem worth thinking through, a project worth building, or a book I should read, I'd like to hear about it.</p>
+					<p>If you've got a project worth building, a problem worth thinking through, or a book that made you stare at the ceiling for a while, tell me about it.</p>
 					<div class="about-links">
 						<a href="mailto:anshuwont@gmail.com">email ↗</a>
 						<a href="https://github.com/ansh0eman" target="_blank" rel="noopener noreferrer">github ↗</a>
@@ -54,22 +54,22 @@ import Section from '@/components/Section.astro';
 </Base>
 
 <style>
-	.about-page { --accent: #a94335; --muted: #57534e; --rule: rgb(120 113 108 / .42); padding: clamp(2rem, 6vw, 4.5rem) 0 4rem; }
+	.about-page { --accent: #a94335; --muted: #57534e; --rule: rgb(120 113 108 / .42); padding: clamp(1.5rem, 3vw, 2.5rem) 0 3rem; }
 	:global(.dark) .about-page { --accent: #df7564; --muted: #c2bbb3; --rule: rgb(168 162 158 / .32); }
 	.eyebrow, .section-number { color: var(--accent); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; }
-	.about-heading { max-width: 58rem; padding-bottom: 1.3rem; }
-	h1 { margin: .8rem 0 1.5rem; font-size: clamp(2.8rem, 8vw, 6.5rem); letter-spacing: -.075em; line-height: 1.03; }
+	.about-heading { max-width: 58rem; padding-bottom: .7rem; }
+	h1 { margin: .5rem 0 .8rem; font-size: clamp(2.3rem, 4.8vw, 4rem); letter-spacing: -.065em; line-height: 1.05; }
 	h1 em { color: var(--accent); font-style: normal; }
-	.about-artwork { display: flex; justify-content: center; margin: 0 0 clamp(2rem, 5vw, 3.5rem); }
-	.about-artwork img { display: block; width: min(78%, 44rem); height: auto; }
-	.opening { max-width: 75ch; margin-bottom: clamp(3rem, 8vw, 6rem); font-size: clamp(1rem, 1.9vw, 1.23rem); line-height: 1.8; }
+	.about-artwork { display: flex; justify-content: center; margin: 0 0 clamp(1.5rem, 3vw, 2.5rem); }
+	.about-artwork img { display: block; width: min(66%, 34rem); height: auto; }
+	.opening { max-width: 75ch; margin-bottom: clamp(2.5rem, 5vw, 4rem); font-size: clamp(.94rem, 1.4vw, 1.07rem); line-height: 1.7; }
 	.opening p + p { margin-top: 1rem; }
 	.opening a { color: var(--accent); text-decoration: underline; text-underline-offset: .25em; }
-	.about-section { display: grid; grid-template-columns: minmax(10rem, .32fr) minmax(0, 1fr); gap: 1.5rem; padding: 2.2rem 0 2.8rem; border-top: 1px solid var(--rule); }
+	.about-section { display: grid; grid-template-columns: minmax(10rem, .32fr) minmax(0, 1fr); gap: 1.5rem; padding: 1.6rem 0 2rem; border-top: 1px solid var(--rule); }
 	.about-section > div { max-width: 65ch; }
-	h2 { margin: 0 0 1rem; font-size: clamp(1.55rem, 3vw, 2.4rem); line-height: 1.2; letter-spacing: -.055em; }
+	h2 { margin: 0 0 .8rem; font-size: clamp(1.4rem, 2.2vw, 1.9rem); line-height: 1.2; letter-spacing: -.055em; }
 	.about-section p:not(.section-number) { margin: 0 0 1rem; color: var(--muted); font-size: .89rem; line-height: 1.85; }
 	.about-section a { display: inline-block; margin-top: .4rem; color: var(--accent); font-size: .8rem; font-weight: 700; text-decoration: underline; text-underline-offset: .3em; }
 	.about-links { display: flex; flex-wrap: wrap; gap: .8rem 1.5rem; }
-	@media (max-width: 650px) { .about-artwork img { width: 100%; } .about-section { grid-template-columns: 1fr; gap: .8rem; } }
+	@media (max-width: 650px) { .about-artwork img { width: min(86%, 22rem); } .about-section { grid-template-columns: 1fr; gap: .8rem; } }
 </style>
