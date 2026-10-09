@@ -9,19 +9,19 @@ posts.sort(sortPostsByDate);
 const latestPost = posts[0];
 
 const work = [
-	{ company: 'Impact Analytics', mark: 'IA', role: 'AI Analyst', dates: 'Jan 2026 — present', description: 'I work on pricing and demand forecasting: preparing data, checking modelling approaches, and tracing the exceptions that make a neat result less neat. The useful answer has to survive contact with the underlying data.' },
-	{ company: 'YES BANK', mark: 'YB', role: 'Software Engineering Intern', dates: 'May — Jul 2025', description: 'I worked on internal AI and operations tools, from a streaming chat interface and access controls to enterprise testing. It taught me how much work can hide behind a “simple” internal flow.' },
-	{ company: 'Alethe Labs', mark: 'AL', role: 'Machine Learning Engineer Intern', dates: 'Dec 2024 — Jan 2025', description: 'I built and evaluated models for corrosion in infrastructure images and explored unusual patterns in transaction data without labelled outcomes.' }
+	{ company: 'Impact Analytics', mark: 'IA', role: 'AI Analyst', dates: 'Jan 2026 — present', description: 'I work on pricing and demand forecasting: preparing data, testing modelling choices, and finding out why a forecast missed. The messy exceptions are where my day gets interesting.' },
+	{ company: 'YES BANK', mark: 'YB', role: 'Software Engineering Intern', dates: 'May — Jul 2025', description: 'I worked on internal AI and operations tools, from a streaming chat interface to access controls and enterprise testing. “Internal tool” sounds tiny until people depend on it.' },
+	{ company: 'Alethe Labs', mark: 'AL', role: 'Machine Learning Engineer Intern', dates: 'Dec 2024 — Jan 2025', description: 'I built models for corrosion in infrastructure images and looked for unusual transaction patterns without labelled examples. A lot of the work was figuring out what a useful answer even looked like.' }
 ];
 
 const featuredProjects = [
-	{ name: 'Aegis AI', kind: 'AI workspace', description: 'An AI workspace built with the less glamorous parts in mind: access, usage controls, and a record of important account changes. The chat is only one part of the product.', image: '/assets/projects/aegis-ai/admin-users.png', alt: 'Aegis AI admin console showing member provisioning and governance controls', href: '/projects/#aegis-ai' },
-	{ name: 'SetuAI', kind: 'Compliance workflow', description: 'A team-built workflow for textile vendors and buyers. Document intake, assisted extraction, checks, and review lead toward a clearer answer to “what still needs attention?”', image: '/assets/projects/setuai/buyer-marketplace.png', alt: 'SetuAI buyer marketplace showing vendors and compliance statuses', href: 'https://setuai.ansh0eman.in/' },
-	{ name: 'LEDA OS', kind: 'watchOS prototype', description: 'A Ben 10-inspired watchOS prototype. Tap the Omnitrix, turn the Digital Crown to choose an alien, and start a voice conversation through a local bridge.', image: '/assets/projects/leda/watchos-omnitrix.png', alt: 'LEDA OS prototype showing a green Omnitrix-inspired interface on Apple Watch', href: '/projects/#leda-os' }
+	{ name: 'Aegis AI', kind: 'AI workspace', description: 'An AI workspace needs more than a chat box. I worked on the grown-up bits too: roles, usage limits, and a record of what changed.', image: '/assets/projects/aegis-ai/admin-users.png', alt: 'Aegis AI admin console showing member provisioning and governance controls', href: '/projects/#aegis-ai' },
+	{ name: 'SetuAI', kind: 'Compliance workflow', description: 'A team-built tool for textile vendors and buyers to handle compliance documents, pull out useful details, and see what still needs a human look.', image: '/assets/projects/setuai/buyer-marketplace.png', alt: 'SetuAI buyer marketplace showing vendors and compliance statuses', href: 'https://setuai.ansh0eman.in/' },
+	{ name: 'LEDA OS', kind: 'watchOS prototype', description: 'I wanted to talk to LEDA without digging out my phone. The result: a watchOS prototype with an Omnitrix interface, alien selection, and a voice bridge to my second brain. Ten-year-old me had product veto power.', image: '/assets/projects/leda/watchos-omnitrix.png', alt: 'LEDA OS prototype showing a green Omnitrix-inspired interface on Apple Watch', href: '/projects/#leda-os' }
 ];
 ---
 
-<Base head={{ title: 'Anshu Man — software, systems, and side quests', description: 'Anshu Man builds AI, data, and software projects, from practical work systems to a Ben 10-inspired watchOS prototype.', canonical: 'https://ansh0eman.in/' }}>
+<Base head={{ title: 'I work on AI and data systems', description: 'Anshuman, aka Anshu Man: AI and data systems, side projects that get out of hand, and notes on whatever will not leave him alone.', canonical: 'https://ansh0eman.in/' }}>
 	<Section>
 		<main class="home-page">
 			<header class="home-intro">
@@ -29,8 +29,9 @@ const featuredProjects = [
 				<figure class="home-artwork">
 					<img src="/home1.jpeg" alt="Thom Yorke standing alone in an overgrown landscape beside a concrete walkway" width="728" height="547" fetchpriority="high" />
 				</figure>
-				<p class="home-lede">I work on AI and data systems. Outside work, ideas tend to become side projects before I can talk myself out of them. Lately, that means building an Omnitrix for my Apple Watch: a voice bridge to LEDA, my second brain, so I can catch a thought or talk to it from my wrist. Yes, it transforms.</p>
-				<p class="home-elsewhere"><span>Elsewhere:</span> music, books, philosophy, and films I keep promising myself I'll finish.</p>
+				<p class="home-lede">Hi, I’m Anshuman. “Anshu Man” began as a third-grader’s answer to a question about my missing surname, then stuck around long after Facebook. I work on AI and data systems; somehow, that has involved building models, leading hackathon-winning teams, and getting government APIs to mostly cooperate. Outside work, I consume too much media and occasionally try to make films. My success rate there is not something I advertise.</p>
+				<p class="home-lede">My mum asked for one Good Morning text each day. I automated it, kept tinkering, and ended up with LEDA, my second brain. Now I’m building a voice bridge to it on Apple Watch, dressed as the Omnitrix. The text takes five seconds. This project has taken somewhat longer.</p>
+				<p class="home-elsewhere"><span>Away from code:</span> books, philosophy, too much music, and a queue of films I swear I’ll watch.</p>
 				<nav class="home-jumps" aria-label="Explore this page">
 					<a href="#work">where i've worked <span aria-hidden="true">↘</span></a>
 					<a href="#projects">things i've made <span aria-hidden="true">↘</span></a>
@@ -38,7 +39,7 @@ const featuredProjects = [
 			</header>
 
 			<section id="work" class="home-section work-section" aria-labelledby="work-heading">
-				<div class="section-heading"><div><p class="home-eyebrow">The day job & the internships</p><h2 id="work-heading">work</h2></div><span class="section-aside">01 / 03</span></div>
+				<div class="section-heading"><div><h2 id="work-heading">work</h2></div><span class="section-aside">01 / 03</span></div>
 				<ol class="work-list">
 					{work.map((item) => (
 						<li class="work-entry">
@@ -55,8 +56,8 @@ const featuredProjects = [
 			</section>
 
 			<section id="projects" class="home-section projects-section" aria-labelledby="projects-heading">
-				<div class="section-heading"><div><p class="home-eyebrow">Selected from the archive</p><h2 id="projects-heading">things i've made</h2></div><span class="section-aside">02 / 03</span></div>
-				<p class="section-intro">Three ideas that escaped the notes app and became actual projects.</p>
+				<div class="section-heading"><div><h2 id="projects-heading">things i've made</h2></div><span class="section-aside">02 / 03</span></div>
+				<p class="section-intro">A few ideas I followed far enough to give them their own page.</p>
 				<div class="featured-projects">
 					{featuredProjects.map((project, index) => (
 						<article class:list={['featured-project', { 'featured-project-lead': index === 0, 'featured-project-watch': project.name === 'LEDA OS' }]}>
@@ -75,8 +76,8 @@ const featuredProjects = [
 			</section>
 
 			<section class="home-section notes-section" aria-labelledby="notes-heading">
-				<div class="section-heading"><div><p class="home-eyebrow">The writing shelf</p><h2 id="notes-heading">notes from the side quests</h2></div><span class="section-aside">03 / 03</span></div>
-				<p class="section-intro">A missing surname, a Good Morning text that grew an agent architecture, and other things that didn't fit in a project README.</p>
+				<div class="section-heading"><div><h2 id="notes-heading">notes from the side quests</h2></div><span class="section-aside">03 / 03</span></div>
+				<p class="section-intro">The posts wander from my name to consciousness to the time one text message grew an agent architecture. I try to keep up.</p>
 				<div class="notes-layout">
 					{latestPost && <article class="latest-note">
 						<p class="project-kind">Latest note / {formatDate(latestPost.frontmatter.pubDate)}</p>
@@ -90,9 +91,8 @@ const featuredProjects = [
 			</section>
 
 			<section class="home-contact" aria-labelledby="contact-heading">
-				<p class="home-eyebrow">The door is open</p>
-				<h2 id="contact-heading">got something interesting?</h2>
-				<p>A project, a problem, a book I should read, or a very specific Radiohead opinion—send it my way.</p>
+				<h2 id="contact-heading">come say hi</h2>
+				<p>Got a project, a book I should read, or a theory you need a witness for? Email me.</p>
 				<a href="mailto:anshuwont@gmail.com">email me <span aria-hidden="true">↗</span></a>
 			</section>
 		</main>
@@ -109,6 +109,7 @@ const featuredProjects = [
 	.home-artwork { display: flex; justify-content: center; margin: 0 0 1.25rem; padding: clamp(.45rem, 1.3vw, .9rem) 0; background: url('/home1.jpeg') center / auto 100% repeat-x; }
 	.home-artwork img { display: block; width: min(66%, 44rem); height: clamp(11rem, 28vw, 20rem); object-fit: cover; object-position: center; box-shadow: 0 6px 22px rgb(0 0 0 / .22); }
 	.home-lede { max-width: 75ch; font-size: clamp(.94rem, 1.4vw, 1.07rem); line-height: 1.65; }
+	.home-lede + .home-lede { margin-top: .75rem; }
 	.home-elsewhere { margin-top: .7rem; color: var(--muted); font-size: .78rem; line-height: 1.6; }
 	.home-elsewhere span { color: var(--accent); }
 	.home-jumps { display: flex; flex-wrap: wrap; gap: .8rem 1.5rem; margin-top: 1.3rem; }
