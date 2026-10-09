@@ -1,39 +1,32 @@
 ---
 layout: ../../layouts/post.astro
-title: "Art Generation with Neural Style Transfer Model."
+title: "Playing with Neural Style Transfer"
 pubDate: 2024-07-09
-description: "Exploring Neural Style Transfer with Impressionism!"
-author: "anshu man"
-excerpt: as a fan of art history, i decided to experiment with some impressionist art. impressionism, a revolutionary 19th-century art movement, is known for its small, thin, yet visible brush strokes, open compositions, and emphasis on the ever-changing qualities of light.
+description: "An experiment with neural style transfer and Impressionist paintings."
+author: "Anshu Man"
+excerpt: "I tried giving my photos an Impressionist makeover with neural style transfer. Some of the results were surprisingly good; some were just very committed to the brushstrokes."
 image:
   src:
   alt:
 tags: ["Art", "Deep Learning", "AI"]
 ---
 
-## Exploring Neural Style Transfer with Impressionism!
+Hello World! 😉
 
-Hello World!. 😉 
+I've always liked Impressionist paintings: the visible brushstrokes, the light, and the way a scene can feel familiar and strange at once. So I tried making my own images in that spirit with **neural style transfer**.
 
-as a fan of art history, i decided to experiment with some impressionist art. ***impressionism***, a revolutionary 19th-century art movement, is known for its small, thin, yet visible brush strokes, open compositions, and emphasis on the ever-changing qualities of light.
+The idea is to start with two images. The **content image** supplies the scene; the **style image** supplies visual patterns such as colour and texture. The generated image tries to keep the first while borrowing from the second.
 
-i've recently been diving into the fascinating world of <h1 style="margin-top: 1.2em" >**neural style transfer** (nst)</h1>one of the coolest optimization techniques in deep learning. nst essentially merges two images: **the content image** and the **style image**, repainting the content image in the style (?) of the referenced image. us to merge two images—a "content" image and a "style" image —to create a "generated" image that beautifully blends the content of first image with the style of other.
+<img src="/nst.png" alt="Diagram showing a content image and a style image combined into a neural style transfer result" class="w-full" />
 
-<img src="/nst.png" alt="Personal Image" class="shadow-lg w-full object-repeat" style="max-width: 100%; height: auto; border-radius:0 " />
+I used a pretrained VGG-19 network to represent features from the images. Its earlier layers respond to simpler visual features, while deeper layers capture more complex ones. Optimising the generated image against those representations is what makes the mix possible.
 
+For the experiment, I pulled content photos from my computer and paired them with paintings. The outputs kept recognisable parts of the original scenes while picking up colour and brushstroke patterns from the style images. Here are a few results:
 
- I used ***VGG-19***, a 19-layer version of the VGG network. This model has already been trained on the very large ImageNet database, and has learned to recognize a variety of low level features (at the shallower layers) and high level features (at the deeper layers).
+<img src="/4.png" alt="Photo of two people blended with the gold textures of Klimt's The Kiss" class="w-full" />
+<img src="/3.png" alt="Photo of two people blended with the swirling blue sky of Van Gogh's Starry Night" class="w-full" />
+<img src="/2.png" alt="Seated person blended with the blues and yellows of Van Gogh's Starry Night" class="w-full" />
+<img src="/6.png" alt="Group photo blended with the gold patterning of Klimt's The Kiss" class="w-full" />
+<img src="/1.png" alt="Seated person blended with the colours of a poppy-field painting" class="w-full" />
 
-The Impressionism movement began with a group of paris-based artists in the 1870s and 1880s and faced significant opposition from the conventional art community at the time. fun fact: the name 
-# "impressionism"
- comes from claude monet's painting, impression, soleil levant (impression, sunrise), which inspired a critic to coin the term in a satirical review.
-
-for my experiment, i used multiple pictures from my pc (whatever there was) as the content image and multiple paintins as the style image. the results were pretty insane. the generated image kept the landscape's structure while adopting the style image's vibrant brushstrokes and colors. it was like merging the past and present on one canvas.
-
-<img src="/4.png" alt="Personal Image" class="shadow-lg w-full object-repeat" style="max-width: 100%; height: auto; border-radius:0 " />
-<img src="/3.png" alt="Personal Image" class="shadow-lg w-full object-repeat" style="max-width: 100%; height: auto; border-radius:0 " />
-<img src="/2.png" alt="Personal Image" class="shadow-lg w-full object-repeat" style="max-width: 100%; height: auto; border-radius:0 " />
-<img src="/6.png" alt="Personal Image" class="shadow-lg w-full object-repeat" style="max-width: 100%; height: auto; border-radius:0 " />
-<img src="/1.png" alt="Personal Image" class="shadow-lg w-full object-repeat" style="max-width: 100%; height: auto; border-radius:0 " />
-
-there's always room for improvement with some hyperparameter magic and longer training—if only i had a quantum computer.
+There's always room to tune the settings and let it run longer. For now, I like that the results sit somewhere between a photo, a painting, and a small machine-made surprise.

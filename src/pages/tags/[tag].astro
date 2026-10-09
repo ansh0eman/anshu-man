@@ -3,7 +3,6 @@ import Section from '@/components/Section.astro';
 import Card from '@/components/Card.astro';
 import Base from '@/layouts/Base.astro';
 import Heading from '@/components/Heading.astro';
-import { AppConfig } from '@/utils/AppConfig';
 import { MarkdownInstance } from 'astro';
 
 export async function getStaticPaths(): Promise<any> {
@@ -28,8 +27,8 @@ interface Props {
 }
 
 const { tag } = Astro.params;
-const title = AppConfig.title;
-const description = AppConfig.description;
+const title = `${tag} notes | Anshu Man`;
+const description = `Notes tagged ${tag} by Anshu Man.`;
 
 const { posts } = Astro.props;
 ---

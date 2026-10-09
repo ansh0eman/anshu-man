@@ -22,10 +22,15 @@ const {
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>{title}</title>
+		<title>I work on AI and data systems</title>
 		<meta name="description" content={description} />
 		<meta name="author" content={AppConfig.author} />
 		{canonical && <link rel="canonical" href={canonical} />}
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		{canonical && <meta property="og:url" content={canonical} />}
+		<meta name="twitter:card" content="summary" />
 
     <link rel="sitemap" href="/sitemap-index.xml" />
 		<link rel="alternate" type="application/rss+xml" href="/rss.xml" />
@@ -59,5 +64,6 @@ const {
 </html>
 <style is:global>
 	:root {
+		font-size: 95%;
 	}
 </style>

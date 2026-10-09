@@ -3,15 +3,15 @@ import Base from '../../layouts/Base.astro';
 import Section from '../../components/Section.astro';
 import ProjectJukebox from '../../components/ProjectJukebox';
 
-const title = 'Projects | Anshuman';
-const description = 'Selected products, experiments, and systems by Anshuman.';
+const title = 'Projects | Anshu Man';
+const description = 'Selected products, systems, and experiments by Anshu Man, including Aegis AI, SetuAI, and LEDA OS.';
 ---
 
-<Base head={{ title, description }}>
+<Base head={{ title, description, canonical: 'https://ansh0eman.in/projects/' }}>
 	<Section>
 		<main class="projects-page">
 			<header class="page-heading">
-				<div><p class="page-kicker">Selected work / 作業記録</p><h1>Projects</h1></div>
+				<div><p class="page-kicker">Selected work / 作業記録</p><h1>Projects</h1><p class="project-intro">Selected work, experiments, and the ideas that got far enough to become real.</p></div>
 			</header>
 
 			<figure class="radiohead-strip">
@@ -54,6 +54,7 @@ const description = 'Selected products, experiments, and systems by Anshuman.';
 	.page-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; padding: 0.35rem 0 0.8rem; }
 	.page-kicker, .eyebrow { margin: 0; color: var(--project-accent); font-size: 0.68rem; letter-spacing: 0.14em; line-height: 1.5; text-transform: uppercase; }
 	.page-heading h1 { margin: 0.2rem 0 0; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; letter-spacing: -0.06em; line-height: 1; }
+	.project-intro { max-width: 65ch; margin: .75rem 0 .25rem; color: var(--project-muted); font-size: .78rem; line-height: 1.65; }
 	.radiohead-strip { margin: 0 0 0.8rem; border-block: 1px solid var(--project-rule); }
 	.radiohead-strip img { display: block; width: 100%; height: clamp(4.5rem, 8vw, 6.25rem); object-fit: cover; object-position: center 48%; }
 	.radiohead-strip figcaption { display: flex; justify-content: space-between; gap: 1rem; padding: 0.45rem 0; color: var(--project-muted); font-size: 0.59rem; letter-spacing: 0.1em; text-transform: uppercase; }

@@ -1,19 +1,156 @@
 ---
-import { AppConfig } from '@/utils/AppConfig';
 import Base from '@/layouts/Base.astro';
-import Hero from '@/components/Hero.astro';
-import LatestPosts from '@/components/LatestPosts.astro';
-import { sortPostsByDate } from '@/utils/data.util';
+import Section from '@/components/Section.astro';
+import NowPlaying from '@/components/NowPlaying.astro';
+import { formatDate, sortPostsByDate } from '@/utils/data.util';
 
-const { title } = AppConfig;
-const { description } = AppConfig;
+const posts = await Astro.glob('./posts/*.md');
+posts.sort(sortPostsByDate);
+const latestPost = posts[0];
 
-const allPosts = await Astro.glob('./posts/*.md');
-allPosts.sort(sortPostsByDate);
-const latestPosts = allPosts.slice(0, 3);
+const work = [
+	{ company: 'Impact Analytics', mark: 'IA', role: 'AI Analyst', dates: 'Jan 2026 — present', description: 'I work on pricing and demand forecasting: preparing data, testing modelling choices, and finding out why a forecast missed. The messy exceptions are where my day gets interesting.' },
+	{ company: 'YES BANK', mark: 'YB', role: 'Software Engineering Intern', dates: 'May — Jul 2025', description: 'I worked on internal AI and operations tools, from a streaming chat interface to access controls and enterprise testing. “Internal tool” sounds tiny until people depend on it.' },
+	{ company: 'Alethe Labs', mark: 'AL', role: 'Machine Learning Engineer Intern', dates: 'Dec 2024 — Jan 2025', description: 'I built models for corrosion in infrastructure images and looked for unusual transaction patterns without labelled examples. A lot of the work was figuring out what a useful answer even looked like.' }
+];
+
+const featuredProjects = [
+	{ name: 'Aegis AI', kind: 'AI workspace', description: 'An AI workspace needs more than a chat box. I worked on the grown-up bits too: roles, usage limits, and a record of what changed.', image: '/assets/projects/aegis-ai/admin-users.png', alt: 'Aegis AI admin console showing member provisioning and governance controls', href: '/projects/#aegis-ai' },
+	{ name: 'SetuAI', kind: 'Compliance workflow', description: 'A team-built tool for textile vendors and buyers to handle compliance documents, pull out useful details, and see what still needs a human look.', image: '/assets/projects/setuai/buyer-marketplace.png', alt: 'SetuAI buyer marketplace showing vendors and compliance statuses', href: 'https://setuai.ansh0eman.in/' },
+	{ name: 'LEDA OS', kind: 'watchOS prototype', description: 'I wanted to talk to LEDA without digging out my phone. The result: a watchOS prototype with an Omnitrix interface, alien selection, and a voice bridge to my second brain. Ten-year-old me had product veto power.', image: '/assets/projects/leda/watchos-omnitrix.png', alt: 'LEDA OS prototype showing a green Omnitrix-inspired interface on Apple Watch', href: '/projects/#leda-os' }
+];
 ---
 
-<Base head={{ title, description }}>
-	<Hero />
-	<LatestPosts posts={latestPosts} />
+<Base head={{ title: 'I work on AI and data systems', description: 'Anshuman, aka Anshu Man: AI and data systems, side projects that get out of hand, and notes on whatever will not leave him alone.', canonical: 'https://ansh0eman.in/' }}>
+	<Section>
+		<main class="home-page">
+			<header class="home-intro">
+				<h1>hi, i'm <span>anshu man.</span></h1>
+				<figure class="home-artwork">
+					<img src="/home1.jpeg" alt="Thom Yorke standing alone in an overgrown landscape beside a concrete walkway" width="728" height="547" fetchpriority="high" />
+				</figure>
+				<p class="home-lede">Anshu Man began with a third-grade question about my missing surname and a superhero answer from my mum. <a href="/posts/first_blog_post/">The investigation was extremely serious.</a></p>
+				<p class="home-lede">These days I work on AI and data systems. Off the clock: making things, watching films, and occasionally trying to make my own. Results vary.</p>
+				<p class="home-lede">Currently: LEDA, my second brain. Mum asked for a daily Good Morning text; I somehow ended up building a voice bridge to it on my Apple Watch, dressed as the Omnitrix. The request was one sentence. The implementation has lore.</p>
+				<p class="home-elsewhere"><span>Also:</span> books, philosophy, music that gets stuck in my head.</p>
+				<nav class="home-jumps" aria-label="Explore this page">
+					<a href="#work">where i've worked <span aria-hidden="true">↘</span></a>
+					<a href="#projects">things i've made <span aria-hidden="true">↘</span></a>
+				</nav>
+			</header>
+
+			<section id="work" class="home-section work-section" aria-labelledby="work-heading">
+				<div class="section-heading"><div><h2 id="work-heading">work</h2></div><span class="section-aside">01 / 03</span></div>
+				<ol class="work-list">
+					{work.map((item) => (
+						<li class="work-entry">
+							<span class="work-mark" aria-hidden="true">{item.mark}</span>
+							<div class="work-copy">
+								<div class="work-title"><h3>{item.company}</h3><span>{item.dates}</span></div>
+								<p class="work-role">{item.role}</p>
+								<p class="work-description">{item.description}</p>
+							</div>
+						</li>
+					))}
+				</ol>
+				<a class="section-link" href="/resume/resume.pdf" target="_blank" rel="noopener noreferrer">the full résumé <span aria-hidden="true">↗</span></a>
+			</section>
+
+			<section id="projects" class="home-section projects-section" aria-labelledby="projects-heading">
+				<div class="section-heading"><div><h2 id="projects-heading">things i've made</h2></div><span class="section-aside">02 / 03</span></div>
+				<p class="section-intro">A few projects that escaped the “I'll just try this quickly” stage.</p>
+				<div class="featured-projects">
+					{featuredProjects.map((project, index) => (
+						<article class:list={['featured-project', { 'featured-project-lead': index === 0, 'featured-project-watch': project.name === 'LEDA OS' }]}>
+							<a class="project-image" href={project.href} aria-label={`Explore ${project.name}`}>
+								<img src={project.image} alt={project.alt} loading="lazy" width={index === 2 ? 400 : 1440} height={index === 2 ? 400 : 900} />
+							</a>
+							<div class="project-copy">
+								<p class="project-kind">{String(index + 1).padStart(2, '0')} / {project.kind}</p>
+								<h3><a href={project.href}>{project.name} <span aria-hidden="true">↗</span></a></h3>
+								<p>{project.description}</p>
+							</div>
+						</article>
+					))}
+				</div>
+				<a class="section-link" href="/projects/">all projects <span aria-hidden="true">→</span></a>
+			</section>
+
+			<section class="home-section notes-section" aria-labelledby="notes-heading">
+				<div class="section-heading"><div><h2 id="notes-heading">notes from the side quests</h2></div><span class="section-aside">03 / 03</span></div>
+				<p class="section-intro">There’s a name-origin investigation, a poem about consciousness, and the technical story of a Good Morning text that got wildly out of hand. A mixed bag, like the rest of my brain.</p>
+				<div class="notes-layout">
+					{latestPost && <article class="latest-note">
+						<p class="project-kind">Latest note / {formatDate(latestPost.frontmatter.pubDate)}</p>
+						<h3><a href={latestPost.url}>{latestPost.frontmatter.title}</a></h3>
+						<p>{latestPost.frontmatter.excerpt}</p>
+						<a class="section-link" href={latestPost.url}>read the note <span aria-hidden="true">↗</span></a>
+					</article>}
+					<NowPlaying />
+				</div>
+				<a class="section-link" href="/posts/">all notes <span aria-hidden="true">→</span></a>
+			</section>
+
+			<section class="home-contact" aria-labelledby="contact-heading">
+				<h2 id="contact-heading">come say hi</h2>
+				<p>Have a project, a book recommendation, or a question you can’t stop thinking about? Send it over.</p>
+				<a href="mailto:anshuwont@gmail.com">email me <span aria-hidden="true">↗</span></a>
+			</section>
+		</main>
+	</Section>
 </Base>
+
+<style>
+	.home-page { --accent: #a94335; --muted: #57534e; --rule: rgb(120 113 108 / .42); padding: .25rem 0 3rem; }
+	:global(.dark) .home-page { --accent: #df7564; --muted: #c2bbb3; --rule: rgb(168 162 158 / .32); }
+	.home-intro { padding: clamp(1.6rem, 3vw, 2.7rem) 0 clamp(2rem, 4vw, 3rem); border-bottom: 1px solid var(--rule); }
+	.home-eyebrow, .project-kind { color: var(--accent); font-size: .67rem; line-height: 1.5; letter-spacing: .13em; text-transform: uppercase; }
+	.home-intro h1 { margin: .15rem 0 1rem; font-size: clamp(2.2rem, 4.3vw, 3.7rem); line-height: 1.05; letter-spacing: -.065em; }
+	.home-intro h1 span { color: var(--accent); }
+	.home-artwork { display: flex; justify-content: center; margin: 0 0 1.25rem; padding: clamp(.45rem, 1.3vw, .9rem) 0; background: url('/home1.jpeg') center / auto 100% repeat-x; }
+	.home-artwork img { display: block; width: min(66%, 44rem); height: clamp(11rem, 28vw, 20rem); object-fit: cover; object-position: center; box-shadow: 0 6px 22px rgb(0 0 0 / .22); }
+	.home-lede { max-width: 75ch; font-size: clamp(.94rem, 1.4vw, 1.07rem); line-height: 1.65; }
+	.home-lede + .home-lede { margin-top: .75rem; }
+	.home-elsewhere { margin-top: .7rem; color: var(--muted); font-size: .78rem; line-height: 1.6; }
+	.home-elsewhere span { color: var(--accent); }
+	.home-jumps { display: flex; flex-wrap: wrap; gap: .8rem 1.5rem; margin-top: 1.3rem; }
+	.home-jumps a, .section-link { width: fit-content; color: var(--accent); font-size: .78rem; font-weight: 700; text-decoration: underline; text-underline-offset: .3em; }
+	.home-jumps a:hover, .section-link:hover, .home-contact a:hover { text-decoration-thickness: 2px; }
+	.home-section { padding-top: clamp(2rem, 4vw, 3rem); }
+	.section-heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; padding-bottom: .9rem; border-bottom: 1px solid var(--rule); }
+	.section-heading h2 { margin: .15rem 0 0; font-size: clamp(1.55rem, 2.7vw, 2.2rem); line-height: 1.1; letter-spacing: -.06em; }
+	.section-aside { padding-bottom: .2rem; color: var(--muted); font-size: .65rem; letter-spacing: .1em; white-space: nowrap; }
+	.work-list { list-style: none; }
+	.work-entry { display: grid; grid-template-columns: 3.3rem minmax(0, 1fr); gap: 1.15rem; padding: 1.2rem 0; border-bottom: 1px solid var(--rule); }
+	.work-mark { display: grid; width: 3.25rem; height: 3.25rem; place-items: center; border: 1px solid var(--rule); color: var(--accent); font-size: .92rem; font-weight: 800; }
+	.work-title { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .25rem 1rem; }
+	.work-title h3 { font-size: clamp(1.08rem, 1.7vw, 1.3rem); letter-spacing: -.04em; }
+	.work-title span, .work-role { color: var(--muted); font-size: .73rem; }
+	.work-role { margin-top: .15rem; }
+	.work-description { max-width: 72ch; margin-top: .8rem; color: var(--muted); font-size: .83rem; line-height: 1.75; }
+	.work-section > .section-link, .projects-section > .section-link, .notes-section > .section-link { display: inline-block; margin-top: 1.3rem; }
+	.section-intro { max-width: 65ch; margin-top: .9rem; color: var(--muted); font-size: .83rem; line-height: 1.7; }
+	.featured-projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem 1.5rem; margin-top: 1.3rem; }
+	.featured-project { min-width: 0; padding-top: .6rem; border-top: 1px solid var(--rule); }
+	.featured-project-lead { display: grid; grid-column: 1 / -1; grid-template-columns: minmax(0, 1.18fr) minmax(16rem, .82fr); gap: 1.6rem; align-items: center; }
+	.project-image { display: grid; width: 100%; aspect-ratio: 16 / 9; place-items: center; overflow: hidden; background: #262422; }
+	.project-image img { width: 100%; height: 100%; object-fit: cover; }
+	.featured-project-watch .project-image img { object-fit: contain; }
+	.project-copy { padding: .8rem 0 0; }
+	.project-copy h3 { margin: .3rem 0 .5rem; font-size: clamp(1.25rem, 2vw, 1.7rem); line-height: 1.15; letter-spacing: -.05em; }
+	.project-copy h3 a { text-decoration: none; }
+	.project-copy h3 a:hover { color: var(--accent); }
+	.project-copy > p:last-child { max-width: 52ch; color: var(--muted); font-size: .8rem; line-height: 1.7; }
+	.notes-layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(15rem, .7fr); gap: 1.2rem; align-items: stretch; margin-top: 1.5rem; }
+	.latest-note { display: flex; flex-direction: column; min-height: 14rem; padding: 1.1rem; border: 1px solid var(--rule); }
+	.latest-note h3 { max-width: 28ch; margin-top: .9rem; font-size: clamp(1.25rem, 2vw, 1.65rem); letter-spacing: -.05em; line-height: 1.2; }
+	.latest-note h3 a:hover { color: var(--accent); }
+	.latest-note > p:nth-of-type(2) { max-width: 52ch; margin: .7rem 0 1.8rem; color: var(--muted); font-size: .8rem; line-height: 1.7; }
+	.latest-note .section-link { margin-top: auto; }
+	.home-contact { margin-top: clamp(2.5rem, 5vw, 4rem); padding: 1.3rem 0 1.6rem; border-top: 1px solid var(--rule); }
+	.home-contact h2 { max-width: 20ch; margin: .35rem 0 .7rem; font-size: clamp(1.6rem, 2.7vw, 2.2rem); letter-spacing: -.06em; line-height: 1.1; }
+	.home-contact p:not(.home-eyebrow) { max-width: 58ch; color: var(--muted); font-size: .85rem; line-height: 1.7; }
+	.home-contact a { display: inline-block; margin-top: 1.2rem; color: var(--accent); font-size: .8rem; font-weight: 700; text-underline-offset: .3em; }
+	@media (max-width: 720px) { .featured-project-lead, .notes-layout { grid-template-columns: 1fr; } .featured-project-lead .project-image { grid-row: 1; } }
+	@media (max-width: 560px) { .home-intro { padding-top: 1.5rem; } .home-artwork img { width: 78%; height: 12rem; } .featured-projects { grid-template-columns: 1fr; gap: 1.4rem; } .featured-project-lead { grid-column: auto; } .work-entry { grid-template-columns: 2.6rem minmax(0, 1fr); gap: .8rem; } .work-mark { width: 2.5rem; height: 2.5rem; font-size: .72rem; } .section-aside { display: none; } }
+</style>
