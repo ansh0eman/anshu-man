@@ -3,7 +3,7 @@ import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
 ---
 
-<Base head={{ title: 'About | Anshuman', description: 'The person behind the projects: software, work, books, philosophy, music, and a few ongoing questions.', canonical: 'https://ansh0eman.in/about/' }}>
+<Base head={{ title: 'About | Anshu Man', description: 'The person behind the projects: software, work, books, philosophy, music, and a few ongoing questions.', canonical: 'https://ansh0eman.in/about/' }}>
 	<Section>
 		<main class="about-page">
 			<header class="about-heading">
@@ -13,13 +13,16 @@ import Section from '@/components/Section.astro';
 			<figure class="about-artwork">
 				<img src="/about.jpeg" alt="Two seated portraits of Thom Yorke against a white background" width="728" height="756" fetchpriority="high" />
 			</figure>
-			<p class="opening">I studied computer science at Manipal and now work with AI and data systems. I like building things, but I also like finding out what happens after the nice demo: who can use the thing, what breaks when the data is wrong, and whether the idea still makes sense outside my laptop.</p>
+			<div class="opening">
+				<p>hi, i'm Anshu Man. The space in my name has a whole third-grade superhero story behind it (<a href="/posts/first_blog_post/">yes, really</a>).</p>
+				<p>I studied computer science at Manipal and now work with AI and data systems. I like building things, but I also like finding out what happens after the nice demo: who can use the thing, what breaks when the data is wrong, and whether the idea still makes sense outside my laptop.</p>
+			</div>
 
 			<section class="about-section">
 				<p class="section-number">01 / the throughline</p>
 				<div>
 					<h2>curiosity is doing most of the driving.</h2>
-					<p>That curiosity has taken me from image and music experiments to compliance workflows, internal tools, and an Apple Watch app with a suspiciously familiar green dial. I don't think those interests are as unrelated as they first look. I like figuring out how a complicated thing works, then making it understandable enough to use or play with.</p>
+					<p>That curiosity has taken me from image and music experiments to compliance workflows, internal tools, and an Apple Watch app with a suspiciously familiar green dial. It also turned my mother's request for a Good Morning text into <a href="/posts/openclaw-second-brain/">a second brain</a>. I have a habit of following a small question further than planned.</p>
 					<a href="/projects/">see what i've made ↗</a>
 				</div>
 			</section>
@@ -60,6 +63,8 @@ import Section from '@/components/Section.astro';
 	.about-artwork { display: flex; justify-content: center; margin: 0 0 clamp(2rem, 5vw, 3.5rem); }
 	.about-artwork img { display: block; width: min(78%, 44rem); height: auto; }
 	.opening { max-width: 75ch; margin-bottom: clamp(3rem, 8vw, 6rem); font-size: clamp(1rem, 1.9vw, 1.23rem); line-height: 1.8; }
+	.opening p + p { margin-top: 1rem; }
+	.opening a { color: var(--accent); text-decoration: underline; text-underline-offset: .25em; }
 	.about-section { display: grid; grid-template-columns: minmax(10rem, .32fr) minmax(0, 1fr); gap: 1.5rem; padding: 2.2rem 0 2.8rem; border-top: 1px solid var(--rule); }
 	.about-section > div { max-width: 65ch; }
 	h2 { margin: 0 0 1rem; font-size: clamp(1.55rem, 3vw, 2.4rem); line-height: 1.2; letter-spacing: -.055em; }

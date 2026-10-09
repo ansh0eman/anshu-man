@@ -1,8 +1,8 @@
 export const AppConfig = {
-	site_name: 'Anshuman',
-	title: 'Anshuman',
-	description: 'Software, systems, projects, and notes by Anshuman.',
-	author: 'Anshuman',
+	site_name: 'Anshu Man',
+	title: 'Anshu Man',
+	description: 'Software, systems, projects, and notes by Anshu Man.',
+	author: 'Anshu Man',
 	locale_region: 'en',
 	locale: 'en'
 };

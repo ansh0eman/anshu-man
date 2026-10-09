@@ -3,7 +3,7 @@ layout: ../../layouts/post.astro
 title: 'Cogito, ergo sum'
 pubDate: 2025-05-20
 description: 'Cogito, ergo sum'
-author: 'Anshuman'
+author: 'Anshu Man'
 excerpt: I (over)think, (maybe) therefore I am (not).
 featuredContent: |
   Mind over matter is magic

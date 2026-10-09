@@ -3,7 +3,7 @@ layout: ../../layouts/post.astro
 title: "Playing with Neural Style Transfer"
 pubDate: 2024-07-09
 description: "An experiment with neural style transfer and Impressionist paintings."
-author: "anshu man"
+author: "Anshu Man"
 excerpt: "I tried giving my photos an Impressionist makeover with neural style transfer. Some of the results were surprisingly good; some were just very committed to the brushstrokes."
 image:
   src:
