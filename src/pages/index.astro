@@ -27,6 +27,9 @@ const featuredProjects = [
 			<header class="home-intro">
 				<p class="home-eyebrow">Software, systems, and the occasional detour</p>
 				<h1>hi, i'm <span>Anshuman.</span></h1>
+				<figure class="home-artwork">
+					<img src="/home1.jpeg" alt="Thom Yorke standing alone in an overgrown landscape beside a concrete walkway" width="728" height="547" fetchpriority="high" />
+				</figure>
 				<p class="home-lede">I work on AI and data systems. I also build the ideas I can't leave alone—including a Ben 10-inspired watchOS prototype that probably says too much about my childhood.</p>
 				<p class="home-elsewhere"><span>Elsewhere:</span> music, books, philosophy, and the occasional film idea.</p>
 				<nav class="home-jumps" aria-label="Explore this page">
@@ -102,9 +105,11 @@ const featuredProjects = [
 	:global(.dark) .home-page { --accent: #df7564; --muted: #c2bbb3; --rule: rgb(168 162 158 / .32); }
 	.home-intro { padding: clamp(2.5rem, 7vw, 5.5rem) 0 clamp(3rem, 8vw, 6rem); border-bottom: 1px solid var(--rule); }
 	.home-eyebrow, .project-kind { color: var(--accent); font-size: .67rem; line-height: 1.5; letter-spacing: .13em; text-transform: uppercase; }
-	.home-intro h1 { margin: .75rem 0 1.2rem; font-size: clamp(2.6rem, 8vw, 5.8rem); line-height: 1.02; letter-spacing: -.07em; }
+	.home-intro h1 { margin: .75rem 0 1.35rem; font-size: clamp(2.6rem, 8vw, 5.8rem); line-height: 1.02; letter-spacing: -.07em; }
 	.home-intro h1 span { color: var(--accent); }
-	.home-lede { max-width: 59ch; font-size: clamp(1rem, 1.9vw, 1.23rem); line-height: 1.75; }
+	.home-artwork { display: flex; justify-content: center; margin: 0 0 1.8rem; padding: clamp(.6rem, 2vw, 1.5rem) 0; background: url('/home1.jpeg') center / auto 100% repeat-x; }
+	.home-artwork img { display: block; width: min(72%, 54rem); height: clamp(13rem, 40vw, 29rem); object-fit: cover; object-position: center; box-shadow: 0 8px 30px rgb(0 0 0 / .23); }
+	.home-lede { max-width: 75ch; font-size: clamp(1rem, 1.9vw, 1.23rem); line-height: 1.75; }
 	.home-elsewhere { margin-top: 1rem; color: var(--muted); font-size: .84rem; line-height: 1.7; }
 	.home-elsewhere span { color: var(--accent); }
 	.home-jumps { display: flex; flex-wrap: wrap; gap: 1.25rem 2rem; margin-top: 2rem; }
@@ -146,5 +151,5 @@ const featuredProjects = [
 	.home-contact p:not(.home-eyebrow) { max-width: 58ch; color: var(--muted); font-size: .85rem; line-height: 1.7; }
 	.home-contact a { display: inline-block; margin-top: 1.2rem; color: var(--accent); font-size: .8rem; font-weight: 700; text-underline-offset: .3em; }
 	@media (max-width: 720px) { .featured-project-lead, .notes-layout { grid-template-columns: 1fr; } .featured-project-lead .project-image { grid-row: 1; } }
-	@media (max-width: 560px) { .home-intro { padding-top: 2rem; } .featured-projects { grid-template-columns: 1fr; gap: 1.8rem; } .featured-project-lead { grid-column: auto; } .work-entry { grid-template-columns: 2.6rem minmax(0, 1fr); gap: .8rem; } .work-mark { width: 2.5rem; height: 2.5rem; font-size: .72rem; } .section-aside { display: none; } }
+	@media (max-width: 560px) { .home-intro { padding-top: 2rem; } .home-artwork img { width: 82%; height: 15rem; } .featured-projects { grid-template-columns: 1fr; gap: 1.8rem; } .featured-project-lead { grid-column: auto; } .work-entry { grid-template-columns: 2.6rem minmax(0, 1fr); gap: .8rem; } .work-mark { width: 2.5rem; height: 2.5rem; font-size: .72rem; } .section-aside { display: none; } }
 </style>

@@ -9,8 +9,11 @@ import Section from '@/components/Section.astro';
 			<header class="about-heading">
 				<p class="eyebrow">The person behind the projects</p>
 				<h1>about me, <em>more or less.</em></h1>
-				<p class="opening">I studied computer science at Manipal and now work with AI and data systems. I like building things, but I also like finding out what happens after the nice demo: who can use the thing, what breaks when the data is wrong, and whether the idea still makes sense outside my laptop.</p>
 			</header>
+			<figure class="about-artwork">
+				<img src="/about.jpeg" alt="Two seated portraits of Thom Yorke against a white background" width="728" height="756" fetchpriority="high" />
+			</figure>
+			<p class="opening">I studied computer science at Manipal and now work with AI and data systems. I like building things, but I also like finding out what happens after the nice demo: who can use the thing, what breaks when the data is wrong, and whether the idea still makes sense outside my laptop.</p>
 
 			<section class="about-section">
 				<p class="section-number">01 / the throughline</p>
@@ -51,15 +54,17 @@ import Section from '@/components/Section.astro';
 	.about-page { --accent: #a94335; --muted: #57534e; --rule: rgb(120 113 108 / .42); padding: clamp(2rem, 6vw, 4.5rem) 0 4rem; }
 	:global(.dark) .about-page { --accent: #df7564; --muted: #c2bbb3; --rule: rgb(168 162 158 / .32); }
 	.eyebrow, .section-number { color: var(--accent); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; }
-	.about-heading { max-width: 58rem; padding-bottom: clamp(3rem, 8vw, 6rem); }
+	.about-heading { max-width: 58rem; padding-bottom: 1.3rem; }
 	h1 { margin: .8rem 0 1.5rem; font-size: clamp(2.8rem, 8vw, 6.5rem); letter-spacing: -.075em; line-height: 1.03; }
 	h1 em { color: var(--accent); font-style: normal; }
-	.opening { max-width: 65ch; font-size: clamp(1rem, 1.9vw, 1.23rem); line-height: 1.8; }
+	.about-artwork { display: flex; justify-content: center; margin: 0 0 clamp(2rem, 5vw, 3.5rem); }
+	.about-artwork img { display: block; width: min(78%, 44rem); height: auto; }
+	.opening { max-width: 75ch; margin-bottom: clamp(3rem, 8vw, 6rem); font-size: clamp(1rem, 1.9vw, 1.23rem); line-height: 1.8; }
 	.about-section { display: grid; grid-template-columns: minmax(10rem, .32fr) minmax(0, 1fr); gap: 1.5rem; padding: 2.2rem 0 2.8rem; border-top: 1px solid var(--rule); }
 	.about-section > div { max-width: 65ch; }
 	h2 { margin: 0 0 1rem; font-size: clamp(1.55rem, 3vw, 2.4rem); line-height: 1.2; letter-spacing: -.055em; }
 	.about-section p:not(.section-number) { margin: 0 0 1rem; color: var(--muted); font-size: .89rem; line-height: 1.85; }
 	.about-section a { display: inline-block; margin-top: .4rem; color: var(--accent); font-size: .8rem; font-weight: 700; text-decoration: underline; text-underline-offset: .3em; }
 	.about-links { display: flex; flex-wrap: wrap; gap: .8rem 1.5rem; }
-	@media (max-width: 650px) { .about-section { grid-template-columns: 1fr; gap: .8rem; } }
+	@media (max-width: 650px) { .about-artwork img { width: 100%; } .about-section { grid-template-columns: 1fr; gap: .8rem; } }
 </style>
