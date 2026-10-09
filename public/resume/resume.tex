@@ -1,49 +1,27 @@
 %-------------------------
-% Resume in Latex
-% Author : Anshuman
-% Based off of: https://github.com/sb2nov/resume
-%------------------------
+% Resume in LaTeX
+% Author: Anshuman
+% Based on: https://github.com/sb2nov/resume
+%-------------------------
 
 \documentclass[letterpaper,11pt]{article}
 
-\usepackage{graphicx}
 \usepackage{latexsym}
 \usepackage[empty]{fullpage}
 \usepackage{titlesec}
-\usepackage{marvosym}
 \usepackage[usenames,dvipsnames]{color}
-\usepackage{verbatim}
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
 \usepackage{tabularx}
-\usepackage{fontawesome5}
-\usepackage{multicol}
-\setlength{\multicolsep}{-3.0pt}
-\setlength{\columnsep}{-1pt}
-\input{glyphtounicode}
-
-
-%----------FONT OPTIONS----------
-% sans-serif
-% \usepackage[sfdefault]{FiraSans}
-% \usepackage[sfdefault]{roboto}
-% \usepackage[sfdefault]{noto-sans}
-% \usepackage[default]{sourcesanspro}
-
-% serif
-% \usepackage{CormorantGaramond}
-% \usepackage{charter}
-
 
 \pagestyle{fancy}
-\fancyhf{} % clear all header and footer fields
+\fancyhf{}
 \fancyfoot{}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
-% Adjust margins
 \addtolength{\oddsidemargin}{-0.6in}
 \addtolength{\evensidemargin}{-0.5in}
 \addtolength{\textwidth}{1.19in}
@@ -51,175 +29,108 @@
 \addtolength{\textheight}{1.4in}
 
 \urlstyle{same}
-
 \raggedbottom
 \raggedright
 \setlength{\tabcolsep}{0in}
 
-% Sections formatting
 \titleformat{\section}{
   \vspace{-8pt}\scshape\raggedright\large\bfseries
 }{}{0em}{}[\color{black}\titlerule \vspace{-4pt}]
 
-% Ensure that generate pdf is machine readable/ATS parsable
-\pdfgentounicode=1
-
-%-------------------------
-% Custom commands
 \newcommand{\resumeItem}[1]{
-  \item\small{
-    {#1 \vspace{-2pt}}
-  }
-}
-
-\newcommand{\classesList}[4]{
-    \item\small{
-        {#1 #2 #3 #4 \vspace{-2pt}}
-  }
+  \item\small{{#1 \vspace{-2pt}}}
 }
 
 \newcommand{\resumeSubheading}[4]{
   \vspace{-2pt}\item
     \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
       \textbf{#1} & \textbf{\small #2} \\
-      \textit{\small#3} & \textit{\small #4} \\
+      \textit{\small #3} & \textit{\small #4} \\
     \end{tabular*}\vspace{-8pt}
 }
 
-\newcommand{\resumeSubSubheading}[2]{
-    \item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-      \textit{\small#1} & \textit{\small #2} \\
-    \end{tabular*}\vspace{-7pt}
+\newcommand{\resumePItem}[2]{
+  \item[$\vcenter{\hbox{\tiny$\bullet$}}$]\small{\textbf{#1}: #2 \vspace{-2pt}}
 }
 
-\newcommand{\resumeProjectHeading}[2]{
-    \item
-    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
-      \small#1 & \textbf{\small #2}\\
-    \end{tabular*}\vspace{-7pt}
-}
-
-\newcommand{\resumeSubItem}[2]{%
-  \resumePItem{#1}{#2}\vspace{-3pt}%
-}
-
-\newcommand{\resumePItem}[2]{%
-  \item[$\vcenter{\hbox{\tiny$\bullet$}}$]\small{%
-    \textbf{#1}: #2 \vspace{-2pt}%
-  }%
-}
-
+\newcommand{\resumeSubItem}[2]{\resumePItem{#1}{#2}\vspace{-3pt}}
 \renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
-
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in,label={}]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
 \newcommand{\resumeItemListStart}{\begin{itemize}}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-6pt}}
-
-
-%-------------------------------------------
-%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{0pt}}
 
 \begin{document}
 
-%----------HEADING----------
-% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
-%   \textbf{\href{http://sourabhbajaj.com/}{\Large Sourabh Bajaj}} & Email : \href{mailto:sourabh@sourabhbajaj.com}{sourabh@sourabhbajaj.com}\\
-%   \href{http://sourabhbajaj.com/}{http://www.sourabhbajaj.com} & Mobile : +1-123-456-7890 \\
-% \end{tabular*}
-\begin{tabularx}{\textwidth}{@{}X r@{}}
-  \begin{minipage}[t]{\textwidth}
-    {\Huge \scshape Anshuman}\\[0.2em]
-    +91-6205590392 \;|\; \href{https://ansh0eman.netlify.app/}{ansh0eman.xyz} \;|\; 
-    \href{mailto:anshuwont@gmail.com}{anshuwont@gmail.com} \\
-    % \href{https://github.com/ansh0eman}{github.com/ansh0eman} \;|\;
-    \href{https://www.linkedin.com/in/anshuman-anshuman-82028b263/}{linkedin.com/in/anshuman} \\[0.4em]
-    {\small \textbf{Research Interests:} Machine Learning, Computational Creativity, Natural Language Processing, Computer Vision}
-  \end{minipage}
-  &
-  % \raisebox{-.5\height}{\includegraphics[width=2.5cm,keepaspectratio]{passport1.JPEG}}
-\end{tabularx}
+\begin{center}
+  {\Huge \scshape Anshuman} \\ \vspace{2pt}
+  \small Bengaluru, India \;|\; +91-6205590392 \;|\;
+  \href{mailto:anshuwont@gmail.com}{anshuwont@gmail.com} \;|\;
+  \href{https://ansh0eman.netlify.app/}{anshuman.xyz} \;|\;
+  \href{https://github.com/ansh0eman}{GitHub} \;|\;
+  \href{https://www.linkedin.com/in/anshuman-anshuman/}{LinkedIn}
+\end{center}
+\vspace{-12pt}
 
-%-----------EDUCATION-----------
 \section{Education}
-  \resumeSubHeadingListStart
-    \resumeSubheading
-      {Manipal Institute of Technology}{2022 -- 2026}
-      {Bachelor of Technology - Computer Science; CGPA: 8.65}{Manipal, Karnataka}
-    \resumeSubheading
-      {Precidency Global School}{2020 -- 2022}{Class XII; CGPA: 9.62}{Patna, Bihar}
-  \resumeSubHeadingListEnd
+\resumeSubHeadingListStart
+  \resumeSubheading
+    {Manipal Institute of Technology}{2022 -- 2026}
+    {Bachelor of Technology in Computer Science and Engineering; CGPA: 8.65/10}{Manipal, Karnataka}
+\resumeSubHeadingListEnd
 
-%-----------EXPERIENCE-----------
 \section{Experience}
 \resumeSubHeadingListStart
-    \resumeSubheading
-    {AI Analyst Intern}{Jan 2026 – Present}
-    {Impact Analytics}{Bangaluru, Karnataka}
-    \resumeItemListStart
-      \resumeItem{Developing ML-driven pricing and demand forecasting models for retail optimization using large-scale transactional datasets}
-      \resumeItem{Building predictive models and data pipelines for pricing analytics and demand prediction}
-    \resumeItemListEnd
-    
   \resumeSubheading
-    {Software Engineering Intern}{May 2025 - July 2025}
-    {Yes Bank Ltd.}{Mumbai, Maharashtra}
+    {AI Analyst}{Jan 2026 -- Present}
+    {Impact Analytics}{Bengaluru, Karnataka}
     \resumeItemListStart
-      \resumeItem{Led a team of interns in testing and quality assurance of enterprise platforms, documenting bugs, validating workflows, and collaborating with developers to resolve key issues.}
-      \resumeItem{Designed and enhanced SharePoint-based internal workflow systems and automated business processes using Power Automate, contributing to greater operational efficiency and reliability.}
+      \resumeItem{Own the development and validation of an end-to-end pricing and demand-forecasting pipeline for a global luxury jewellery retailer across 13 geographic clusters, using Python and BigQuery SQL to transform large-scale transactional data into reliable modelling inputs.}
+      \resumeItem{Build and evaluate approaches spanning store clustering, demand classification, baseline demand, seasonality, price elasticity, promotions, and markdowns; validate performance at product and fiscal-week levels and trace upstream/downstream exceptions through hierarchy-level alerts, Tableau, and Excel.}
     \resumeItemListEnd
 
   \resumeSubheading
-    {Machine Learning Engineer Intern}{December 2024 -- January 2025}
+    {Software Engineering Intern}{May 2025 -- Jul 2025}
+    {YES BANK}{Mumbai, Maharashtra}
+    \resumeItemListStart
+      \resumeItem{Engineered an Azure OpenAI conversational interface with SSE-based token streaming while migrating a legacy Python--Streamlit monolith to a responsive Next.js and TypeScript application.}
+      \resumeItem{Architected JWT authentication, RBAC middleware, and a SQLite-backed governance layer supporting atomic bulk provisioning, concurrency-safe transactions, auditability, and rollback integrity.}
+      \resumeItem{Led a three-person intern team through end-to-end QA of three enterprise platforms and built SharePoint, Power Automate, and Power BI workflows, internal sites, and dashboards for operational reporting and stakeholder review.}
+    \resumeItemListEnd
+
+  \resumeSubheading
+    {Machine Learning Engineer Intern}{Dec 2024 -- Jan 2025}
     {Alethe Labs}{Gurugram, Haryana}
     \resumeItemListStart
-      \resumeItem{Developed a \textbf{Corrosion Condition State Classification model} using ResUnet with multihead attention to segment infrastructure damage into four severity levels.}
-    \resumeItemListEnd
-
-  \resumeSubheading
-    {Undergraduate NLP Research Intern}{June 2024 -- July 2024}
-    {MIT, Manipal}{Karnataka}
-    \resumeItemListStart
-      \resumeItem{Developed models analyzing lyrical structures using NLP and fractal pattern visualization.}
-      \resumeItem{Worked with transformer models and embeddings including BERT, Word2Vec, and Doc2Vec.}
+      \resumeItem{Developed a client-facing multi-head-attention ResUNet for four-class corrosion-condition segmentation of infrastructure imagery---severe corrosion, bad, fair, and background---and implemented unsupervised anomaly detection to identify suspicious patterns in unlabelled banking transactions.}
     \resumeItemListEnd
 \resumeSubHeadingListEnd
 
-%-----------PROJECTS-----------------
 \section{Projects}
 \resumeSubHeadingListStart
-  \resumeSubItem{SetuAI – AI-Powered Compliance Engine}
-    {(PostgreSQL, Node.js, React, Google Gemini OCR) Built a full-stack SaaS platform to automate compliance verification with live government API checks, role-based dashboards, and risk scoring, achieving ~70\% faster vendor onboarding and improved compliance transparency.}
-  \resumeSubItem{Neural Style Transfer for Artistic Image Generation}
-    {(CNNs, VGG-19, ImageNet) Developed a Deep Learning model to generate aesthetically pleasing and contextually significant images in the style of various Impressionism artists, leveraging low-level and high-level feature extraction.}
-  \resumeSubItem{Image Processing Application}
-    {(Java, CSS, JavaFX) Created an application with multiple image filters, histogram-based analysis, and compression, with an attractive GUI built using OOP principles.}
-    \resumeSubItem{Property Management System}
-    {(Python, SQL, Rich) Built a comprehensive application for tenant/lease management,
-maintenance tracking, and secure storage of property-related documents.}
+  \resumeSubItem{\href{https://github.com/ansh0eman/setuai}{SetuAI -- AI-Powered Vendor Compliance Platform}}
+    {Built a React, Node.js, and PostgreSQL platform combining Gemini OCR, government API validation, role-based workflows, and risk scoring, reducing vendor onboarding time by approximately 70\%.}
+  \resumeSubItem{\href{https://github.com/ansh0eman/real-time-anomaly-engine}{Realtime Anomaly Engine}}
+    {Built an asynchronous FastAPI service using Redis Streams, PostgreSQL, WebSockets, and Docker to ingest validated metrics, score anomalies with a z-score cold start and Isolation Forest, persist flagged events, and stream live alerts.}
+  \resumeSubItem{\href{https://github.com/ansh0eman/Leda}{LEDA -- Local-First Personal AI and Agentic Computing System}}
+    {Built a private second brain with OpenClaw-powered agentic workflows, a TypeScript terminal coding agent that inspects local project files through validated tools, and a SwiftUI watchOS voice assistant that streams audio through a WebSocket bridge. Filesystem and audio operations remain local, with model calls limited to reasoning steps.}
 \resumeSubHeadingListEnd
 
-
-%-----------PROGRAMMING SKILLS-----------
 \section{Technical Skills}
- \begin{itemize}[leftmargin=0.15in, label={}]
-    \small{\item{
-     \textbf{Languages}{: Python, Java, C, HTML, CSS, JavaScript, SQL}}
-     \item{\textbf{Technologies/Frameworks}{: PyTorch, TensorFlow, Hugging Face Transformers, Git, PowerBI, JavaFX} }
-     \item{\textbf{Relevant Coursework}{: Data Structures \& Algorithms, OOP, Operating Systems, Database Management, Computer Architecture, Embedded Systems, Software Engineering } }}
- \end{itemize}
-%-----------LEADERSHIP / EXTRACURRICULAR---------------
+\begin{itemize}[leftmargin=0.15in,label={}]
+  \small{\item{
+    \textbf{Languages}{: Python, TypeScript, JavaScript, SQL, Swift, Java, C} \\
+    \textbf{Technologies/Frameworks}{: Azure OpenAI, BigQuery, PostgreSQL, SQLite, Redis Streams, FastAPI, Docker, PyTorch, TensorFlow, Next.js, React, Node.js, REST APIs, WebSockets, SSE, JWT, RBAC, Git, Tableau, Power BI, DBeaver, SharePoint, Power Automate}
+  }}
+\end{itemize}
+
 \section{Leadership \& Achievements}
 \resumeSubHeadingListStart
-  \resumeSubItem{SAP Hackfest'25 – Special Award} {Ranked in the Top 5 among 25 000 students, 4,000 teams across 20 state hubs; won special award for developing \textit{SetuAI}, an AI-powered vendor compliance platform.}
-
-  \resumeSubItem{IAESTE Manipal (International Association for the Exchange of Students for Technical Experience)}
-    {Served as an LC member, developing leadership, teamwork, and communication skills; organized Namaste Manipal'23, a week-long flagship event welcoming interns from around the world.}
-  \resumeSubItem{Revels MIT Sponsorship Team (Cultural Fest of MIT)}
-    {Contacted potential sponsors, created sponsorship packages, and negotiated terms; secured sponsorship from Lifestyle, providing clothing, accessories, vouchers, and gift cards for the Fashion Event.}
+  \resumeSubItem{SAP Hackfest'25 -- Special Award}
+    {Ranked in the top five among 25,000 students and 4,000 teams across 20 state hubs for developing SetuAI.}
+  \resumeSubItem{IAESTE Manipal}
+    {Served as an LC member and helped organize Namaste Manipal'23, a week-long flagship programme welcoming international interns.}
 \resumeSubHeadingListEnd
 
 \end{document}
