@@ -3,10 +3,28 @@ import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
 import NowPlaying from '@/components/NowPlaying.astro';
 import { formatDate, sortPostsByDate } from '@/utils/data.util';
+import { AppConfig } from '@/utils/AppConfig';
 
 const posts = await Astro.glob('./posts/*.md');
 posts.sort(sortPostsByDate);
 const latestPost = posts[0];
+const pinnedNoteDetails = [
+	{ href: '/posts/first_blog_post/', title: 'Why don’t I have a surname?', date: '2024-11-28', excerpt: 'A third-grade question about my missing surname got a superhero answer from my mum.' },
+	{ href: '/posts/zero-greater-one/', title: '0 > 1', date: '2026-10-10', excerpt: 'A small tattoo about nothing, freedom, and why an empty space can be more interesting than a finished answer.' },
+	{ href: '/posts/third_blog_post/', title: 'Cogito, ergo sum', date: '2025-05-20', excerpt: 'I (over)think, (maybe) therefore I am (not).' }
+];
+const pinnedNotes = pinnedNoteDetails.map((note) => {
+	const post = posts.find((candidate) => candidate.url === note.href);
+	return {
+		...note,
+		href: post?.url ?? note.href,
+		date: post?.frontmatter.pubDate ?? note.date,
+		excerpt: post?.frontmatter.excerpt ?? note.excerpt,
+		isLatest: post?.url === latestPost?.url
+	};
+});
+const pinnedNoteUrls = new Set(pinnedNotes.map((note) => note.href));
+const latestUnpinnedPost = latestPost?.url && !pinnedNoteUrls.has(latestPost.url) ? latestPost : undefined;
 
 const work = [
 	{ company: 'Impact Analytics', mark: 'IA', role: 'AI Analyst', dates: 'Jan 2026 — present', description: 'I work on pricing and demand forecasting: preparing data, testing modelling choices, and finding out why a forecast missed. The messy exceptions are where my day gets interesting.' },
@@ -21,7 +39,7 @@ const featuredProjects = [
 ];
 ---
 
-<Base head={{ title: 'I work on AI and data systems', description: 'Anshuman, aka Anshu Man: AI and data systems, side projects that get out of hand, and notes on whatever will not leave him alone.', canonical: 'https://ansh0eman.in/' }}>
+<Base head={{ title: AppConfig.title, description: AppConfig.description, canonical: 'https://ansh0eman.in/' }}>
 	<Section>
 		<main class="home-page">
 			<header class="home-intro">
@@ -78,14 +96,31 @@ const featuredProjects = [
 
 			<section class="home-section notes-section" aria-labelledby="notes-heading">
 				<div class="section-heading"><div><h2 id="notes-heading">notes from the side quests</h2></div><span class="section-aside">03 / 03</span></div>
-				<p class="section-intro">There’s a name-origin investigation, a poem about consciousness, and the technical story of a Good Morning text that got wildly out of hand. A mixed bag, like the rest of my brain.</p>
 				<div class="notes-layout">
-					{latestPost && <article class="latest-note">
-						<p class="project-kind">Latest note / {formatDate(latestPost.frontmatter.pubDate)}</p>
-						<h3><a href={latestPost.url}>{latestPost.frontmatter.title}</a></h3>
-						<p>{latestPost.frontmatter.excerpt}</p>
-						<a class="section-link" href={latestPost.url}>read the note <span aria-hidden="true">↗</span></a>
-					</article>}
+					<div class="notes-list" aria-label="Pinned notes and latest note">
+						{pinnedNotes.map((post) => (
+							<article class="note-row">
+								<a href={post.href}>
+									<div class="note-row-heading">
+										<h3>{post.title}</h3>
+										<span>{post.isLatest ? 'Latest note' : formatDate(post.date)}</span>
+									</div>
+									<p>{post.excerpt}</p>
+									<span class="note-arrow" aria-hidden="true">↗</span>
+								</a>
+							</article>
+						))}
+						{latestUnpinnedPost && <article class="note-row note-row-latest">
+							<a href={latestUnpinnedPost.url}>
+								<div class="note-row-heading">
+									<h3>{latestUnpinnedPost.frontmatter.title}</h3>
+									<span>Latest note / {formatDate(latestUnpinnedPost.frontmatter.pubDate)}</span>
+								</div>
+								<p>{latestUnpinnedPost.frontmatter.excerpt}</p>
+								<span class="note-arrow" aria-hidden="true">↗</span>
+							</a>
+						</article>}
+					</div>
 					<NowPlaying />
 				</div>
 				<a class="section-link" href="/posts/">all notes <span aria-hidden="true">→</span></a>
@@ -141,16 +176,20 @@ const featuredProjects = [
 	.project-copy h3 a { text-decoration: none; }
 	.project-copy h3 a:hover { color: var(--accent); }
 	.project-copy > p:last-child { max-width: 52ch; color: var(--muted); font-size: .8rem; line-height: 1.7; }
-	.notes-layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(15rem, .7fr); gap: 1.2rem; align-items: stretch; margin-top: 1.5rem; }
-	.latest-note { display: flex; flex-direction: column; min-height: 14rem; padding: 1.1rem; border: 1px solid var(--rule); }
-	.latest-note h3 { max-width: 28ch; margin-top: .9rem; font-size: clamp(1.25rem, 2vw, 1.65rem); letter-spacing: -.05em; line-height: 1.2; }
-	.latest-note h3 a:hover { color: var(--accent); }
-	.latest-note > p:nth-of-type(2) { max-width: 52ch; margin: .7rem 0 1.8rem; color: var(--muted); font-size: .8rem; line-height: 1.7; }
-	.latest-note .section-link { margin-top: auto; }
+	.notes-layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(15rem, .7fr); gap: 1.2rem; align-items: stretch; margin-top: 1.1rem; }
+	.notes-list { min-width: 0; border-top: 1px solid var(--rule); }
+	.note-row { border-bottom: 1px solid var(--rule); }
+	.note-row a { position: relative; display: block; padding: .95rem 2rem .95rem 0; text-decoration: none; }
+	.note-row a:hover h3, .note-row a:focus-visible h3 { color: var(--accent); }
+	.note-row-heading { display: flex; align-items: baseline; justify-content: space-between; gap: .75rem; }
+	.note-row h3 { font-size: clamp(1rem, 1.45vw, 1.2rem); line-height: 1.25; letter-spacing: -.035em; transition: color .18s ease; }
+	.note-row-heading > span { flex: 0 0 auto; color: var(--muted); font-size: .62rem; }
+	.note-row p { max-width: 60ch; margin-top: .35rem; color: var(--muted); font-size: .74rem; line-height: 1.55; }
+	.note-arrow { position: absolute; top: 1rem; right: .2rem; color: var(--accent); font-size: .85rem; }
 	.home-contact { margin-top: clamp(2.5rem, 5vw, 4rem); padding: 1.3rem 0 1.6rem; border-top: 1px solid var(--rule); }
 	.home-contact h2 { max-width: 20ch; margin: .35rem 0 .7rem; font-size: clamp(1.6rem, 2.7vw, 2.2rem); letter-spacing: -.06em; line-height: 1.1; }
 	.home-contact p:not(.home-eyebrow) { max-width: 58ch; color: var(--muted); font-size: .85rem; line-height: 1.7; }
 	.home-contact a { display: inline-block; margin-top: 1.2rem; color: var(--accent); font-size: .8rem; font-weight: 700; text-underline-offset: .3em; }
 	@media (max-width: 720px) { .featured-project-lead, .notes-layout { grid-template-columns: 1fr; } .featured-project-lead .project-image { grid-row: 1; } }
-	@media (max-width: 560px) { .home-intro { padding-top: 1.5rem; } .home-artwork img { width: 78%; height: 12rem; } .featured-projects { grid-template-columns: 1fr; gap: 1.4rem; } .featured-project-lead { grid-column: auto; } .work-entry { grid-template-columns: 2.6rem minmax(0, 1fr); gap: .8rem; } .work-mark { width: 2.5rem; height: 2.5rem; font-size: .72rem; } .section-aside { display: none; } }
+	@media (max-width: 560px) { .home-intro { padding-top: 1.5rem; } .home-artwork img { width: 78%; height: 12rem; } .featured-projects { grid-template-columns: 1fr; gap: 1.4rem; } .featured-project-lead { grid-column: auto; } .work-entry { grid-template-columns: 2.6rem minmax(0, 1fr); gap: .8rem; } .work-mark { width: 2.5rem; height: 2.5rem; font-size: .72rem; } .section-aside { display: none; } .note-row-heading { align-items: flex-start; flex-direction: column; gap: .2rem; } }
 </style>
