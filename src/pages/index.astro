@@ -13,18 +13,19 @@ const pinnedNoteDetails = [
 	{ href: '/posts/zero-greater-one/', title: '0 > 1', date: '2026-10-10', excerpt: 'A small tattoo about nothing, freedom, and why an empty space can be more interesting than a finished answer.' },
 	{ href: '/posts/third_blog_post/', title: 'Cogito, ergo sum', date: '2025-05-20', excerpt: 'I (over)think, (maybe) therefore I am (not).' }
 ];
+const normalizePostUrl = (url: string | undefined) => url?.replace(/\/+$/, '') || '/';
 const pinnedNotes = pinnedNoteDetails.map((note) => {
-	const post = posts.find((candidate) => candidate.url === note.href);
+	const post = posts.find((candidate) => normalizePostUrl(candidate.url) === normalizePostUrl(note.href));
 	return {
 		...note,
 		href: post?.url ?? note.href,
 		date: post?.frontmatter.pubDate ?? note.date,
 		excerpt: post?.frontmatter.excerpt ?? note.excerpt,
-		isLatest: post?.url === latestPost?.url
+		isLatest: post && normalizePostUrl(post.url) === normalizePostUrl(latestPost?.url)
 	};
 });
-const pinnedNoteUrls = new Set(pinnedNotes.map((note) => note.href));
-const latestUnpinnedPost = latestPost?.url && !pinnedNoteUrls.has(latestPost.url) ? latestPost : undefined;
+const pinnedNoteUrls = new Set(pinnedNotes.map((note) => normalizePostUrl(note.href)));
+const latestUnpinnedPost = latestPost?.url && !pinnedNoteUrls.has(normalizePostUrl(latestPost.url)) ? latestPost : undefined;
 
 const work = [
 	{ company: 'Impact Analytics', mark: 'IA', role: 'AI Analyst', dates: 'Jan 2026 — present', description: 'I work on pricing and demand forecasting: preparing data, testing modelling choices, and finding out why a forecast missed. The messy exceptions are where my day gets interesting.' },
