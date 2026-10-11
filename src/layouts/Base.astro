@@ -20,6 +20,22 @@ const {
 
 <html lang="en">
 	<head>
+		<script is:inline>
+			// Keep development and deploy-preview traffic out of the production reports.
+			if (['ansh0eman.in', 'www.ansh0eman.in', 'ansh0eman.netlify.app'].includes(window.location.hostname)) {
+				window.dataLayer = window.dataLayer || [];
+				function gtag() { window.dataLayer.push(arguments); }
+				gtag('js', new Date());
+				gtag('config', 'G-SDMJBN6NQP', {
+					allow_google_signals: false,
+					allow_ad_personalization_signals: false
+				});
+				const tag = document.createElement('script');
+				tag.async = true;
+				tag.src = 'https://www.googletagmanager.com/gtag/js?id=G-SDMJBN6NQP';
+				document.head.appendChild(tag);
+			}
+		</script>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>{title}</title>
