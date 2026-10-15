@@ -17,3 +17,18 @@ from = "https://setuai.ansh0eman.in/"
 to = "/projects/setuai/"
 status = 200
 force = true
+
+[[redirects]]
+from = "/posts/first_blog_post"
+to = "/posts/mom-why-dont-i-have-a-surname/"
+status = 301
+
+[[redirects]]
+from = "/posts/second_blog_post"
+to = "/posts/playing-with-neural-style-transfer/"
+status = 301
+
+[[redirects]]
+from = "/posts/third_blog_post"
+to = "/posts/cogito-ergo-sum/"
+status = 301

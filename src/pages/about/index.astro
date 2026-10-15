@@ -1,28 +1,42 @@
 ---
 import Base from '@/layouts/Base.astro';
 import Section from '@/components/Section.astro';
+import { AppConfig } from '@/utils/AppConfig';
 ---
 
-<Base head={{ title: 'About | Anshu Man', description: 'The person behind the projects: software, work, books, philosophy, music, and a few ongoing questions.', canonical: 'https://ansh0eman.in/about/' }}>
+<Base head={{ title: `About | ${AppConfig.site_name}`, description: 'The person behind the projects: software, work, books, philosophy, music, and a few ongoing questions.', canonical: 'https://ansh0eman.in/about/' }}>
 	<Section>
 		<main class="about-page">
 			<header class="about-heading">
 				<p class="eyebrow">The person behind the projects</p>
 				<h1>about me, <em>more or less.</em></h1>
 			</header>
-			<figure class="about-artwork">
-				<img src="/about.jpeg" alt="Two seated portraits of Thom Yorke against a white background" width="728" height="756" fetchpriority="high" />
+			<figure class="about-banner">
+				<img src="/assets/about/wanderer-above-sea-of-fog-banner.png" alt="A lone figure overlooking misty mountains in a panoramic painting" width="1399" height="350" fetchpriority="high" />
 			</figure>
 			<div class="opening">
-				<p>hi, i'm Anshu Man. A school form once insisted I needed a surname. My mother had a better explanation, and it involved superheroes. <a href="/posts/first_blog_post/">I wrote the whole thing down here.</a></p>
-				<p>I studied computer science and now work with AI and data systems. I like building the demo. I also like the awkward next part: who can use it, what happens when the data is wrong, and whether it still makes sense away from my laptop.</p>
+				<p>hello world,</p>
+				<p>i’m anshuman. i am a <strong>vitamin c</strong> fiend. i think lemons are the best seasoning to ever exist and complement everything. i find <strong>snow</strong> extremely fascinating, even though i’ve never touched it. it’s something i keep wondering about, times late at night ever since childhood to a point i almost feel i know how its texture feels like. i hope to cross it off my bucket list someday soon.</p>
+				<p>i didn’t stress this enough, but i really love <strong>citrus</strong> anything. i hit existential dread quite early, sometime during middle school, and hence got into philosophy. I used to call myself a <strong class="identity-word">thinker</strong> at the time. my favourite book is <em>Hitchhiker’s guide to the galaxy</em>. i’m looking forward to getting <strong class="number-mark">42</strong> tatted soon. (google <span class="answer-phrase">“the meaning of life, the universe and everything”</span> or <a href="https://www.google.com/search?q=the+meaning+of+life+the+universe+and+everything" target="_blank" rel="noopener noreferrer">click here</a>.)</p>
+				<p>my dad got a PC when i was a kid, and i really liked playing video games and watching cartoons (<strong>BEN 10</strong> I LOVE YOU). that opened up the technological sphere and imaginative thinking for me i believe, but it also introduced me to a problem i had never paid attention to. <mark class="surname-mark">I lack a last name, and computers really wanted me to have one.</mark> (i still struggle with it. i’m not allowed to step into some countries, even.) <a href="/posts/mom-why-dont-i-have-a-surname/">My mother had a better explanation</a>, and it involved superheroes.</p>
+				<p>I love <strong class="spiderman-mark">spiderman</strong>. Spiderman has been a great part of my childhood. i still look at him with the same awe i did as a kid. you inspire me more than anything.</p>
+				<p>I grew up in a small town, <strong>Patna</strong>, beside a riverbank and India’s holy river, <strong>The Ganges</strong>. I grew up hearing stories about it. I was a stubborn kid. I made a lot of wishes (with cries and tears involved). I gave my mother countless headaches growing up.</p>
+				<p>That stubbornness got me a camera. I wanted to become a filmmaker. all my cousins shared the dream. I started calling myself a <strong class="identity-word">creative</strong>. I really liked being behind the camera, and even in front of it. I made videos, edited them, and posted them on YouTube. I still believe i have an insane vision when it comes to creativity, a good eye for things. but i’m a perfectionist.</p>
+				<p>I love stimulating my senses, be it auditory, visual, taste, intellectual, physical, olfactory (not in definite order). During my early teens and teenage years, i started reading a lot, listening to music a lot (in a critical, serious way), and looking at art (alot, that it made my parents bother why was i spending hours staring at a piece but not study). That developed my taste and observation. I picked up and dropped a lot of hobbies and habits. I started calling myself an <strong class="identity-word">addict</strong>, with a god complex.</p>
+				<p>i liked anything that made me notice something i’d missed before. studying computer science gave that curiosity somewhere else to go. My particular interest in Art intersected with my interests in Tech and maths during college. I experimented with Tech x Art x Maths a lot there. Then i started hating AI art, it lacks soul and taste. AI art bothers me. too much of it feels like it skips the part where someone develops a point of view.</p>
+				<p>these days, i’ve started calling myself a <strong class="identity-word">builder</strong>. i like building the demo, but i’m getting more interested in what happens after that - who can use it, what breaks, and whether the idea still makes sense away from my laptop.</p>
+				<p>I still struggle with identity most of the time. i’ve called myself a <strong class="identity-word">thinker</strong>, a <strong class="identity-word">creative</strong>, an <strong class="identity-word">addict</strong>, and a <strong class="identity-word">builder</strong>. i’m still figuring out which of those fits. probably all of them on different days.</p>
 			</div>
+
+			<figure class="about-artwork">
+				<img src="/about.jpeg" alt="Two seated portraits of Thom Yorke against a white background" width="728" height="756" loading="lazy" />
+			</figure>
 
 			<section class="about-section">
 				<p class="section-number">01 / the throughline</p>
 				<div>
 					<h2>small questions get out of hand.</h2>
-					<p>One week it's image and music experiments. Another it's a compliance workflow or an internal tool. My mother asked for a Good Morning text and I somehow built <a href="/posts/openclaw-second-brain/">a second brain</a>. I put an Omnitrix-inspired dial on an Apple Watch because a normal microphone button didn't satisfy the product manager in my head. I tend to follow an idea until I can build it, understand it, or both.</p>
+					<p>one week, I’m exploring generative art; the next, I’m designing a workflow to solve a problem no one else noticed. I’ll turn a passing curiosity into a prototype, then keep refining it until the idea reveals what it was really trying to become.</p>
 					<a href="/projects/">see what i've made ↗</a>
 				</div>
 			</section>
@@ -31,8 +45,8 @@ import Section from '@/components/Section.astro';
 				<p class="section-number">02 / away from the editor</p>
 				<div>
 					<h2>when i'm not building</h2>
-					<p>I read books and philosophy, listen to Radiohead and Car Seat Headrest, and keep telling myself I'll finish a film. I return to questions about identity and meaning more often than I arrive at answers.</p>
-					<p>I wrote <a href="/posts/third_blog_post/">a poem about overthinking</a>. It did not fix the overthinking.</p>
+					<p>i read books and philosophy, listen to Radiohead and Car Seat Headrest, and keep telling myself i’ll finish a film. i return to questions about identity and meaning more often than i arrive at answers.</p>
+					<p>i wrote <a href="/posts/cogito-ergo-sum/">a poem about overthinking</a>. it did not fix the overthinking.</p>
 					<a href="/posts/">read the notes ↗</a>
 				</div>
 			</section>
@@ -41,7 +55,7 @@ import Section from '@/components/Section.astro';
 				<p class="section-number">03 / your turn</p>
 				<div>
 					<h2>come say hi.</h2>
-					<p>If you've got a project worth building, a problem worth thinking through, or a book that made you stare at the ceiling for a while, tell me about it.</p>
+					<p>if you’ve got a project worth building, a problem you can’t stop thinking about, or a book, song, or film that stayed with you, tell me about it.</p>
 					<div class="about-links">
 						<a href="mailto:anshuwont@gmail.com">email ↗</a>
 						<a href="https://github.com/ansh0eman" target="_blank" rel="noopener noreferrer">github ↗</a>
@@ -60,10 +74,21 @@ import Section from '@/components/Section.astro';
 	.about-heading { max-width: 58rem; padding-bottom: .7rem; }
 	h1 { margin: .5rem 0 .8rem; font-size: clamp(2.3rem, 4.8vw, 4rem); letter-spacing: -.065em; line-height: 1.05; }
 	h1 em { color: var(--accent); font-style: normal; }
-	.about-artwork { display: flex; justify-content: center; margin: 0 0 clamp(1.5rem, 3vw, 2.5rem); }
-	.about-artwork img { display: block; width: min(66%, 34rem); height: auto; }
-	.opening { max-width: 75ch; margin-bottom: clamp(2.5rem, 5vw, 4rem); font-size: clamp(.94rem, 1.4vw, 1.07rem); line-height: 1.7; }
+	.about-banner { margin: clamp(.6rem, 1.5vw, 1rem) 0 clamp(1.75rem, 3vw, 2.5rem); }
+	.about-banner img { display: block; width: 100%; height: auto; }
+	.about-artwork { display: flex; justify-content: center; margin: clamp(1.25rem, 3vw, 2rem) 0 clamp(2rem, 4vw, 3rem); }
+	.about-artwork img { display: block; width: min(52%, 25rem); height: auto; }
+	.opening { max-width: 75ch; margin-bottom: 0; font-size: clamp(.94rem, 1.4vw, 1.07rem); line-height: 1.7; }
 	.opening p + p { margin-top: 1rem; }
+	.opening strong { font-weight: 800; }
+	.opening .identity-word { color: var(--accent); box-shadow: inset 0 -.27em 0 rgb(169 67 53 / .18); }
+	:global(.dark) .opening .identity-word { box-shadow: inset 0 -.27em 0 rgb(223 117 100 / .25); }
+	.opening .number-mark { display: inline-block; padding: 0 .27em; border: 1px solid currentColor; border-radius: .18em; color: #78540e; background: #f5e8bd; line-height: 1.3; }
+	:global(.dark) .opening .number-mark { color: #ffe3a0; background: #493d29; }
+	.opening .answer-phrase { color: var(--accent); font-style: italic; text-decoration: underline dotted; text-underline-offset: .22em; }
+	.opening .surname-mark { padding: .06em .18em; background: rgb(169 67 53 / .16); color: inherit; font-weight: 700; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+	:global(.dark) .opening .surname-mark { background: rgb(223 117 100 / .22); }
+	.opening .spiderman-mark { color: var(--accent); }
 	.opening a { color: var(--accent); text-decoration: underline; text-underline-offset: .25em; }
 	.about-section { display: grid; grid-template-columns: minmax(10rem, .32fr) minmax(0, 1fr); gap: 1.5rem; padding: 1.6rem 0 2rem; border-top: 1px solid var(--rule); }
 	.about-section > div { max-width: 65ch; }
@@ -71,5 +96,5 @@ import Section from '@/components/Section.astro';
 	.about-section p:not(.section-number) { margin: 0 0 1rem; color: var(--muted); font-size: .89rem; line-height: 1.85; }
 	.about-section a { display: inline-block; margin-top: .4rem; color: var(--accent); font-size: .8rem; font-weight: 700; text-decoration: underline; text-underline-offset: .3em; }
 	.about-links { display: flex; flex-wrap: wrap; gap: .8rem 1.5rem; }
-	@media (max-width: 650px) { .about-artwork img { width: min(86%, 22rem); } .about-section { grid-template-columns: 1fr; gap: .8rem; } }
+	@media (max-width: 650px) { .about-artwork img { width: min(76%, 18rem); } .about-section { grid-template-columns: 1fr; gap: .8rem; } }
 </style>

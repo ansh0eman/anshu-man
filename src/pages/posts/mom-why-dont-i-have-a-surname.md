@@ -1,8 +1,8 @@
 ---
 layout: ../../layouts/post.astro
-title: "Mom, Why don't i have a surname!!??"
+title: "Mom, Why Don't I Have a Surname?"
 pubDate: 2024-11-28
-description: "Mom, Why don't i have a surname!!??"
+description: "Mom, Why Don't I Have a Surname?"
 author: "Anshu Man"
 excerpt: Once in 3rd grade, my class teacher aka Rani ma'am asked me why don't i have a surname and she was dead serious this time like what could possibly be the reason that you don't and your sister has a first name, a middle name and a last name. 
 

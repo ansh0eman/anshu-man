@@ -2,12 +2,13 @@
 import Base from '@/layouts/Base.astro';
 import PostHeader from '@/components/PostHeader.astro';
 import PostContent from '@/components/PostContent.astro';
+import { AppConfig } from '@/utils/AppConfig';
 
 const { frontmatter } = Astro.props;
 const canonical = new URL(Astro.url.pathname, 'https://ansh0eman.in').href;
 ---
 
-<Base head={{ title: `${frontmatter.title} | Anshu Man`, description: frontmatter.excerpt, canonical }}>
+<Base head={{ title: `${frontmatter.title} | ${AppConfig.site_name}`, description: frontmatter.excerpt, canonical }}>
 	<div class="mx-auto w-full max-w-screen-md">
 		<PostHeader
 			title={frontmatter.title}

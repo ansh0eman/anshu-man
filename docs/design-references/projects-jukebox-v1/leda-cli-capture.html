@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LEDA CLI capture</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; min-height: 100%; background: #090b0d; }
+    body {
+      display: grid;
+      place-items: center;
+      padding: 64px;
+      color: #d6ddd8;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    .terminal {
+      width: min(1180px, 100%);
+      overflow: hidden;
+      border: 1px solid #39413d;
+      background: #101411;
+      box-shadow: 22px 22px 0 #050706;
+    }
+    .chrome {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 18px;
+      border-bottom: 1px solid #39413d;
+      color: #89938d;
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .dot { width: 10px; height: 10px; border: 1px solid #77817b; border-radius: 50%; }
+    .title { margin-left: auto; }
+    pre {
+      margin: 0;
+      padding: 34px 38px 42px;
+      white-space: pre-wrap;
+      font-size: 17px;
+      line-height: 1.65;
+    }
+    .prompt { color: #f0f4f1; }
+    .turn { color: #a5ff90; }
+    .tool { color: #8bbfff; }
+    .muted { color: #89938d; }
+    .answer { color: #f0f4f1; }
+  </style>
+</head>
+<body>
+  <section class="terminal" aria-label="LEDA terminal transcript">
+    <div class="chrome">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="title">LEDA / local project inspection</span>
+    </div>
+    <pre><span class="prompt">$ npm run ask -- "Inspect package.json and README.md, then explain what this project implements and what its safety limits are."</span>
+
+<span class="turn">Agent turn 1/10</span>
+<span class="tool">Tool name: read_file</span>
+<span class="muted">Raw arguments: {"filePath":"package.json"}</span>
+<span class="muted">Tool result: TypeScript CLI · OpenAI SDK · Zod</span>
+
+<span class="turn">Agent turn 2/10</span>
+<span class="tool">Tool name: read_file</span>
+<span class="muted">Raw arguments: {"filePath":"README.md"}</span>
+<span class="muted">Tool result: read-only tools, path controls, bounded model turns</span>
+
+<span class="turn">Agent turn 3/10</span>
+<span class="answer">Final assistant answer:
+LEDA is a terminal-native TypeScript coding assistant that investigates local projects through validated read_file and list_files tools. It bounds model turns and tool calls, blocks selected sensitive paths, and keeps write and shell access unavailable in the current build.</span></pre>
+  </section>
+</body>
+</html>

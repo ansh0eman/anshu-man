@@ -139,7 +139,7 @@ Once you accept that there might not be one grand point to all of this, you get 
 
 <figure class="thom-interlude">
   <img src="/assets/radiohead/thom-yorke-blackpool-guitar.jpg" alt="Thom Yorke performing with Radiohead in blue stage light in Blackpool, 2006" width="1632" height="1224" loading="lazy" />
-  <figcaption>I had no clever reason to put Thom Yorke here. I just wanted to put Thom Yorke here. Photo by Drown via <a href="https://commons.wikimedia.org/wiki/File:Radiohead_Blackpool_Thom_Yorke_guitar.jpg" target="_blank" rel="noreferrer">Wikimedia Commons</a>, licensed <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noreferrer">CC BY-SA 2.0</a>.</figcaption>
+  <figcaption>Photo: <a href="https://commons.wikimedia.org/wiki/File:Radiohead_Blackpool_Thom_Yorke_guitar.jpg" target="_blank" rel="noreferrer">Drown / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noreferrer">CC BY-SA 2.0</a>.</figcaption>
 </figure>
 
 None of those things have to matter to everyone.

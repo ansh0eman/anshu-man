@@ -4,6 +4,7 @@ import Card from '@/components/Card.astro';
 import Base from '@/layouts/Base.astro';
 import Heading from '@/components/Heading.astro';
 import { MarkdownInstance } from 'astro';
+import { AppConfig } from '@/utils/AppConfig';
 
 export async function getStaticPaths(): Promise<any> {
 	const allPosts = await Astro.glob('../posts/*.md');
@@ -27,8 +28,8 @@ interface Props {
 }
 
 const { tag } = Astro.params;
-const title = `${tag} notes | Anshu Man`;
-const description = `Notes tagged ${tag} by Anshu Man.`;
+const title = `${tag} notes | ${AppConfig.site_name}`;
+const description = `Notes tagged ${tag} by ${AppConfig.author}.`;
 
 const { posts } = Astro.props;
 ---

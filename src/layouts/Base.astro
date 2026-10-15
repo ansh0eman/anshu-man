@@ -3,22 +3,26 @@ import Footer from '@/components/Footer.astro';
 import Navbar from '@/components/Navbar.astro';
 import { AppConfig } from '@/utils/AppConfig';
 
-export interface Props {
+	export interface Props {
 	head: {
-		title: string;
-		description: string;
+		title?: string;
+		description?: string;
 		canonical?: string;
 	};
 	siteRoot?: string;
 }
 
 const {
-	head: { title, description, canonical },
+	head: {
+		title = AppConfig.title,
+		description = AppConfig.description,
+		canonical
+	},
 	siteRoot = ''
 } = Astro.props as Props;
 ---
 
-<html lang="en">
+<html lang={AppConfig.locale}>
 	<head>
 		<script is:inline>
 			// Keep development and deploy-preview traffic out of the production reports.
