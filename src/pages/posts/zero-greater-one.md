@@ -24,14 +24,13 @@ tags: ["0 > 1", "tattoo", "nihilism", "philosophy"]
   }
   .playlist-cover-link {
     display: block;
-    aspect-ratio: 1;
-    overflow: hidden;
+    overflow: visible;
   }
   .playlist-cover {
     display: block;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
   }
   .playlist-copy small {
     display: block;
@@ -65,6 +64,25 @@ tags: ["0 > 1", "tattoo", "nihilism", "philosophy"]
     font-size: .85rem;
     font-weight: 700;
     text-underline-offset: .2em;
+  }
+  .thom-interlude {
+    width: min(100%, 38rem);
+    margin: 2.25rem auto;
+  }
+  .thom-interlude img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .thom-interlude figcaption {
+    margin-top: .55rem;
+    color: #8c837d;
+    font-size: .75rem;
+    line-height: 1.55;
+  }
+  .thom-interlude figcaption a {
+    color: inherit;
+    text-underline-offset: .18em;
   }
   @media (max-width: 560px) {
     .playlist {
@@ -118,6 +136,11 @@ I like nihilism for this reason. Not because I think nothing matters, or because
 It lets you clear the table.
 
 Once you accept that there might not be one grand point to all of this, you get to notice the smaller points you would have otherwise walked past. Reading something that changes how you look at a day. A song that gets stuck in your head at the exact right time. Going somewhere new. Having dinner with family. Meeting someone who makes the whole world feel slightly less random for a bit.
+
+<figure class="thom-interlude">
+  <img src="/assets/radiohead/thom-yorke-blackpool-guitar.jpg" alt="Thom Yorke performing with Radiohead in blue stage light in Blackpool, 2006" width="1632" height="1224" loading="lazy" />
+  <figcaption>I had no clever reason to put Thom Yorke here. I just wanted to put Thom Yorke here. Photo by Drown via <a href="https://commons.wikimedia.org/wiki/File:Radiohead_Blackpool_Thom_Yorke_guitar.jpg" target="_blank" rel="noreferrer">Wikimedia Commons</a>, licensed <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noreferrer">CC BY-SA 2.0</a>.</figcaption>
+</figure>
 
 None of those things have to matter to everyone.
 
