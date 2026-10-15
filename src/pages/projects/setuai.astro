@@ -1,8 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Section from '../../components/Section.astro';
+import { AppConfig } from '@/utils/AppConfig';
 
-const title = 'SetuAI | Anshu Man';
+const title = `SetuAI | ${AppConfig.site_name}`;
 const description = 'A project story about SetuAI, a compliance workflow for India’s textile supply chain.';
 const canonical = 'https://setuai.ansh0eman.in/';
 const siteRoot = 'https://ansh0eman.in';
