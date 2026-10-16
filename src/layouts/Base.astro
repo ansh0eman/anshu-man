@@ -42,6 +42,82 @@ const {
 				document.head.appendChild(tag);
 			}
 		</script>
+
+		<script is:inline>
+			// Site-wide, privacy-conscious interaction events for GA4.
+			(() => {
+				const enabled = ['ansh0eman.in', 'www.ansh0eman.in', 'ansh0eman.netlify.app'].includes(location.hostname);
+				if (!enabled) return;
+				const emit = (event, parameters = {}) => {
+					if (!Array.isArray(window.dataLayer)) return;
+					window.dataLayer.push(['event', event, { ...parameters, page_path: location.pathname }]);
+				};
+				const locationOf = (href) => {
+					try {
+						const url = new URL(href, location.href);
+						if (!['http:', 'https:'].includes(url.protocol)) return { kind: url.protocol.replace(':', ''), destination: url.protocol };
+						const internal = url.origin === location.origin;
+						return { kind: internal ? 'internal' : 'outbound', destination: internal ? url.pathname : url.hostname + url.pathname };
+					} catch { return { kind: 'other', destination: 'unknown' }; }
+				};
+				document.addEventListener('click', (event) => {
+					const target = event.target instanceof Element ? event.target : null;
+					if (!target) return;
+					const anchor = target.closest('a[href]');
+					if (anchor) {
+						const { kind, destination } = locationOf(anchor.getAttribute('href'));
+						emit('site_link_click', {
+							link_kind: /\\.pdf$/i.test(destination) ? 'pdf' : kind,
+							link_destination: destination.slice(0, 200),
+							link_location: anchor.closest('nav, header, footer, main')?.tagName.toLowerCase() || 'body'
+						});
+						return;
+					}
+					const button = target.closest('button, [role="button"]');
+					if (button) {
+						const label = button.getAttribute('data-analytics-label') || button.getAttribute('aria-label') || button.id || button.getAttribute('type') || 'unlabelled_button';
+						emit('site_button_click', { button_label: label.slice(0, 100) });
+					}
+				});
+				document.addEventListener('submit', (event) => {
+					const form = event.target;
+					if (!(form instanceof HTMLFormElement)) return;
+					emit('site_form_submit', { form_id: (form.id || form.getAttribute('name') || 'unnamed_form').slice(0, 100) });
+				}, true);
+				const seenDepth = new Set();
+				let scrollScheduled = false;
+				const checkScroll = () => {
+					scrollScheduled = false;
+					const maxScroll = document.documentElement.scrollHeight - innerHeight;
+					if (maxScroll <= 0) return;
+					const depth = Math.min(100, Math.round((scrollY / maxScroll) * 100));
+					for (const milestone of [25, 50, 75, 90]) {
+						if (depth >= milestone && !seenDepth.has(milestone)) {
+							seenDepth.add(milestone);
+							emit('site_scroll_depth', { scroll_percent: milestone });
+						}
+					}
+				};
+				addEventListener('scroll', () => {
+					if (!scrollScheduled) {
+						scrollScheduled = true;
+						requestAnimationFrame(checkScroll);
+					}
+				}, { passive: true });
+				if ('IntersectionObserver' in window) {
+					const seenSections = new Set();
+					const observer = new IntersectionObserver((entries) => {
+						for (const entry of entries) {
+							if (!entry.isIntersecting || seenSections.has(entry.target.id)) continue;
+							seenSections.add(entry.target.id);
+							emit('site_section_view', { section_id: entry.target.id.slice(0, 100) });
+							observer.unobserve(entry.target);
+						}
+					}, { threshold: 0.25 });
+					document.querySelectorAll('main section[id], main article[id]').forEach((section) => observer.observe(section));
+				}
+			})();
+		</script>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>{title}</title>
