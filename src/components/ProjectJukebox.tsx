@@ -47,7 +47,10 @@ const projects: Project[] = [
 			{ label: 'Governance', text: 'Admin controls support member provisioning, account status, and per-user AI policies.' },
 			{ label: 'Integrity', text: 'SQLite-backed usage limits and audit events keep key account changes traceable.' }
 		],
-		links: [{ label: 'GitHub', href: 'https://github.com/ansh0eman/aegis-ai' }],
+		links: [
+			{ label: 'Case study', href: '/projects/aegis/' },
+			{ label: 'GitHub', href: 'https://github.com/ansh0eman/aegis-ai' }
+		],
 		cover: '/assets/projects/aegis-ai/admin-users.png', coverAlt: 'Aegis AI admin console for member provisioning and governance',
 		media: [
 			{ src: '/assets/projects/aegis-ai/admin-users.png', alt: 'Aegis AI admin interface for member provisioning and AI policy controls', caption: 'Admin and governance controls', width: 1440, height: 900 },
@@ -194,7 +197,7 @@ export default function ProjectJukebox() {
 						<p className="feature-line">{active.shortDescription}</p>
 						<p className="project-stack">{active.technologies.join('  /  ')}</p>
 						<nav className="project-links" aria-label={`${active.name} links`}>
-							{active.links.map((link) => <a href={link.href} target="_blank" rel="noreferrer" key={link.href}>{link.label} ↗</a>)}
+							{active.links.map((link) => <a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noreferrer' : undefined} key={link.href}>{link.label} ↗</a>)}
 						</nav>
 					</div>
 				</div>

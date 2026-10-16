@@ -1,0 +1,325 @@
+---
+import Base from '../../layouts/Base.astro';
+import Section from '../../components/Section.astro';
+import { AppConfig } from '@/utils/AppConfig';
+
+const title = `Aegis AI | ${AppConfig.site_name}`;
+const description = 'A technical case study of a governed AI workspace: streamed inference, identity, SQLite persistence, transactional limits, and audit trails.';
+const canonical = 'https://ansh0eman.in/projects/aegis/';
+const image = 'https://ansh0eman.in/assets/projects/aegis-ai/admin-users.png';
+
+const flow = [
+	{ name: 'Browser', detail: 'Submits a message with the HttpOnly session cookie.' },
+	{ name: 'Next.js route', detail: 'Checks origin, identity, request shape, and policy.' },
+	{ name: 'SQLite admission', detail: 'Checks owner/quota; records one user message and usage row.' },
+	{ name: 'OpenAI stream', detail: 'Receives the ordered recent history and current prompt.' },
+	{ name: 'Browser SSE', detail: 'Renders text deltas as they arrive.' }
+];
+
+const codeInput = `const openaiStream = await openai.responses.create({
+  model: "gpt-6-luna",
+  input: [...admission.history, { role: "user", content: message }],
+  stream: true,
+});`;
+
+const codePersist = `if (event.type === "response.output_text.delta") {
+  assistantText += event.delta;
+  yield { event: "delta", data: { text: event.delta } };
+}
+
+// After response.completed, write one complete assistant row.
+persistAssistant(assistantText);`;
+
+const codeTransaction = `database.transaction((transaction) => {
+  updateAccount(transaction, targetUserId, nextStatus);
+  writeAuditLog(transaction, {
+    actorUserId,
+    action: "user.disabled",
+    targetUserId,
+  });
+}, { behavior: "immediate" });`;
+---
+
+<Base head={{ title, description, canonical, ogImage: image }}>
+	<Section>
+		<main class="aegis-case">
+			<nav class="case-breadcrumb" aria-label="Breadcrumb">
+				<a href="/projects/">Projects</a><span aria-hidden="true">/</span><span aria-current="page">Aegis AI</span>
+			</nav>
+
+			<header class="case-hero">
+				<div class="case-hero-copy">
+					<p class="case-kicker"><span class="case-mark" aria-hidden="true"></span> Independent project / Full-stack systems</p>
+					<h1>Aegis AI</h1>
+					<p class="case-deck">An enterprise-style AI workspace, built to explore the parts around a model call: identity, governance, persistence, and failure handling.</p>
+					<div class="case-actions">
+						<a class="case-button" href="https://github.com/ansh0eman/aegis-ai" target="_blank" rel="noopener noreferrer">Source on GitHub <span aria-hidden="true">↗</span></a>
+						<a class="case-text-link" href="https://github.com/ansh0eman/aegis-ai/blob/main/README.md" target="_blank" rel="noopener noreferrer">Setup and docs <span aria-hidden="true">↗</span></a>
+					</div>
+					<p class="case-availability"><span aria-hidden="true">●</span> Source available · no public Aegis deployment</p>
+				</div>
+				<figure class="case-cover">
+					<a href="/assets/projects/aegis-ai/admin-users.png" target="_blank" rel="noreferrer" aria-label="Open the Aegis AI admin interface capture at full size">
+						<img src="/assets/projects/aegis-ai/admin-users.png" alt="Aegis AI admin screen with local example accounts, user status controls, and a provisioning form" width="1440" height="900" fetchpriority="high" />
+					</a>
+					<figcaption><span>Admin and governance view</span><span>Local capture · example.test data</span></figcaption>
+				</figure>
+			</header>
+
+			<dl class="case-facts" aria-label="Project details">
+				<div><dt>Focus</dt><dd>AI workspace governance</dd></div>
+				<div><dt>Stack</dt><dd>Next.js · TypeScript · SQLite · Drizzle</dd></div>
+				<div><dt>Inference</dt><dd>OpenAI Responses API · SSE</dd></div>
+				<div><dt>State</dt><dd>Open source reference project</dd></div>
+			</dl>
+
+			<div class="case-layout">
+				<aside class="case-toc" aria-label="On this page">
+					<p class="case-label">On this page</p>
+					<nav>
+						<a href="#why">Why build it</a>
+						<a href="#request">Request lifecycle</a>
+						<a href="#streaming">Streaming and cancellation</a>
+						<a href="#data">Relational data</a>
+						<a href="#integrity">Transactions</a>
+						<a href="#governance">Governance and audit</a>
+						<a href="#demo">Demo boundaries</a>
+						<a href="#verification">Verification</a>
+						<a href="#tradeoffs">Trade-offs</a>
+					</nav>
+				</aside>
+
+				<article class="case-story">
+					<section id="why" class="story-section story-opening" aria-labelledby="why-title">
+						<p class="case-label">01 / The problem</p>
+						<h2 id="why-title">A chat box is the easy part.</h2>
+						<div class="story-columns">
+							<p>I started Aegis to make the browser-to-model path concrete, then kept asking what changes when more than one person depends on it. Which account owns a conversation? What happens when access is disabled mid-session? How do request limits behave when two prompts arrive together? And when a stream breaks halfway through, what should the database say happened?</p>
+							<p>The project grew in small steps: chat and a route handler, streamed responses, relational persistence, multi-turn context, authentication, role checks, admin controls, audit events, and finally concurrency and failure tests. The useful work turned out to be around the model call, not just the prompt itself.</p>
+						</div>
+						<div class="case-callout"><strong>The design goal</strong><p>Keep each boundary visible: browser input is untrusted, access is checked on the server, writes are short and transactional, and provider output is not considered complete until the provider says it is.</p></div>
+					</section>
+
+					<section id="request" class="story-section" aria-labelledby="request-title">
+						<p class="case-label">02 / Request lifecycle</p>
+						<h2 id="request-title">A request with a few guardrails.</h2>
+						<p class="section-intro">This is the private authenticated chat path. The app checks the local invariants first, releases the database transaction, then calls the provider.</p>
+						<ol class="request-flow" aria-label="Aegis private chat request flow">
+							{flow.map((step, index) => <li>
+								<span class="flow-number">{String(index + 1).padStart(2, '0')}</span>
+								<strong>{step.name}</strong>
+								<span>{step.detail}</span>
+								{index < flow.length - 1 && <span class="flow-arrow" aria-hidden="true">→</span>}
+							</li>)}
+						</ol>
+						<div class="flow-return"><span aria-hidden="true">↳</span><p><strong>After a successful completion:</strong> the server stores one complete assistant message in SQLite, then sends the final <code>done</code> event. No transaction stays open during model generation.</p></div>
+						<p>The browser sends JSON and its same-origin session cookie to <code>POST /api/chat</code>. The route checks the request origin, resolves the current user, validates the body and conversation ID, then checks the account's AI policy. Admission rechecks status and policy in the write transaction, verifies that the conversation belongs to the user, loads the recent history, checks the UTC-day request count, and records the new user message plus one usage row.</p>
+						<p>For an existing conversation, the server sends up to 12 earlier messages in insertion order and then the current message exactly once. For a new conversation, it creates the owner-scoped conversation and inserts the user message before calling OpenAI. The provider never receives an unbounded database transcript.</p>
+					</section>
+
+					<section id="streaming" class="story-section" aria-labelledby="streaming-title">
+						<p class="case-label">03 / Stream lifecycle</p>
+						<h2 id="streaming-title">Fast feedback, explicit completion.</h2>
+						<figure class="case-capture case-capture-wide">
+							<a href="/assets/projects/aegis-ai/workspace.png" target="_blank" rel="noreferrer" aria-label="Open the Aegis workspace capture at full size"><img src="/assets/projects/aegis-ai/workspace.png" alt="Aegis authenticated workspace with a conversation area and message composer" width="1440" height="900" loading="lazy" /></a>
+							<figcaption>The workspace screen is a local capture, not a hosted public app.</figcaption>
+						</figure>
+						<p>The route streams provider events as Server-Sent Events. Each output-text delta is accumulated server-side and forwarded to the browser, where the chat client parses events and appends text to the current assistant message. The client also passes an abort signal; disconnecting cancels the upstream request.</p>
+						<pre class="code-sample"><code>{codeInput}</code><span class="code-caption">app/api/chat/route.ts · current source</span></pre>
+						<p>A browser can display partial text before generation ends, so “visible” and “durable” are different states. The server waits for the provider's explicit <code>response.completed</code> event before persisting. Errors, incomplete responses, cancellation, and persistence failures emit safe error events and never create a successful assistant row.</p>
+						<pre class="code-sample"><code>{codePersist}</code><span class="code-caption">lib/chat-stream.ts · excerpt</span></pre>
+						<p>If generation fails after admission, the user message and request-usage row remain. That gives the conversation a record of the attempted prompt and counts it against the request allowance; no assistant message is written. The current design has no retry-state marker or automatic deduplication.</p>
+					</section>
+
+					<section id="data" class="story-section" aria-labelledby="data-title">
+						<p class="case-label">04 / Data model</p>
+						<h2 id="data-title">Conversations have owners. Messages have order.</h2>
+						<p>SQLite is the database; Drizzle is the TypeScript query and migration layer. In <code>db/schema.ts</code>, a conversation has a required foreign key to its user, and each message belongs to a conversation. This keeps ownership and ordering queryable instead of packing the transcript into one JSON value.</p>
+						<div class="relationship" role="img" aria-label="A user owns many conversations; each conversation has many ordered messages">
+							<div><span>users</span><small>id · role · status</small></div><span class="relation-line" aria-hidden="true">1 ───── n</span><div><span>conversations</span><small>id · userId · createdAt</small></div><span class="relation-line" aria-hidden="true">1 ───── n</span><div><span>messages</span><small>id · conversationId · role · content</small></div>
+						</div>
+						<p>Foreign keys connect the records; checks constrain allowed roles and statuses; indexes support the access paths. A migration records each schema change so the same table structure can be applied consistently on a fresh database. The private chat history loader uses the most recent 12 message rows. Persistence is not model memory: those rows affect an answer only when the server includes them in that request.</p>
+					</section>
+
+					<section id="integrity" class="story-section" aria-labelledby="integrity-title">
+						<p class="case-label">05 / Concurrency and integrity</p>
+						<h2 id="integrity-title">Check and claim the slot together.</h2>
+						<p>If a user has one request left, two overlapping requests must not both read the same old count and pass. `admitChatRequest` uses an immediate SQLite transaction to serialize the status, ownership, policy, quota, and insert sequence. Public demo counters use the same pattern for their fixed-window check-and-increment.</p>
+						<div class="race-example" aria-label="Concurrent quota request example">
+							<p><span>request A</span><code>BEGIN IMMEDIATE → count → admit + insert → COMMIT</code></p>
+							<p><span>request B</span><code>wait → read updated count → reject at limit</code></p>
+						</div>
+						<p>Provisioning hashes passwords before opening the transaction, then inserts users and their audit rows together. Status and AI policy changes likewise couple the business write to its audit record. If an audit insert fails, the mutation rolls back. The network request to an AI provider is never inside one of these transactions.</p>
+						<pre class="code-sample"><code>{codeTransaction}</code><span class="code-caption">lib/admin-user-transactions.ts · simplified excerpt</span></pre>
+						<p>Independent SQLite connections exercise the last-quota-slot race. Locks can still be busy and fail; there is no retry queue. This is a single-instance local-file design, not distributed coordination.</p>
+					</section>
+
+					<section id="governance" class="story-section" aria-labelledby="governance-title">
+						<p class="case-label">06 / Identity and governance</p>
+						<h2 id="governance-title">The UI is not the permission check.</h2>
+						<div class="story-columns">
+							<div><h3>Identity</h3><p>Passwords are hashed with Argon2id. A signed JWT lives in an HttpOnly, SameSite cookie. On each protected request, the server verifies the token and reloads the account's current role and status from SQLite, so a disabled account is rejected before that token expires.</p></div>
+							<div><h3>Administration</h3><p>Server-side helpers enforce member and admin access for pages and API routes. Admin controls cover bounded bulk provisioning, account enable/disable, per-user AI availability, prompt length, daily request count, and a recent audit log. Cookie-authenticated mutations also use same-origin checks.</p></div>
+						</div>
+						<p>The audit log is application-append-only: it records successful mutations with actor, target, action, small safe metadata, and timestamp. It does not store plaintext passwords, password hashes, session tokens, API keys, or prompts. It is not tamper-proof against a host or database-file owner, and it is not delivered to an external SIEM.</p>
+						<div class="case-callout"><strong>Request limits are not billing telemetry.</strong><p>Aegis records admitted request counts and applies prompt-size and request-per-day limits. It does not currently measure model tokens, latency, or currency cost, and application quotas cannot guarantee provider spend.</p></div>
+					</section>
+
+					<section id="demo" class="story-section" aria-labelledby="demo-title">
+						<p class="case-label">07 / Demo boundaries</p>
+						<h2 id="demo-title">Synthetic state stays separate.</h2>
+						<p>The synthetic <code>/demo</code> playground keeps sample people, policies, scripted chat, and illustrative audit events in browser state. Those scripted interactions do not call OpenAI or read/write real account records. A separate optional live demo path posts to <code>/api/demo/chat</code>, uses a distinct Groq-compatible key, and is disabled unless explicitly configured and the provider free tier has been operator-verified.</p>
+						<p>That optional route has prompt/output/time bounds, a small concurrent-inference cap, and persisted abuse counters; it does not save demo prompts or replies as user conversations. The app itself is not publicly hosted, and there are no shared public Aegis credentials. Private chat uses the separate server-only <code>OPENAI_API_KEY</code>.</p>
+					</section>
+
+					<section id="verification" class="story-section" aria-labelledby="verification-title">
+						<p class="case-label">08 / Verification</p>
+						<h2 id="verification-title">Tests that keep the claims honest.</h2>
+						<p>The checks run locally and in GitHub Actions use synthetic fixtures; they do not call OpenAI or Groq.</p>
+						<div class="test-results" role="table" aria-label="Automated test suite results">
+							<div role="row"><strong role="columnheader">Suite</strong><strong role="columnheader">Passing tests</strong><strong role="columnheader">What it checks</strong></div>
+							<div role="row"><span role="cell">SSE</span><span role="cell">8 / 8</span><span role="cell">Chunk parsing, completion, failure, persistence, cancellation</span></div>
+							<div role="row"><span role="cell">Transactions and security</span><span role="cell">10 / 10</span><span role="cell">Quota races, lock failures, rollback, RBAC, schema constraints</span></div>
+							<div role="row"><span role="cell">Demo</span><span role="cell">22 / 22</span><span role="cell">Synthetic roles, policy, isolation, limits, reset behavior</span></div>
+						</div>
+						<p>Lint, TypeScript, and the webpack production build are also part of CI. Passing tests show that these modeled cases behave as expected; they do not prove a future deployment, provider billing limits, restore reliability, or multi-host behavior.</p>
+						<pre class="code-sample"><code>npm run lint
+npx tsc --noEmit
+npm run test:sse
+npm run test:step11
+npm run test:demo
+npm run build -- --webpack</code><span class="code-caption">Local and CI verification</span></pre>
+					</section>
+
+					<section id="tradeoffs" class="story-section story-last" aria-labelledby="tradeoffs-title">
+						<p class="case-label">09 / What I learned</p>
+						<h2 id="tradeoffs-title">Useful constraints, visible edges.</h2>
+						<ul class="lesson-list">
+							<li><strong>Persistence is not context.</strong> A conversation can survive refresh while the model sees only the bounded history the application chooses to send.</li>
+							<li><strong>Streaming changes durability.</strong> Partial output can reach the browser, but only a confirmed complete result becomes an assistant row.</li>
+							<li><strong>Transactions stop at the network boundary.</strong> Keep local invariants atomic; don’t hold a SQLite writer lock while waiting for inference.</li>
+							<li><strong>Current state beats stale claims.</strong> Checking role and status from SQLite makes access changes effective without waiting for JWT expiry.</li>
+						</ul>
+						<p>The trade-off is a small system that is easy to run and explain, but deliberately not horizontally scalable. Moving beyond one host would mean replacing local SQLite assumptions, reconsidering shared rate limits, and adding operational work such as backups, restore drills, TLS, monitoring, and key rotation.</p>
+						<div class="case-end-links"><a href="https://github.com/ansh0eman/aegis-ai" target="_blank" rel="noopener noreferrer">Browse the source ↗</a><a href="https://github.com/ansh0eman/aegis-ai/tree/main/docs" target="_blank" rel="noopener noreferrer">Read the engineering notes ↗</a><a href="/projects/">Back to projects →</a></div>
+					</section>
+				</article>
+			</div>
+		</main>
+	</Section>
+</Base>
+
+<style>
+	.aegis-case { --aegis-accent: #a94335; --aegis-muted: rgb(68 64 60 / .78); --aegis-rule: rgb(120 113 108 / .42); padding: .4rem 0 4rem; }
+	:global(.dark) .aegis-case { --aegis-accent: #df7564; --aegis-muted: rgb(214 211 208 / .76); --aegis-rule: rgb(168 162 158 / .32); }
+	.aegis-case a { text-underline-offset: .23em; }
+	.case-breadcrumb { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; padding: .15rem 0 1.5rem; color: var(--aegis-muted); font-size: .68rem; }
+	.case-breadcrumb a, .case-text-link { color: var(--aegis-accent); }
+	.case-hero { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; padding: clamp(1.3rem, 3vw, 2.6rem) 0; }
+	.case-hero-copy { min-width: 0; }
+	.case-kicker, .case-label { color: var(--aegis-accent); font-size: .66rem; line-height: 1.6; letter-spacing: .13em; text-transform: uppercase; }
+	.case-mark { display: inline-block; width: .55rem; height: .55rem; margin-right: .35rem; border-radius: 50%; background: var(--aegis-accent); vertical-align: .02em; }
+	.case-hero h1 { margin: .45rem 0 .8rem; font-size: clamp(2.8rem, 6.5vw, 5rem); line-height: .98; letter-spacing: -.07em; }
+	.case-deck { max-width: 39rem; color: var(--aegis-muted); font-size: clamp(.95rem, 1.35vw, 1.08rem); line-height: 1.75; }
+	.case-actions { display: flex; flex-wrap: wrap; gap: .75rem 1.3rem; align-items: center; margin-top: 1.35rem; }
+	.case-button { display: inline-flex; gap: .7rem; align-items: center; padding: .68rem .85rem; border: 1px solid var(--aegis-accent); background: var(--aegis-accent); color: #fffaf6; font-size: .74rem; font-weight: 700; text-decoration: none; transition: transform 160ms ease, background-color 160ms ease; }
+	.case-button:hover { transform: translateY(-2px); background: color-mix(in srgb, var(--aegis-accent) 86%, black); }
+	.case-text-link { font-size: .73rem; font-weight: 700; }
+	.case-availability { margin-top: .9rem; color: var(--aegis-muted); font-size: .68rem; }
+	.case-availability span { margin-right: .35rem; color: var(--aegis-accent); font-size: .55rem; }
+	.case-cover { min-width: 0; margin: 0; padding: .4rem; border: 1px solid var(--aegis-rule); background: rgb(120 113 108 / .08); }
+	.case-cover a, .case-capture a { display: block; }
+	.case-cover img { display: block; width: 100%; height: auto; }
+	.case-cover figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .35rem 1rem; padding: .55rem .15rem .05rem; color: var(--aegis-muted); font-size: .56rem; letter-spacing: .07em; text-transform: uppercase; }
+	.case-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: .4rem 0 2.5rem; border-block: 1px solid var(--aegis-rule); }
+	.case-facts div { min-width: 0; padding: .8rem .75rem .85rem 0; }
+	.case-facts dt { color: var(--aegis-muted); font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; }
+	.case-facts dd { margin: .35rem 0 0; font-size: .72rem; line-height: 1.5; }
+	.case-layout { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: clamp(1.5rem, 5vw, 5rem); align-items: start; }
+	.case-toc { position: sticky; top: 7rem; padding-top: .2rem; }
+	.case-toc nav { display: grid; gap: .1rem; margin-top: .6rem; }
+	.case-toc a { padding: .3rem 0; color: var(--aegis-muted); font-size: .64rem; line-height: 1.5; text-decoration: none; }
+	.case-toc a:hover, .case-toc a:focus-visible { color: var(--aegis-accent); text-decoration: underline; }
+	.case-story { min-width: 0; }
+	.story-section { scroll-margin-top: 7rem; padding: clamp(2.2rem, 5vw, 4rem) 0; border-top: 1px solid var(--aegis-rule); }
+	.story-opening { padding-top: .15rem; border-top: 0; }
+	.story-section h2 { max-width: 23ch; margin: .45rem 0 1rem; font-size: clamp(1.7rem, 3.5vw, 2.7rem); line-height: 1.08; letter-spacing: -.055em; }
+	.story-section h3 { margin: 0 0 .6rem; font-size: 1.03rem; letter-spacing: -.03em; }
+	.story-section p:not(.case-label) { max-width: 76ch; color: var(--aegis-muted); font-size: .8rem; line-height: 1.85; }
+	.story-section p + p { margin-top: .9rem; }
+	.story-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 2.3rem; }
+	.story-columns > div p { margin-top: 0; }
+	.case-callout { margin-top: 1.5rem; padding: 1rem 1.15rem; border-left: 2px solid var(--aegis-accent); background: color-mix(in srgb, var(--aegis-accent) 7%, transparent); }
+	.case-callout strong { font-size: .79rem; }
+	.story-section .case-callout p { margin-top: .35rem; }
+	.section-intro { margin-bottom: 1.45rem; }
+	.request-flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1rem; margin: 1.2rem 0 0; padding: 0; list-style: none; }
+	.request-flow li { position: relative; display: flex; flex-direction: column; gap: .4rem; min-width: 0; padding: .75rem .45rem .75rem 0; border-top: 2px solid var(--aegis-accent); }
+	.flow-number { color: var(--aegis-accent); font-size: .61rem; letter-spacing: .1em; }
+	.request-flow strong { font-size: .76rem; line-height: 1.35; }
+	.request-flow li > span:nth-of-type(2) { color: var(--aegis-muted); font-size: .63rem; line-height: 1.55; }
+	.flow-arrow { position: absolute; top: .55rem; right: .1rem; color: var(--aegis-accent); font-size: .9rem; }
+	.flow-return { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr); gap: .5rem; align-items: start; margin: .65rem 0 1.25rem; padding: .7rem 0; border-bottom: 1px dashed var(--aegis-rule); }
+	.flow-return > span { color: var(--aegis-accent); }
+	.story-section .flow-return p { margin: 0; font-size: .7rem; }
+	.case-capture { margin: 1.4rem 0 1.2rem; }
+	.case-capture img { display: block; width: 100%; height: auto; border: 1px solid var(--aegis-rule); }
+	.case-capture figcaption { margin-top: .45rem; color: var(--aegis-muted); font-size: .63rem; }
+	.code-sample { position: relative; margin: 1rem 0 1.25rem; padding: 1rem 1rem 2.2rem; overflow-x: auto; border: 1px solid rgb(168 162 158 / .3); background: #242321; color: #eeeae4; font-size: .68rem; line-height: 1.7; tab-size: 2; }
+	.code-sample code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; white-space: pre; }
+	.code-caption { position: absolute; right: .75rem; bottom: .4rem; left: .75rem; color: #b4aaa0; font-size: .56rem; letter-spacing: .07em; }
+	.story-section code:not(.code-sample code) { padding: .08rem .22rem; background: rgb(120 113 108 / .12); font-size: .92em; }
+	.relationship { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin: 1.4rem 0; padding: 1rem; border-block: 1px solid var(--aegis-rule); }
+	.relationship div { display: grid; gap: .3rem; min-width: 8.3rem; }
+	.relationship div > span { color: var(--aegis-accent); font-size: .8rem; font-weight: 700; }
+	.relationship small, .relation-line { color: var(--aegis-muted); font-size: .6rem; }
+	.race-example { margin: 1.2rem 0; padding: .2rem 0; border-block: 1px solid var(--aegis-rule); }
+	.race-example p { display: grid; grid-template-columns: 6.2rem minmax(0, 1fr); gap: .7rem; align-items: baseline; margin: 0 !important; padding: .65rem 0; }
+	.race-example p + p { border-top: 1px solid var(--aegis-rule); }
+	.race-example p > span { color: var(--aegis-accent); font-size: .64rem; text-transform: uppercase; }
+	.race-example code { overflow-wrap: anywhere; color: inherit; font-size: .66rem !important; }
+	.test-results { margin: 1.1rem 0; border-block: 1px solid var(--aegis-rule); }
+	.test-results > div { display: grid; grid-template-columns: minmax(7.5rem, .7fr) minmax(5.8rem, .45fr) minmax(0, 1.85fr); gap: .8rem; padding: .65rem .2rem; font-size: .66rem; line-height: 1.5; }
+	.test-results > div + div { border-top: 1px solid var(--aegis-rule); }
+	.test-results > div:first-child { color: var(--aegis-accent); letter-spacing: .05em; }
+	.test-results [role="cell"] { color: var(--aegis-muted); }
+	.lesson-list { display: grid; gap: .7rem; margin: 1.2rem 0; padding-left: 1.2rem; color: var(--aegis-muted); font-size: .78rem; line-height: 1.7; }
+	.lesson-list li::marker { color: var(--aegis-accent); }
+	.lesson-list strong { color: inherit; }
+	.story-last { border-bottom: 0; }
+	.case-end-links { display: flex; flex-wrap: wrap; gap: .7rem 1.4rem; margin-top: 1.35rem; }
+	.case-end-links a { color: var(--aegis-accent); font-size: .72rem; font-weight: 700; }
+	:global(html) { scroll-behavior: smooth; }
+	:global(:focus-visible) { outline: 2px solid var(--aegis-accent); outline-offset: 3px; }
+	@media (max-width: 760px) {
+		.case-hero { grid-template-columns: 1fr; align-items: start; }
+		.case-cover { max-width: 42rem; }
+		.case-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+		.case-layout { grid-template-columns: 1fr; gap: .3rem; }
+		.case-toc { position: static; padding: .8rem 0; border-block: 1px solid var(--aegis-rule); }
+		.case-toc nav { display: flex; flex-wrap: wrap; gap: .15rem .95rem; }
+		.story-opening { padding-top: 2rem; }
+	}
+	@media (max-width: 560px) {
+		.case-hero { gap: 1.2rem; }
+		.case-hero h1 { font-size: clamp(2.6rem, 14vw, 4rem); }
+		.case-cover figcaption { font-size: .5rem; }
+		.case-facts div { padding: .65rem .4rem .7rem 0; }
+		.case-facts dd { font-size: .67rem; }
+		.story-columns { grid-template-columns: 1fr; gap: .9rem; }
+		.request-flow { grid-template-columns: 1fr; gap: .35rem; }
+		.request-flow li { display: grid; grid-template-columns: 2rem minmax(0, 1fr); gap: .15rem .5rem; padding: .6rem 1.5rem .6rem 0; }
+		.request-flow li > span:nth-of-type(2) { grid-column: 2; }
+		.flow-arrow { top: auto; right: .4rem; bottom: .6rem; transform: rotate(90deg); }
+		.relationship { align-items: stretch; flex-direction: column; }
+		.relation-line { transform: rotate(90deg); transform-origin: left center; height: 1rem; }
+		.race-example p { grid-template-columns: 1fr; gap: .2rem; }
+		.test-results > div { grid-template-columns: minmax(0, 1fr) auto; gap: .35rem .65rem; }
+		.test-results > div > :last-child { grid-column: 1 / -1; }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		:global(html) { scroll-behavior: auto; }
+		.case-button { transition: none; }
+		.case-button:hover { transform: none; }
+	}
+</style>
