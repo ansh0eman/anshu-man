@@ -8,6 +8,7 @@ import { AppConfig } from '@/utils/AppConfig';
 		title?: string;
 		description?: string;
 		canonical?: string;
+		ogImage?: string;
 	};
 	siteRoot?: string;
 }
@@ -16,7 +17,8 @@ const {
 	head: {
 		title = AppConfig.title,
 		description = AppConfig.description,
-		canonical
+		canonical,
+		ogImage
 	},
 	siteRoot = ''
 } = Astro.props as Props;
@@ -50,7 +52,9 @@ const {
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		{canonical && <meta property="og:url" content={canonical} />}
-		<meta name="twitter:card" content="summary" />
+		{ogImage && <meta property="og:image" content={ogImage} />}
+		<meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+		{ogImage && <meta name="twitter:image" content={ogImage} />}
 
     <link rel="sitemap" href="/sitemap-index.xml" />
 		<link rel="alternate" type="application/rss+xml" href="/rss.xml" />
