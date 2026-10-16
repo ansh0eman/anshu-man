@@ -57,7 +57,7 @@ const {
 						const url = new URL(href, location.href);
 						if (!['http:', 'https:'].includes(url.protocol)) return { kind: url.protocol.replace(':', ''), destination: url.protocol };
 						const internal = url.origin === location.origin;
-						return { kind: internal ? 'internal' : 'outbound', destination: internal ? url.pathname : url.hostname + url.pathname };
+						return { kind: internal ? 'internal' : 'outbound', destination: internal ? url.pathname + (url.hash || '') : url.hostname + url.pathname };
 					} catch { return { kind: 'other', destination: 'unknown' }; }
 				};
 				document.addEventListener('click', (event) => {
@@ -67,7 +67,7 @@ const {
 					if (anchor) {
 						const { kind, destination } = locationOf(anchor.getAttribute('href'));
 						emit('site_link_click', {
-							link_kind: /\\.pdf$/i.test(destination) ? 'pdf' : kind,
+							link_kind: /\.pdf$/i.test(destination) ? 'pdf' : kind,
 							link_destination: destination.slice(0, 200),
 							link_location: anchor.closest('nav, header, footer, main')?.tagName.toLowerCase() || 'body'
 						});
