@@ -30,9 +30,9 @@ const {
 			// Keep development and deploy-preview traffic out of the production reports.
 			if (['ansh0eman.in', 'www.ansh0eman.in', 'ansh0eman.netlify.app'].includes(window.location.hostname)) {
 				window.dataLayer = window.dataLayer || [];
-				function gtag() { window.dataLayer.push(arguments); }
-				gtag('js', new Date());
-				gtag('config', 'G-SDMJBN6NQP', {
+				window.gtag = function gtag() { window.dataLayer.push(arguments); };
+				window.gtag('js', new Date());
+				window.gtag('config', 'G-SDMJBN6NQP', {
 					allow_google_signals: false,
 					allow_ad_personalization_signals: false
 				});
@@ -49,8 +49,8 @@ const {
 				const enabled = ['ansh0eman.in', 'www.ansh0eman.in', 'ansh0eman.netlify.app'].includes(location.hostname);
 				if (!enabled) return;
 				const emit = (event, parameters = {}) => {
-					if (!Array.isArray(window.dataLayer)) return;
-					window.dataLayer.push(['event', event, { ...parameters, page_path: location.pathname }]);
+					if (typeof window.gtag !== 'function') return;
+					window.gtag('event', event, { ...parameters, page_path: location.pathname });
 				};
 				const locationOf = (href) => {
 					try {
