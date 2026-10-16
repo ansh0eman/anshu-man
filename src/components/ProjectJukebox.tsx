@@ -208,7 +208,7 @@ export default function ProjectJukebox() {
 						if (event.key === 'ArrowRight') { event.preventDefault(); moveProject(1); }
 					}}>
 						{projects.map((project, index) => <div className={`record-choice${project.id === active.id ? ' is-active' : ''}`} key={project.id}>
-							<button type="button" className="record-select" onClick={() => chooseProject(project)} aria-pressed={project.id === active.id}>
+							<button type="button" className="record-select" data-analytics-label={`select_project_${project.id}`} onClick={() => chooseProject(project)} aria-pressed={project.id === active.id}>
 								<span className="record-disc"><img src={project.cover} alt="" loading="lazy" /><span className="record-center">{String(index + 1).padStart(2, '0')}</span></span>
 								<span className="record-label"><strong>{project.name}</strong><small>{project.technologies.slice(0, 2).join(' / ')}</small></span>
 							</button>

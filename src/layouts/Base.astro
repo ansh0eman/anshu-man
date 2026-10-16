@@ -32,7 +32,19 @@ const {
 				window.dataLayer = window.dataLayer || [];
 				window.gtag = function gtag() { window.dataLayer.push(arguments); };
 				window.gtag('js', new Date());
+				// Normalize only explicit Instagram tags; never guess the source of direct traffic.
+				const query = new URLSearchParams(location.search);
+				const source = query.get('utm_source')?.toLowerCase();
+				const campaign = {};
+				if (source === 'ig' || source === 'instagram') {
+					campaign.campaign_source = 'instagram';
+					const medium = query.get('utm_medium')?.toLowerCase();
+					if (!medium || medium === 'bio' || medium === 'social') campaign.campaign_medium = 'social';
+					if (medium === 'bio' && !query.has('utm_content')) campaign.campaign_content = 'link_in_bio';
+				}
 				window.gtag('config', 'G-SDMJBN6NQP', {
+					...campaign,
+					...(query.get('analytics_debug') === '1' ? { debug_mode: true } : {}),
 					allow_google_signals: false,
 					allow_ad_personalization_signals: false
 				});
@@ -57,7 +69,9 @@ const {
 						const url = new URL(href, location.href);
 						if (!['http:', 'https:'].includes(url.protocol)) return { kind: url.protocol.replace(':', ''), destination: url.protocol };
 						const internal = url.origin === location.origin;
-						return { kind: internal ? 'internal' : 'outbound', destination: internal ? url.pathname + (url.hash || '') : url.hostname + url.pathname };
+						const pdf = /\.pdf$/i.test(url.pathname);
+						const anchor = internal && url.pathname === location.pathname && !!url.hash;
+						return { kind: pdf ? 'pdf' : anchor ? 'anchor' : internal ? 'internal' : 'outbound', destination: internal ? url.pathname + (url.hash || '') : url.hostname + url.pathname };
 					} catch { return { kind: 'other', destination: 'unknown' }; }
 				};
 				document.addEventListener('click', (event) => {
@@ -67,8 +81,8 @@ const {
 					if (anchor) {
 						const { kind, destination } = locationOf(anchor.getAttribute('href'));
 						emit('site_link_click', {
-							link_kind: /\.pdf$/i.test(destination) ? 'pdf' : kind,
-							link_destination: destination.slice(0, 200),
+							link_kind: kind,
+							link_destination: destination.slice(0, 100),
 							link_location: anchor.closest('nav, header, footer, main')?.tagName.toLowerCase() || 'body'
 						});
 						return;
@@ -77,6 +91,18 @@ const {
 					if (button) {
 						const label = button.getAttribute('data-analytics-label') || button.getAttribute('aria-label') || button.id || button.getAttribute('type') || 'unlabelled_button';
 						emit('site_button_click', { button_label: label.slice(0, 100) });
+					}
+				}, true);
+				document.addEventListener('auxclick', (event) => {
+					if (event.button !== 1) return;
+					const anchor = event.target instanceof Element ? event.target.closest('a[href]') : null;
+					if (!anchor) return;
+					const { kind, destination } = locationOf(anchor.getAttribute('href'));
+					emit('site_link_click', { link_kind: kind, link_destination: destination.slice(0, 100), link_location: anchor.closest('nav, header, footer, main')?.tagName.toLowerCase() || 'body' });
+				}, true);
+				document.addEventListener('change', (event) => {
+					if (event.target instanceof HTMLInputElement && event.target.id === 'light-switch') {
+						emit('site_button_click', { button_label: event.target.checked ? 'theme_dark' : 'theme_light' });
 					}
 				});
 				document.addEventListener('submit', (event) => {
@@ -104,18 +130,23 @@ const {
 						requestAnimationFrame(checkScroll);
 					}
 				}, { passive: true });
-				if ('IntersectionObserver' in window) {
-					const seenSections = new Set();
-					const observer = new IntersectionObserver((entries) => {
-						for (const entry of entries) {
-							if (!entry.isIntersecting || seenSections.has(entry.target.id)) continue;
-							seenSections.add(entry.target.id);
-							emit('site_section_view', { section_id: entry.target.id.slice(0, 100) });
-							observer.unobserve(entry.target);
-						}
-					}, { threshold: 0.25 });
-					document.querySelectorAll('main section[id], main article[id]').forEach((section) => observer.observe(section));
-				}
+				const observeSections = () => {
+					if ('IntersectionObserver' in window) {
+						const seenSections = new Set();
+						const observer = new IntersectionObserver((entries) => {
+							for (const entry of entries) {
+								if (!entry.isIntersecting || seenSections.has(entry.target.id)) continue;
+								seenSections.add(entry.target.id);
+								emit('site_section_view', { section_id: entry.target.id.slice(0, 100) });
+								observer.unobserve(entry.target);
+							}
+						}, { threshold: 0.25 });
+						document.querySelectorAll('main section[id], main article[id]').forEach((section) => observer.observe(section));
+					}
+				checkScroll();
+				};
+				if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', observeSections, { once: true });
+				else observeSections();
 			})();
 		</script>
 		<meta charset="UTF-8" />
