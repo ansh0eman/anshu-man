@@ -51,10 +51,10 @@ const projects: Project[] = [
 			{ label: 'Case study', href: '/projects/aegis/' },
 			{ label: 'GitHub', href: 'https://github.com/ansh0eman/aegis-ai' }
 		],
-		cover: '/assets/projects/aegis-ai/admin-users.png', coverAlt: 'Aegis AI admin console for member provisioning and governance',
+		cover: '/assets/projects/aegis-ai/governance-ui-concept.jpg', coverAlt: 'AI-generated visualization of Aegis simulated governance and member access controls',
 		media: [
-			{ src: '/assets/projects/aegis-ai/admin-users.png', alt: 'Aegis AI admin interface for member provisioning and AI policy controls', caption: 'Admin and governance controls', width: 1440, height: 900 },
-			{ src: '/assets/projects/aegis-ai/workspace.png', alt: 'Authenticated Aegis AI workspace empty state', caption: 'Authenticated workspace', width: 1440, height: 900 }
+			{ src: '/assets/projects/aegis-ai/governance-ui-concept.jpg', alt: 'AI-generated Aegis governance visualization with synthetic users and access rules', caption: 'AI-generated simulated governance UI, not a live capture', width: 1586, height: 992 },
+			{ src: '/assets/projects/aegis-ai/workspace-ui-concept.jpg', alt: 'AI-generated Aegis workspace visualization with a scripted sample response', caption: 'AI-generated scripted workspace UI, not a live capture', width: 1586, height: 992 }
 		]
 	},
 	{

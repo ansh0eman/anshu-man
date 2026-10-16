@@ -6,7 +6,7 @@ import { AppConfig } from '@/utils/AppConfig';
 const title = `Aegis AI | ${AppConfig.site_name}`;
 const description = 'A technical case study of a governed AI workspace: streamed inference, identity, SQLite persistence, transactional limits, and audit trails.';
 const canonical = 'https://ansh0eman.in/projects/aegis/';
-const image = 'https://ansh0eman.in/assets/projects/aegis-ai/admin-users.png';
+const image = 'https://ansh0eman.in/assets/projects/aegis-ai/governance-ui-concept.jpg';
 
 const flow = [
 	{ name: 'Browser', detail: 'Submits a message with the HttpOnly session cookie.' },
@@ -59,10 +59,10 @@ const codeTransaction = `database.transaction((transaction) => {
 					<p class="case-availability"><span aria-hidden="true">●</span> Source available · no public Aegis deployment</p>
 				</div>
 				<figure class="case-cover">
-					<a href="/assets/projects/aegis-ai/admin-users.png" target="_blank" rel="noreferrer" aria-label="Open the Aegis AI admin interface capture at full size">
-						<img src="/assets/projects/aegis-ai/admin-users.png" alt="Aegis AI admin screen with local example accounts, user status controls, and a provisioning form" width="1440" height="900" fetchpriority="high" />
+					<a href="/assets/projects/aegis-ai/governance-ui-concept.jpg" target="_blank" rel="noreferrer" aria-label="Open the AI-generated Aegis governance UI visualization at full size">
+						<img src="/assets/projects/aegis-ai/governance-ui-concept.jpg" alt="AI-generated visualization of Aegis's simulated governance screen, showing synthetic member accounts and access controls" width="1586" height="992" fetchpriority="high" />
 					</a>
-					<figcaption><span>Admin and governance view</span><span>Local capture · example.test data</span></figcaption>
+					<figcaption><span>Simulated governance workspace</span><span>AI-generated UI visualization, not a live capture</span></figcaption>
 				</figure>
 			</header>
 
@@ -121,8 +121,8 @@ const codeTransaction = `database.transaction((transaction) => {
 						<p class="case-label">03 / Stream lifecycle</p>
 						<h2 id="streaming-title">Fast feedback, explicit completion.</h2>
 						<figure class="case-capture case-capture-wide">
-							<a href="/assets/projects/aegis-ai/workspace.png" target="_blank" rel="noreferrer" aria-label="Open the Aegis workspace capture at full size"><img src="/assets/projects/aegis-ai/workspace.png" alt="Aegis authenticated workspace with a conversation area and message composer" width="1440" height="900" loading="lazy" /></a>
-							<figcaption>The workspace screen is a local capture, not a hosted public app.</figcaption>
+							<a href="/assets/projects/aegis-ai/workspace-ui-concept.jpg" target="_blank" rel="noreferrer" aria-label="Open the AI-generated Aegis chat workspace visualization at full size"><img src="/assets/projects/aegis-ai/workspace-ui-concept.jpg" alt="AI-generated visualization of Aegis's scripted chat workspace with a sample daily-limit conversation" width="1586" height="992" loading="lazy" /></a>
+							<figcaption>AI-generated UI visualization based on the scripted public demo.</figcaption>
 						</figure>
 						<p>The route streams provider events as Server-Sent Events. Each output-text delta is accumulated server-side and forwarded to the browser, where the chat client parses events and appends text to the current assistant message. The client also passes an abort signal; disconnecting cancels the upstream request.</p>
 						<pre class="code-sample"><code>{codeInput}</code><span class="code-caption">app/api/chat/route.ts · current source</span></pre>

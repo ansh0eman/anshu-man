@@ -11,7 +11,7 @@ Collected on 2026-10-09 for the planned Projects-page redesign. These are refere
 | Fractal Resonance | https://github.com/ansh0eman/music-fractal | `/assets/projects/fractal-resonance/generator-interface.png` plus an output image | Real local frontend capture plus real generated outputs. Excellent visual counterweight to product/UI work. |
 | SetuAI | https://github.com/ansh0eman/setuai | `/assets/projects/setuai/buyer-marketplace.png` | Real authenticated buyer-side frontend capture from a temporary clone, with seeded demo vendors and compliance statuses. Product captures avoid the watermarked login background. |
 | Real-Time Anomaly Engine | https://github.com/ansh0eman/real-time-anomaly-engine | `/assets/projects/real-time-anomaly-engine/api-ingestion-schema.png` | Real live OpenAPI capture with the ingestion payload expanded. Strong technical proof, but visually secondary. |
-| Aegis AI | https://github.com/ansh0eman/aegis-ai | `/assets/projects/aegis-ai/admin-users.png` | Real production-mode local capture using an isolated temporary SQLite database and fake `.test` accounts. Use the admin/governance view over the empty chat view. |
+| Aegis AI | https://github.com/ansh0eman/aegis-ai | `/assets/projects/aegis-ai/governance-ui-concept.jpg` | AI-generated UI visualization based on the current synthetic governance demo. Label it as a visualization, not a live capture. |
 
 ## Collected files
 
@@ -50,8 +50,8 @@ Collected on 2026-10-09 for the planned Projects-page redesign. These are refere
 
 ### Aegis AI
 
-- `/assets/projects/aegis-ai/admin-users.png` — real admin provisioning/governance interface; recommended cover.
-- `/assets/projects/aegis-ai/workspace.png` — real authenticated workspace empty state.
+- `/assets/projects/aegis-ai/governance-ui-concept.jpg` — AI-generated view of synthetic member access and quota controls.
+- `/assets/projects/aegis-ai/workspace-ui-concept.jpg` — AI-generated view of the scripted public chat demo.
 
 ### Neural Style Transfer
 
