@@ -52,8 +52,8 @@ const featuredProjects = [
 				<p class="home-lede">i studied computer science, but books, art, music, and philosophy take up just as much space in my head as code. i've called myself a thinker, a creative, an addict, and lately a builder. i like working where tech meets art, then following an idea past the demo to see who can use it and what breaks.</p>
 				<p class="home-lede">i've wrangled government APIs, built an AI-powered compliance project with a team, and taken part in a few hackathons. SetuAI even came away with a special award at SAP Hackfest. i'm drawn to hard problems, small teams, and early ideas that might grow into something useful.</p>
 				<p class="home-lede">outside of code: SpiderMan, Radiohead, and FC Barcelona. i LOVE citrus anything; bring a lemon if you ever see me. if you're working on something interesting, especially an early AI startup, hit me up. i'd love to build alongside you.</p>
-				<p class="home-elsewhere"><a href="/about/">read more about me <span aria-hidden="true">↗</span></a></p>
-				<nav class="home-social" aria-label="Find me elsewhere">
+				<nav class="home-elsewhere" aria-label="About and social profiles">
+					<a href="/about/">read more about me <span aria-hidden="true">↗</span></a>
 					<a href="https://open.spotify.com/user/a9hedv3hqk3x1wbhfqbm50z68" target="_blank" rel="noopener noreferrer">spotify <span aria-hidden="true">↗</span></a>
 					<a href="https://letterboxd.com/fre4k/" target="_blank" rel="noopener noreferrer">letterboxd <span aria-hidden="true">↗</span></a>
 				</nav>
@@ -148,12 +148,10 @@ const featuredProjects = [
 	.home-artwork img { display: block; width: min(66%, 44rem); height: clamp(11rem, 28vw, 20rem); object-fit: cover; object-position: center; box-shadow: 0 6px 22px rgb(0 0 0 / .22); }
 	.home-lede { max-width: 75ch; font-size: clamp(.94rem, 1.4vw, 1.07rem); line-height: 1.65; }
 	.home-lede + .home-lede { margin-top: .75rem; }
-	.home-elsewhere { margin-top: .7rem; color: var(--muted); font-size: .78rem; line-height: 1.6; }
+	.home-elsewhere { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.5rem; margin-top: .7rem; color: var(--muted); font-size: .78rem; line-height: 1.6; }
 	.home-elsewhere span { color: var(--accent); }
 	.home-elsewhere a { color: var(--accent); font-weight: 700; text-decoration: underline; text-underline-offset: .3em; }
-	.home-social { display: flex; flex-wrap: wrap; gap: .8rem 1.5rem; margin-top: 1.3rem; }
-	.home-social a { width: fit-content; color: var(--accent); font-size: .78rem; font-weight: 700; text-decoration: underline; text-underline-offset: .3em; }
-	.home-social a:hover { text-decoration-thickness: 2px; }
+	.home-elsewhere a:hover { text-decoration-thickness: 2px; }
 	.home-jumps { display: flex; flex-wrap: wrap; gap: .8rem 1.5rem; margin-top: 1.3rem; }
 	.home-jumps a, .section-link { width: fit-content; color: var(--accent); font-size: .78rem; font-weight: 700; text-decoration: underline; text-underline-offset: .3em; }
 	.home-jumps a:hover, .section-link:hover { text-decoration-thickness: 2px; }
