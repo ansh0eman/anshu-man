@@ -89,6 +89,12 @@ const {
 					}
 					const button = target.closest('button, [role="button"]');
 					if (button) {
+						if (button.id === 'theme-toggle') {
+							emit('site_button_click', {
+								button_label: document.documentElement.classList.contains('dark') ? 'theme_light' : 'theme_dark'
+							});
+							return;
+						}
 						const label = button.getAttribute('data-analytics-label') || button.getAttribute('aria-label') || button.id || button.getAttribute('type') || 'unlabelled_button';
 						emit('site_button_click', { button_label: label.slice(0, 100) });
 					}
@@ -100,11 +106,6 @@ const {
 					const { kind, destination } = locationOf(anchor.getAttribute('href'));
 					emit('site_link_click', { link_kind: kind, link_destination: destination.slice(0, 100), link_location: anchor.closest('nav, header, footer, main')?.tagName.toLowerCase() || 'body' });
 				}, true);
-				document.addEventListener('change', (event) => {
-					if (event.target instanceof HTMLInputElement && event.target.id === 'light-switch') {
-						emit('site_button_click', { button_label: event.target.checked ? 'theme_dark' : 'theme_light' });
-					}
-				});
 				document.addEventListener('submit', (event) => {
 					const form = event.target;
 					if (!(form instanceof HTMLFormElement)) return;
