@@ -1,0 +1,46 @@
+---
+import Base from '../../layouts/Base.astro';
+import Section from '../../components/Section.astro';
+
+const title = 'Turn of Play | Anshuman';
+const description = 'Watch a synthetic football match, investigate its turning points, and inspect the source behind every explanation.';
+const app = 'https://matchpulse-studio.politesea-3d29a667.eastus.azurecontainerapps.io/?view=theatre&scenario=native-goals';
+const repository = 'https://github.com/ansh0eman/matchpulse';
+const video = 'https://github.com/ansh0eman/matchpulse/releases/download/turn-of-play-20261026-0b06707/turn-of-play-demo.mp4';
+---
+
+<Base head={{ title, description, canonical: 'https://ansh0eman.in/projects/turn-of-play/', ogImage: 'https://ansh0eman.in/assets/projects/turn-of-play/demo.png' }}>
+  <Section>
+    <main class="turn-of-play">
+      <a class="back" href="/projects/">← All projects</a>
+      <header>
+        <p class="kicker">Microsoft × Premier League · Inside the Game hackathon</p>
+        <h1>Turn of Play<span>.</span></h1>
+        <p class="promise">See what changed. Understand what supports it. Know what remains uncertain.</p>
+        <p class="intro">I built a football viewing experience where you can follow a moment all the way back to its evidence. Watch the replay, switch between Fan and Analyst views, and open the source behind an explanation.</p>
+        <div class="actions"><a class="primary" href={app} target="_blank" rel="noopener noreferrer">Try the live demo ↗</a><a href={repository} target="_blank" rel="noopener noreferrer">Source on GitHub ↗</a></div>
+        <p class="note">Working browser prototype · Synthetic football data · No login required</p>
+      </header>
+
+      <figure class="demo">
+        <video controls playsinline preload="metadata" poster="/assets/projects/turn-of-play/demo.png" aria-label="Turn of Play product demonstration, one minute fifty-three seconds">
+          <source src={video} type="video/mp4" />
+          <track kind="captions" src="/assets/projects/turn-of-play/captions.vtt" srclang="en" label="English" />
+          <a href={video}>Download the product demonstration</a>
+        </video>
+        <figcaption><span>Watch the 1:53 product demo, narrated by me.</span><a href={video}>Open video ↗</a></figcaption>
+      </figure>
+
+      <section aria-labelledby="built"><p class="kicker">The product</p><h2 id="built">An explanation you can investigate.</h2><div class="columns"><p>Matchday connects the score, timeline and observed positions to the original match clock. Fan and Analyst modes change the level of detail while keeping the same underlying source.</p><p>Proof Lens independently recomputes a claim and shows its original observations. One example compares 41 earlier and 18 recent frames: 59 source samples, 21.95m to 31.96m, a difference of about 10.01m. When the positional evidence is stale, the current comparison is withheld.</p></div></section>
+
+      <section aria-labelledby="workflow"><p class="kicker">The implementation</p><h2 id="workflow">Detect → Prove → Explain → Explore</h2><p>Microsoft Foundry and Microsoft Agent Framework coordinate a recorded workflow with a Director, Match Analyst, Evidence Challenger, Narrator and Replay Producer. Models select registered evidence; deterministic code verifies the output against source observations before display. The public viewer revalidates the saved execution without making a new model call.</p><p class="stack">Python · Pydantic · React · TypeScript · Microsoft Foundry · Microsoft Agent Framework · Azure Container Apps</p></section>
+
+      <aside class="limits"><h2>What this demo can tell us</h2><p>All football observations are synthetic. Club names and colours are display labels, not actual club performances or real-player identities. A sampled line-height difference does not establish coaching intent or pressing success. The hosted experience is a prototype; real-world calibration and human usefulness remain unmeasured.</p></aside>
+      <div class="actions closing"><a class="primary" href={app} target="_blank" rel="noopener noreferrer">Explore Turn of Play ↗</a><a href={repository} target="_blank" rel="noopener noreferrer">Read the code and research ↗</a></div>
+    </main>
+  </Section>
+</Base>
+
+<style>
+  .turn-of-play{max-width:64rem;margin:1.5rem auto 4rem;color:inherit}.back{font-size:.82rem;text-decoration:none;opacity:.75}header{padding:2.8rem 0 2rem}.kicker{font-size:.65rem;line-height:1.6;letter-spacing:.12em;text-transform:uppercase;opacity:.7}h1{font-size:clamp(3.1rem,8vw,6rem);line-height:1;letter-spacing:-.065em;font-weight:800;margin:.9rem 0 1.2rem}h1 span{color:#8d2cff}.promise{max-width:34rem;font-size:clamp(1.2rem,3vw,1.65rem);line-height:1.35;font-weight:700;letter-spacing:-.035em}.intro{max-width:43rem;margin:1.25rem 0;line-height:1.8;font-size:.95rem;opacity:.85}.actions{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.5rem;margin:1.6rem 0}.actions a{font-size:.82rem;text-decoration:none}.actions .primary{padding:.85rem 1.15rem;border-radius:14px;background:#7520db;color:#fff;box-shadow:0 4px 0 #431071}.primary:hover{background:#6320b2}.note{font-size:.68rem;opacity:.65}.demo{margin:0 0 3rem;border-radius:20px;overflow:hidden;box-shadow:0 14px 40px rgba(35,12,50,.16);border:1px solid rgba(128,100,145,.3)}video{display:block;width:100%;aspect-ratio:16/9;background:#130b20}.demo figcaption{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem;padding:.8rem 1rem;font-size:.67rem}.demo figcaption a{text-decoration:underline;text-underline-offset:.2em}section{padding:2rem 0;border-top:1px solid rgba(128,100,145,.3)}h2{font-size:clamp(1.35rem,3vw,2rem);font-weight:700;letter-spacing:-.035em;line-height:1.3;margin:.6rem 0 1rem}section p,.limits p{font-size:.88rem;line-height:1.9;opacity:.85}.columns{display:grid;grid-template-columns:1fr 1fr;gap:2rem}.stack{font-size:.7rem!important;margin-top:1.5rem}.limits{padding:1.5rem 1.7rem;margin-top:1rem;border:1px solid rgba(128,100,145,.3);border-radius:18px}.limits h2{font-size:1.1rem}.limits p{margin-bottom:0}.closing{margin-top:2rem}@media(max-width:640px){header{padding-top:2rem}.columns{grid-template-columns:1fr;gap:.35rem}.actions{align-items:flex-start;gap:1.2rem}.limits{padding:1.1rem}.demo{border-radius:12px}}
+</style>
